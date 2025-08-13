@@ -1,0 +1,46 @@
+﻿
+
+@{
+   
+    ViewData["Title"] = "Inicio De Sesion";
+}
+<head>
+<!DOCTYPE html>
+<html lang="en">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=5, minimum-scale=1.0s" />
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="background"></div>
+<div class="centro-pagina">
+        
+    <div class="cuadro-contenedor">
+        <div class="titulo-cuadro">Iniciar Sesión  </div>
+        <div class="icono-circulo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#282634" viewBox="0 0 24 24">
+                <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z" />
+            </svg>
+        
+        </div>
+        <form asp-action="Login" asp-controller="Cuenta" method="post">
+            <label for="usuario" class="label-cuadrou">Usuario</label>
+            <input type="text" id="usuario" name="nombre" class="input-cuadroUsuario" placeholder="Usuario" />
+
+            <label for="contrasenia" class="label-cuadroc">Contraseña</label>
+            <input type="password" id="contrasenia" name="contraseña" class="input-cuadroContrasenia" placeholder="Contraseña" />
+
+            <button type = "submit"  class="btn-iniciarSesion">Iniciar Sesión</button>
+
+            <div class="btnRegistar">
+                <p>¿No tienes cuenta? <a href="/Registro/Registro">Regístrate</a></p>
+            </div>
+        </form>
+
+        
+            @if (ViewBag.Error != null)
+            {
+                <p style="color:red">@ViewBag.Error</p>
+            }
+    </div>
+</div>
+</body>

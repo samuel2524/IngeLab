@@ -1,0 +1,75 @@
+@{
+    ViewData["Title"] = "Registro";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=5, minimum-scale=1.0s" />
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="Registro.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="~/css/Registro.css" asp-append-version="true">
+</head>
+
+
+<body class="body_principal_registro">
+<div class="background"></div>
+    <div class="centro-pagina">
+    
+
+        <div class="contenedor-columnas">
+  
+            <div class="cuadro-contenedorRegistroIzquierda">
+                <div class="titulo-cuadro">Registro</div>
+             
+                    <label for="nombres" class="label-nombre">Nombre</label>
+                    <input type="text" id="Nombres" name="Nombre" class="input-cuadroNombre" placeholder="Nombre" />
+                    <br>
+                    <label for="Apellidos" class="label-Apellidos">Apellidos</label>
+                    <input type="text" id="Apellidos" name="Apellido" class="input-cuadroApellidos" placeholder="Apellidos" />
+                    <br>
+                    <label for="tipoDocumento" class="label-tipoDocumento">Tipo de Documento</label>
+                    <select id="tipoDocumento" name="TipoDocumento" class="input-cuadroTipoDocumento">
+                        <option value="Cedula">Cedula</option>
+                        <option value="TarjetaIdentidad">Tarjeta De Identidad</option>
+                        <option value="Pasaporte">Pasaporte</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                    <br>
+                    <label for="numeroDocumento" class="label-numeroDocumento">Número de Documento</label>
+                    <input type="text" id="numeroDocumento" name="NumeroDocumento" class="input-cuadroNumeroDocumento" placeholder="Número de Documento" />
+                    
+            </div>
+
+
+            <div class="cuadro-contenedorRegistroDerecha">
+                <div class="titulo-cuadro">Registro</div>
+            
+                <label for="correo" class="label-correo">Correo Electrónico</label>
+                <input type="email" id="correo" name="Correo" class="input-cuadroCorreo" placeholder="Correo Electrónico" />
+                <br>
+                <label for="contrasenia" class="label-contraseniaRegistro">Contraseña</label>
+                <input type="password" id="contrasenia" name="Contraseña" class="input-cuadroContraseniaRegistro" placeholder="Contraseña" />
+                <br>
+
+                <label for="fechaNacimiento" class="label-fechaNacimiento">Fecha de Nacimiento</label>
+                <input type="date" id="fechaNacimiento" name="FechaNacimiento" class=" input-cuadroFechaNacimiento" placeholder="Fecha de Nacimiento" />
+                <br>
+
+                <label for="telefono" class="label-telefono">Teléfono</label>
+                <input type="tel" id="telefono" name="Telefono" class="input-cuadroTelefono" placeholder="Teléfono" />
+
+            
+            </div>
+
+        <div class = "cuadro-contenedorConfirmarRegistro">
+            <button type = "submit" class= "btn-Registro" >Registrarse</button>
+        </div>
+
+                
+        </div>
+    </div>
+    
+
+    
+</body>

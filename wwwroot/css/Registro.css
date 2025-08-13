@@ -1,0 +1,139 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    overflow-x: hidden;
+    
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+.centro-pagina {
+    display: flex;
+    position: relative;
+    gap: 0.8rem;
+    z-index: 1;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+}
+
+main {
+    flex: 1;
+}
+
+.background{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #222831;
+    background-image: url('https://i.imgur.com/2GocHwd.jpeg');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(60%); /* ← oscurece solo la imagen */
+    z-index: -1; /*orden en mostrar en la pagina, fondo  */
+
+}
+
+.contenedor-columnas {
+    position: relative;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+.titulo-cuadro p{
+    font-family: 'Raleway', sans-serif;
+
+}
+
+.navbar-transparente-custom {
+    width: 100%;
+    background-color: #7a7373;
+    z-index: 10;
+    border: none;
+}
+
+.cuadro-contenedorConfirmarRegistro{
+    width: 60%;
+    display: flex; 
+    gap: 0.4rem;
+    border-radius: 2px;
+    border: 0px solid black;
+    flex-direction: column;
+}
+.cuadro-contenedorRegistroIzquierda {
+    color: black;
+    flex: 1;
+    min-width: 250px; 
+    display: flex; 
+    gap: 0.4rem;
+    background-color:rgba(162, 167, 173, 0.2);
+    padding: 1rem 1rem 2rem 1rem; /* para cuadrar el espacio del ultimo input al contenedor */
+    border-radius: 12px;
+    border: 2px solid #7a7373;
+    backdrop-filter: blur(20px); 
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    flex-direction: column;
+    
+}
+
+.cuadro-contenedorRegistroDerecha
+{
+    flex: 1; 
+    min-width: 250px;
+    display: flex; /* Activo flexbox*/
+    gap: 0.4rem; /* espacio entre cada item */
+    padding: 1rem 1rem 2rem 1rem; /* para cuadrar el espacio del ultimo input al contenedor */
+    background-color: rgba(162, 167, 173, 0.2);;
+    border-radius: 12px; /* borde del input */
+    border: 2px solid #7a7373; 
+    backdrop-filter: blur(20px); 
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    flex-direction: column;
+}
+
+.btn-Registro{
+    height: 5vh;
+    border-radius: 10px;
+    border: none;
+    background-color:  #7a7373;
+}
+
+.label-correo,.label-contraseniaRegistro,.label-fechaNacimiento, .label-nombre, .label-Apellidos, .label-tipoDocumento, .label-numeroDocumento,.label-telefono {
+    font-size: 1rem;
+    color: white;
+    margin-bottom: 0.5rem;
+    margin-left:4%;
+    font-family: 'Raleway', sans-serif;
+}
+/* Inputs cuadro Derecha */
+.input-cuadroCorreo, .input-cuadroContraseniaRegistro, .input-cuadroFechaNacimiento, .input-cuadroTelefono{
+    width: 60%;
+    padding: 0.6rem;
+    border: 1px solid #7a7373;
+    border-radius: 6px;
+    font-size: 1rem;
+    display: block;
+    margin-left:4%; /* Centra horizontalmente */
+    
+
+}
+
+/* Inputs cuadro Izquierda */
+
+.input-cuadroNombre, .input-cuadroApellidos, .input-cuadroTipoDocumento, .input-cuadroNumeroDocumento{
+    width: 60%;
+    padding: 0.6rem;
+    border: 1px solid #4d4946;
+    border-radius: 6px;
+    font-size: 1rem;
+    display: block;
+    margin-left:4%; /* Centra horizontalmente */
+}

@@ -1,0 +1,215 @@
+﻿
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('https://i.imgur.com/2GocHwd.jpeg');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(60%); /* ← oscurece solo la imagen */
+    z-index: -1; /*orden en mostrar en la pagina, fondo  */
+}
+
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+main {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+}
+
+.centro-pagina {
+    position: relative;
+    flex: 1;
+    min-height: calc(100vh - 120px); /* NUEVO */
+    z-index: 1; /*orden en mostrar en la pagina, centro */
+    color: #EEEEEE;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+    .centro-pagina h1 {
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-family: 'Raleway', sans-serif;
+
+        margin-bottom: 1rem;
+    }
+
+
+.navbar-transparente-custom {
+    width: 100%;
+    background-color:#7a7373;/* blanco semitransparente */
+    backdrop-filter: blur(5px); /* efecto desenfoque */
+    z-index: 10; /*orden en mostrar en la pagina, encima del fondo y del centro de la pagina */
+    position: relative;
+    
+}
+
+
+.cuadro-contenedor {
+    width: 90%;
+    height: auto;
+    max-width: 500px;
+    padding: 2rem;
+    background-color: rgba(162, 167, 173, 0.2);;
+    border-radius: 12px;
+    border: 2px solid #7a7373;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 2rem;
+  
+}
+
+.enlace-principal {
+  color: white; /* dorado, por ejemplo */
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.1); /* fondo sutil */
+
+
+
+}
+
+.logo-navbar {
+  height: 32px;
+  width: auto;
+  border-radius: 4px;
+  box-shadow: 0 0 4px rgba(0,0,0,0.3);
+}
+
+
+.enlace-principal:hover {
+  background-color: rgba(255, 255, 255, 0.4); /* más transparente */
+  transform: scale(1.05); /* sutil agrandamiento */
+  color: #4d4946; /* dorado al pasar el mouse */
+  cursor: pointer;
+}
+
+.input-cuadroUsuario {
+    width: 80%;
+    padding: 0.6rem;
+    border: 1px solid #282634;
+    border-radius: 6px;
+    font-size: 1rem;
+    display: block;
+    margin: 0 auto; /* Centra horizontalmente */
+
+}   
+
+.input-cuadroContrasenia {
+    width: 80%;
+    padding: 0.6rem;
+    border: 1px solid #282634;
+    border-radius: 6px;
+    font-size: 1rem;
+    display: block;
+    margin: 0 auto; /* Centra horizontalmente */
+
+}
+
+.label-cuadroc {
+    color: white;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.2rem;
+    width: 100%;
+    text-align: center; /* Centra el texto */
+    display: block;
+    margin-bottom: 0.5rem;
+
+   
+}
+
+.label-cuadrou {
+    color: white;;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.2rem;
+    width: 100%;
+    text-align: center; /* Centra el texto */
+    display: block;
+    margin-bottom: 0.5rem;
+
+}
+
+
+
+.titulo-cuadro {
+    color: white;;
+    font-family: 'Raleway', sans-serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+    width: 100%;
+}
+
+
+.icono-circulo {
+   width: clamp(60px, 20vw, 90px);
+    height: clamp(60px, 20vw, 90px);
+    max-width: 90px;
+    max-height: 90px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    margin-top: 38px;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(40,38,52,0.10);
+}
+
+    .icono-circulo svg {
+        width: 50px;
+        height: 50px;
+    }
+
+.btn-iniciarSesion {
+    width: 50%;
+    background: white;
+    max-width: 180px;
+    padding: 0.6rem;
+    border: 1px solid #282634;
+    border-radius: 3px;
+    display: block;
+    margin: 0.4rem auto 0 auto;
+}
+
+.btnRegistar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center
+}
+
+    .btnRegistar p {
+        color: white;;
+        font-size: 1.1rem;
+        font-family: 'Raleway', sans-serif;
+        margin-left: 6px;
+    }
+

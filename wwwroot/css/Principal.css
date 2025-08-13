@@ -1,0 +1,49 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+
+
+
+
+.background-Imagen{  
+    height: 80vh;
+    width: 100vw;
+    z-index: -1; /*orden en mostrar en la pagina, fondo  */
+    background-image:url("https://i.imgur.com/xDoGhKE.jpeg");
+    background-size: cover;
+    background-position: center;
+    backdrop-filter: blur(20px);
+    filter: brightness(60%); 
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+.contenedor-Imagen{
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    z-index: 10;
+    justify-content: center;
+
+}
+
+.titulo{
+    color: white; /* Cambio principal */
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    margin: 0;
+    z-index: 15;
+}

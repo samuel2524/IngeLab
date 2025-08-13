@@ -1,0 +1,67 @@
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\bin\Debug\net8.0\appsettings.json
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\bin\Debug\net8.0\IngeLab.staticwebassets.runtime.json
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\bin\Debug\net8.0\IngeLab.staticwebassets.endpoints.json
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\bin\Debug\net8.0\IngeLab.exe
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\bin\Debug\net8.0\IngeLab.deps.json
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\bin\Debug\net8.0\IngeLab.runtimeconfig.json
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\bin\Debug\net8.0\IngeLab.dll
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\bin\Debug\net8.0\IngeLab.pdb
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\obj\Debug\net8.0\IngeLab.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\obj\Debug\net8.0\IngeLab.AssemblyInfoInputs.cache
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\obj\Debug\net8.0\IngeLab.AssemblyInfo.cs
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\obj\Debug\net8.0\IngeLab.csproj.CoreCompileInputs.cache
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\obj\Debug\net8.0\IngeLab.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\obj\Debug\net8.0\IngeLab.RazorAssemblyInfo.cache
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\obj\Debug\net8.0\IngeLab.RazorAssemblyInfo.cs
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\obj\Debug\net8.0\scopedcss\bundle\IngeLab.styles.css
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\obj\Debug\net8.0\scopedcss\projectbundle\IngeLab.bundle.scp.css
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\obj\Debug\net8.0\staticwebassets\msbuild.IngeLab.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\obj\Debug\net8.0\staticwebassets\msbuild.IngeLab.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\obj\Debug\net8.0\staticwebassets\msbuild.build.IngeLab.props
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.IngeLab.props
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.IngeLab.props
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\obj\Debug\net8.0\IngeLab.dll
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\obj\Debug\net8.0\refint\IngeLab.dll
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\obj\Debug\net8.0\IngeLab.pdb
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\obj\Debug\net8.0\IngeLab.genruntimeconfig.cache
+C:\Users\samue\OneDrive\Escritorio\taller poo\IngeLab\IngeLab\obj\Debug\net8.0\ref\IngeLab.dll
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\bin\Debug\net8.0\appsettings.json
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\bin\Debug\net8.0\IngeLab.staticwebassets.runtime.json
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\bin\Debug\net8.0\IngeLab.staticwebassets.endpoints.json
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\bin\Debug\net8.0\IngeLab.exe
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\bin\Debug\net8.0\IngeLab.deps.json
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\bin\Debug\net8.0\IngeLab.runtimeconfig.json
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\bin\Debug\net8.0\IngeLab.dll
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\bin\Debug\net8.0\IngeLab.pdb
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\IngeLab.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\IngeLab.AssemblyInfoInputs.cache
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\IngeLab.AssemblyInfo.cs
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\IngeLab.csproj.CoreCompileInputs.cache
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\IngeLab.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\IngeLab.RazorAssemblyInfo.cache
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\IngeLab.RazorAssemblyInfo.cs
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\scopedcss\bundle\IngeLab.styles.css
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\scopedcss\projectbundle\IngeLab.bundle.scp.css
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\staticwebassets\msbuild.IngeLab.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\staticwebassets\msbuild.IngeLab.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\staticwebassets\msbuild.build.IngeLab.props
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.IngeLab.props
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.IngeLab.props
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\IngeLab.dll
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\refint\IngeLab.dll
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\IngeLab.pdb
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\IngeLab.genruntimeconfig.cache
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\ref\IngeLab.dll
