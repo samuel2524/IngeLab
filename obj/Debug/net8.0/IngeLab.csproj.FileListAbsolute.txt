@@ -65,3 +65,4 @@ C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\refint\IngeLab.dl
 C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\IngeLab.pdb
 C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\IngeLab.genruntimeconfig.cache
 C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\ref\IngeLab.dll
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\IngeLab.sourcelink.json

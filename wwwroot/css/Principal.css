@@ -2,7 +2,7 @@
 body {
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 
@@ -25,11 +25,12 @@ body {
     padding: 0;
 }
 .contenedor-Imagen{
-    position: relative;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
+    height: 80vh;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -46,4 +47,37 @@ body {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     margin: 0;
     z-index: 15;
+}
+
+.TextoAcerca{
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    font-size: 2rem;
+    text-align: center;
+    color: white;
+
+}
+
+.servicios{
+
+    position: relative;
+}
+
+.tituloServicios{
+    text-align: center;
+    color: #000;
+    font-size: 2.5rem;
+}
+
+.TextoServico{
+    text-align: center;
+    color: black;
+    font-size: 1.5rem;
+}
+
+.logo1{
+    width: 8%;        /* Tamaño fijo */
+    height: 8%;
+    color: #007BFF;     /* Cambia el color del trazo */
+    display: block;
+   
 }

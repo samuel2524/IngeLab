@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "79okggf2DlZ1cKnN2tLgsik3RQZDJrgIhkPOGav4jCo=",
+  "Hash": "DNROW9Q72Wt3s9El7U+JTA/lR/JQbOAMVo6pbwM7arI=",
   "Source": "IngeLab",
   "BasePath": "_content/IngeLab",
   "Mode": "Default",
@@ -94,8 +94,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "3byne6gyhq",
-      "Integrity": "bzMmwDvbRfJFndZbbUS5lir2xb/vAOHf+a4HEhOnkRw=",
+      "Fingerprint": "amp1texrdh",
+      "Integrity": "8jwAdrZfg8cquuvBN3AV7YUVf5rd4mkwjHAAm86vb5Q=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\Principal.css"
@@ -1466,7 +1466,7 @@
       ]
     },
     {
-      "Route": "css/Principal.3byne6gyhq.css",
+      "Route": "css/Principal.amp1texrdh.css",
       "AssetFile": "C:\\Users\\USER\\Desktop\\IngeLab\\IngeLab\\IngeLab\\wwwroot\\css\\Principal.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -1476,7 +1476,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "867"
+          "Value": "1597"
         },
         {
           "Name": "Content-Type",
@@ -1484,11 +1484,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"bzMmwDvbRfJFndZbbUS5lir2xb/vAOHf+a4HEhOnkRw=\""
+          "Value": "\"8jwAdrZfg8cquuvBN3AV7YUVf5rd4mkwjHAAm86vb5Q=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 13 Aug 2025 03:42:59 GMT"
+          "Value": "Thu, 14 Aug 2025 05:30:19 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1498,7 +1498,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "3byne6gyhq"
+          "Value": "amp1texrdh"
         },
         {
           "Name": "label",
@@ -1506,7 +1506,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-bzMmwDvbRfJFndZbbUS5lir2xb/vAOHf+a4HEhOnkRw="
+          "Value": "sha256-8jwAdrZfg8cquuvBN3AV7YUVf5rd4mkwjHAAm86vb5Q="
         }
       ]
     },
@@ -1521,7 +1521,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "867"
+          "Value": "1597"
         },
         {
           "Name": "Content-Type",
@@ -1529,11 +1529,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"bzMmwDvbRfJFndZbbUS5lir2xb/vAOHf+a4HEhOnkRw=\""
+          "Value": "\"8jwAdrZfg8cquuvBN3AV7YUVf5rd4mkwjHAAm86vb5Q=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 13 Aug 2025 03:42:59 GMT"
+          "Value": "Thu, 14 Aug 2025 05:30:19 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1543,7 +1543,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-bzMmwDvbRfJFndZbbUS5lir2xb/vAOHf+a4HEhOnkRw="
+          "Value": "sha256-8jwAdrZfg8cquuvBN3AV7YUVf5rd4mkwjHAAm86vb5Q="
         }
       ]
     },
