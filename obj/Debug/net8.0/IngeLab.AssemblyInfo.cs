@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("IngeLab")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c84a6c3226262595c745291eda586ce72dbd6035")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f413593a1bc19b4f92f409f1a523fd906298ac4c")]
 [assembly: System.Reflection.AssemblyProductAttribute("IngeLab")]
 [assembly: System.Reflection.AssemblyTitleAttribute("IngeLab")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

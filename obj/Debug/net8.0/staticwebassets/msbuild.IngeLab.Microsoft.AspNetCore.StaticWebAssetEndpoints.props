@@ -12,17 +12,17 @@
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"fsp9ljc0jh"},{"Name":"integrity","Value":"sha256-MfSY\u002B\u002BGizZOTKLYB8zdRgeEpL9P6erpg7r8Ot2Zznfg="},{"Name":"label","Value":"_content/IngeLab/css/Login.css"}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"4425"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022MfSY\u002B\u002BGizZOTKLYB8zdRgeEpL9P6erpg7r8Ot2Zznfg=\u0022"},{"Name":"Last-Modified","Value":"Wed, 13 Aug 2025 03:28:24 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/IngeLab/css/Principal.amp1texrdh.css">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\Principal.css'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"amp1texrdh"},{"Name":"integrity","Value":"sha256-8jwAdrZfg8cquuvBN3AV7YUVf5rd4mkwjHAAm86vb5Q="},{"Name":"label","Value":"_content/IngeLab/css/Principal.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1597"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u00228jwAdrZfg8cquuvBN3AV7YUVf5rd4mkwjHAAm86vb5Q=\u0022"},{"Name":"Last-Modified","Value":"Thu, 14 Aug 2025 05:30:19 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/IngeLab/css/Principal.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\Principal.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-8jwAdrZfg8cquuvBN3AV7YUVf5rd4mkwjHAAm86vb5Q="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1597"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u00228jwAdrZfg8cquuvBN3AV7YUVf5rd4mkwjHAAm86vb5Q=\u0022"},{"Name":"Last-Modified","Value":"Thu, 14 Aug 2025 05:30:19 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-y0h8EwGG1CY\u002Blwbqd4C628yhb48hHv5vOgWlGMen03o="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1485"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022y0h8EwGG1CY\u002Blwbqd4C628yhb48hHv5vOgWlGMen03o=\u0022"},{"Name":"Last-Modified","Value":"Thu, 14 Aug 2025 05:33:22 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/IngeLab/css/Principal.vz4meyj33g.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\Principal.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"vz4meyj33g"},{"Name":"integrity","Value":"sha256-y0h8EwGG1CY\u002Blwbqd4C628yhb48hHv5vOgWlGMen03o="},{"Name":"label","Value":"_content/IngeLab/css/Principal.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1485"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022y0h8EwGG1CY\u002Blwbqd4C628yhb48hHv5vOgWlGMen03o=\u0022"},{"Name":"Last-Modified","Value":"Thu, 14 Aug 2025 05:33:22 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/IngeLab/css/Registro.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\Registro.css'))</AssetFile>

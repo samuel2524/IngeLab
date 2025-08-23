@@ -66,3 +66,8 @@ C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\IngeLab.pdb
 C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\IngeLab.genruntimeconfig.cache
 C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\ref\IngeLab.dll
 C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\IngeLab.sourcelink.json
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\bin\Debug\net8.0\Npgsql.dll
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\IngeLab.csproj.AssemblyReference.cache
+C:\Users\USER\Desktop\IngeLab\IngeLab\IngeLab\obj\Debug\net8.0\IngeLab.csproj.Up2Date
