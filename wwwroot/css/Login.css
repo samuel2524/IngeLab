@@ -57,14 +57,13 @@ main {
     }
 
 
-.navbar-transparente-custom {
+/*  .navbar-transparente-custom {
     width: 100%;
-    background-color:#7a7373;/* blanco semitransparente */
-    backdrop-filter: blur(5px); /* efecto desenfoque */
-    z-index: 10; /*orden en mostrar en la pagina, encima del fondo y del centro de la pagina */
-    position: relative;
-    
-}
+    background-color:#7a7373; blanco semitransparente 
+backdrop-filter: blur(5px);  efecto desenfoque 
+z-index: 10; orden en mostrar en la pagina, encima del fondo y del centro de la pagina 
+position: relative;
+}*/
 
 
 .cuadro-contenedor {

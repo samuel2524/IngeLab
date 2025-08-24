@@ -1,0 +1,14 @@
+# Archivos de compilación .NET
+bin/
+obj/
+
+# Archivos temporales de usuario
+*.user
+*.rsuser
+*.suo
+
+# Data de Postgres (no versionar nunca la base de datos interna)
+BD_Dockerizada/data_postgres/
+
+# Logs
+*.log

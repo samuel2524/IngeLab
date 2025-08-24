@@ -25,19 +25,22 @@ main {
     flex: 1;
 }
 
-.background{
+.background {
+    /* Posicionamiento para que cubra toda la pantalla */
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: #222831;
-    background-image: url('https://i.imgur.com/2GocHwd.jpeg');
+    width: 100vw; /* 100% del ancho de la ventana */
+    height: 100vh; /* 100% del alto de la ventana */
+    /* ¡Aquí va tu nueva imagen! */
+    background-image: url('../images/AI_Generated_Database.png');
+    /* Asegura que la imagen siempre cubra el espacio sin deformarse */
     background-size: cover;
     background-position: center;
-    filter: brightness(60%); /* ← oscurece solo la imagen */
-    z-index: -1; /*orden en mostrar en la pagina, fondo  */
-
+    /* Lo pone detrás de todo el contenido */
+    z-index: -1;
+    /* Opcional: un pequeño filtro para que no sea tan nítido */
+    /* filter: blur(3px); */
 }
 
 .contenedor-columnas {
@@ -53,12 +56,12 @@ main {
 
 }
 
-.navbar-transparente-custom {
+/*.navbar-transparente-custom {
     width: 100%;
     background-color: #7a7373;
     z-index: 10;
     border: none;
-}
+}*/
 
 .cuadro-contenedorConfirmarRegistro{
     width: 60%;
@@ -137,3 +140,134 @@ main {
     display: block;
     margin-left:4%; /* Centra horizontalmente */
 }
+
+/* NUEVOS ELEMENTOS: REGISTRO */
+
+/* Clase para ocultar elementos. */
+.hidden {
+    display: none;
+}
+
+/* Estilos para el nuevo contenedor unificado */
+.cuadro-unificado-registro {
+    background: rgba(255, 255, 255, 0.1); /* Efecto glassmorphism */
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 30px 40px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column; 
+    gap: 15px; /* Espacio entre los elementos del formulario */
+}
+
+/* Estilos genéricos para labels e inputs para mantener la consistencia */
+.label-estilizado {
+    color: #fff;
+    font-weight: bold;
+    font-size: 1rem;
+    align-self: flex-start; 
+}
+
+.input-estilizado {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #fff;
+    font-size: 1rem;
+    outline: none; 
+}
+
+    .input-estilizado::placeholder {
+        color: #ccc;
+    }
+
+    .input-estilizado:focus {
+        border-color: #00ffff; 
+    }
+
+/* El botón de registro mantiene su estilo y se centra */
+.cuadro-contenedorConfirmarRegistro {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.btn-Registro {
+    /* Estilos del botón */
+    padding: 12px 30px;
+    background-color: #00c6ff; /* Un azul vibrante */
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .btn-Registro:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px #00c6ff;
+    }
+
+/* ===== BOTÓN FLOTANTE PARA VOLVER ===== */
+.btn-volver {
+    position: fixed; /* Lo deja fijo en la pantalla */
+    top: 25px;
+    left: 25px;
+    z-index: 100; /* Se asegura de que esté por encima de todo */
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* El mismo efecto glassmorphism del formulario */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%; /* Lo hacemos un círculo perfecto */
+
+    color: #00ffff; /* Color del ícono (nuestro cian neón) */
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+    .btn-volver svg {
+        width: 24px;
+        height: 24px;
+        color: #00ffff; /* Hereda el color cian */
+    }
+
+    .btn-volver:hover {
+        transform: scale(1.1);
+        background: rgba(0, 255, 255, 0.2); /* Resalta con el color cian */
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+    }
+
+/* ===== LOGO SUPERIOR DE TEXTO ===== */
+.header-logo {
+    position: fixed; /* Fijo en la pantalla */
+    top: 25px;
+    left: 50%; /* Lo movemos al centro */
+    transform: translateX(-50%); /* Ajuste fino para centrarlo perfectamente */
+    z-index: 100;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif; /* Usamos una fuente más moderna */
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 2px; /* Le da un aire más high-tech */
+    /* El toque mágico: un brillo de neón sutil */
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+    transition: text-shadow 0.3s ease;
+}
+
+    .header-logo:hover {
+        text-shadow: 0 0 16px rgba(0, 255, 255, 1);
+    }
