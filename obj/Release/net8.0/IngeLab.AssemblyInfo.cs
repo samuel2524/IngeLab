@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("IngeLab")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fce5fbfcbf0869765cf52c7bb8f9217c0730e311")]
 [assembly: System.Reflection.AssemblyProductAttribute("IngeLab")]
 [assembly: System.Reflection.AssemblyTitleAttribute("IngeLab")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
