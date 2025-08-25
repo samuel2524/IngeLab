@@ -1,0 +1,52 @@
+@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/Login.css" asp-append-version="true">
+    <title>@ViewData["Title"] - IngeLab</title>
+</head>
+<body class="body_principal_login">
+
+    <a href="/" class="btn-volver" aria-label="Volver a la página principal">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+    </a>
+    <a href="/" class="header-logo">IngeLab</a>
+    <div class="background"></div>
+    <div class="centro-pagina">
+
+        <form method="post" asp-controller="Login" asp-action="Index" class="cuadro-unificado-login">
+            <div class="titulo-cuadro">Iniciar Sesión</div>
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger">@ViewBag.Error</div>
+            }
+
+            <label for="correo" class="label-estilizado">Correo Electrónico</label>
+            <input type="email" id="correo" name="Correo" class="input-estilizado" placeholder="tu@correo.com" required />
+
+            <label for="contrasenia" class="label-estilizado">Contraseña</label>
+            <input type="password" id="contrasenia" name="Contraseña" class="input-estilizado" placeholder="Tu contraseña" required />
+
+            <div class="cuadro-contenedorConfirmar">
+                <button type="submit" class="btn-Login">Ingresar</button>
+            </div>
+
+            <hr class="separador">
+
+            <div class="link-registro">
+                <p>¿No tienes una cuenta? <a asp-controller="Registro" asp-action="Index">Créala aquí</a></p>
+            </div>
+        </form>
+
+    </div>
+</body>
+</html>

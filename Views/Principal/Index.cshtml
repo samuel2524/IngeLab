@@ -2,7 +2,6 @@
     Layout = null;
     ViewData["HideNavbar"] = true;
 }
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -15,19 +14,17 @@
     <link rel="stylesheet" href="~/css/Principal.css" asp-append-version="true">
 </head>
 <body>
-
     <header class="hero">
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1 class="hero-title">Transforma Desafíos en Código.</h1>
             <p class="hero-subtitle">Conectamos tu empresa con ingenieros de élite para construir soluciones tecnológicas a la medida. Sin fricción, solo resultados.</p>
             <div class="hero-cta-container">
-                <a href="/Registro/Registro" class="btn btn-primary">Encontrar Talento</a>
+                <a asp-controller="Login" asp-action="Index" class="btn btn-primary">Encontrar Talento</a>
                 <a href="#servicios" class="btn btn-secondary">Ver Servicios</a>
             </div>
         </div>
     </header>
-
     <main>
         <section id="servicios" class="how-it-works-section">
             <h2 class="section-title">Tu Próxima Solución en 3 Pasos</h2>
@@ -49,7 +46,6 @@
                 </div>
             </div>
         </section>
-
         <section class="features-section">
             <h2 class="section-title">Ingeniería de Otro Nivel</h2>
             <div class="features-grid">
@@ -71,16 +67,14 @@
                 </div>
             </div>
         </section>
-
         <section class="final-cta-section">
             <div class="cta-content">
                 <h2 class="cta-title">¿Listo para construir el futuro?</h2>
                 <p class="cta-text">Únete a la plataforma que está redefiniendo la forma en que las empresas resuelven sus retos tecnológicos.</p>
-                <a href="/Registro/Registro" class="btn btn-primary btn-large">¡Empezar ahora!</a>
+                <a asp-controller="Registro" asp-action="Index" class="btn btn-primary btn-large">¡Empezar ahora!</a>
             </div>
         </section>
     </main>
-
     <footer class="footer">
         <p>&copy; @DateTime.Now.Year Ingelab. Todos los derechos reservados.</p>
         <div class="footer-links">
@@ -88,6 +82,5 @@
             <a href="#">Términos de Servicio</a>
         </div>
     </footer>
-
 </body>
 </html>

@@ -1,6 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Views",
+    "\\Views\\Shared"
   ],
   "SelectedNode": "\\IngeLab.sln",
   "PreviewInSolutionExplorer": false

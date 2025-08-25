@@ -1,0 +1,90 @@
+@{
+    ViewData["Title"] = "Registro";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/Registro.css" asp-append-version="true">
+    <title>@ViewData["Title"] - IngeLab</title>
+</head>
+<body class="body_principal_registro">
+    <a href="/" class="btn-volver" aria-label="Volver a la página principal">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+    </a>
+    <a href="/" class="header-logo">IngeLab</a>
+    <div class="background"></div>
+
+    @* @if (ViewBag.mensaje != null) ???????
+    {
+
+        <div class="alert alert-success">@ViewBag.mensaje</div>
+        <script>
+            setTimeout(function () {
+                var mensaje = document.getElementById("mensajeExito");
+                if (mensaje) {
+                    mensaje.style.display = "none";
+                }
+            }, 3000); // 3000 milisegundos = 3 segundos
+        </script>
+
+    } *@
+
+    <div class="centro-pagina">
+        <form asp-controller="Registro" asp-action="Registro" method="post" class="cuadro-unificado-registro">
+            <div class="titulo-cuadro">Registro</div>
+            <label for="tipoUsuario" class="label-estilizado">Soy un:</label>
+            <select id="tipoUsuario" name="TipoUsuario" class="input-estilizado">
+                <option value="ingeniero">Ingeniero</option>
+                <option value="empresa">Empresa</option>
+            </select>
+            <div id="camposIngeniero">
+                <label for="nombres" class="label-estilizado">Nombre</label>
+                <input type="text" id="nombres" name="Nombre" class="input-estilizado" required />
+                <label for="apellidos" class="label-estilizado">Apellidos</label>
+                <input type="text" id="apellidos" name="Apellido" class="input-estilizado" required />
+                <label for="tipoDocumento" class="label-estilizado">Tipo de Documento</label>
+                <select id="tipoDocumento" name="TipoDocumento" class="input-estilizado">
+                    <option value="Cedula">Cédula</option>
+                    <option value="TarjetaIdentidad">Tarjeta De Identidad</option>
+                    <option value="Pasaporte">Pasaporte</option>
+                    <option value="Otro">Otro</option>
+                </select>
+                <label for="numeroDocumento" class="label-estilizado">Número de Documento</label>
+                <input type="text" id="numeroDocumento" name="NumeroDocumento" class="input-estilizado" required />
+                <label for="fechaNacimiento" class="label-estilizado">Fecha de Nacimiento</label>
+                <input type="date" id="fechaNacimiento" name="FechaNacimiento" class="input-estilizado" required />
+            </div>
+            <div id="camposEmpresa" class="hidden">
+                <label for="nombreEmpresa" class="label-estilizado">Nombre de la Empresa</label>
+                <input type="text" id="nombreEmpresa" name="NombreEmpresa" class="input-estilizado" />
+                <label for="nit" class="label-estilizado">NIT</label>
+                <input type="text" id="nit" name="NIT" class="input-estilizado" />
+                <label for="nombreContacto" class="label-estilizado">Nombre del Contacto</label>
+                <input type="text" id="nombreContacto" name="NombreContacto" class="input-estilizado" />
+            </div>
+            <div id="camposComunes">
+                <label for="correo" class="label-estilizado">Correo Electrónico</label>
+                <input type="email" id="correo" name="Correo" class="input-estilizado" required />
+                <label for="contrasenia" class="label-estilizado">Contraseña</label>
+                <input type="password" id="contrasenia" name="Contraseña" class="input-estilizado" required />
+                <label for="telefono" class="label-estilizado">Teléfono</label>
+                <input type="tel" id="telefono" name="Telefono" class="input-estilizado" />
+            </div>
+            <div class="cuadro-contenedorConfirmarRegistro">
+                <button type="submit" class="btn-Registro">Registrarse</button>
+            </div>
+            <hr class="separador">
+            <div class="link-secundario">
+                <p>¿Ya tienes una cuenta? <a asp-controller="Login" asp-action="Index">Inicia sesión</a></p>
+            </div>
+        </form>
+    </div>
+    <script src="~/js/registro.js" asp-append-version="true"></script>
+</body>
+</html>

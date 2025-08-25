@@ -1,185 +1,142 @@
-body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-    overflow-x: hidden;
-    
+/* ===== ESTILOS GLOBALES Y DE FONDO ===== */
+
+* {
+    box-sizing: border-box; /* Regla #1: Para que todos los anchos sean iguales */
 }
 
 html, body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-}
-.centro-pagina {
-    display: flex;
-    position: relative;
-    gap: 0.8rem;
-    z-index: 1;
-    flex-wrap: wrap;
-    justify-content: center;
-    
+    font-family: 'Poppins', sans-serif;
 }
 
-main {
-    flex: 1;
+.body_principal_registro {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    overflow-x: hidden;
 }
 
 .background {
-    /* Posicionamiento para que cubra toda la pantalla */
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw; /* 100% del ancho de la ventana */
-    height: 100vh; /* 100% del alto de la ventana */
-    /* ¡Aquí va tu nueva imagen! */
+    width: 100vw;
+    height: 100vh;
     background-image: url('../images/AI_Generated_Database.png');
-    /* Asegura que la imagen siempre cubra el espacio sin deformarse */
     background-size: cover;
     background-position: center;
-    /* Lo pone detrás de todo el contenido */
     z-index: -1;
-    /* Opcional: un pequeño filtro para que no sea tan nítido */
-    /* filter: blur(3px); */
+}
+/* ===== LOGO Y BOTÓN DE VOLVER ===== */
+
+.header-logo, .btn-volver {
+    position: fixed; /* <-- LA ORDEN CORRECTA Y ÚNICA: Fijado a la pantalla */
+    top: 25px;
+    z-index: 100;
+}
+/*.header-logo { left: 50%; transform: translateX(-50%); color: #ffffff; font-family: 'Poppins', sans-serif; font-size: 1.8rem; font-weight: 600; text-decoration: none; letter-spacing: 2px; text-shadow: 0 0 8px rgba(0, 255, 255, 0.6); transition: text-shadow 0.3s ease; }*/
+
+.header-logo {
+    position: absolute;
+    top: 25px;
+    left: 0;
+    right: 0;
+    margin: 0 auto; /* Centrado horizontal real */
+    width: fit-content; /* Para que no ocupe todo el ancho */
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+    transition: text-shadow 0.3s ease;
 }
 
-.contenedor-columnas {
-    position: relative;
+    .header-logo:hover {
+        text-shadow: 0 0 16px rgba(0, 255, 255, 1);
+    }
+
+.btn-volver {
+    left: 25px;
+    width: 45px;
+    height: 45px;
     display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
+    align-items: center;
     justify-content: center;
-    width: 100%;
-}
-.titulo-cuadro p{
-    font-family: 'Raleway', sans-serif;
-
-}
-
-/*.navbar-transparente-custom {
-    width: 100%;
-    background-color: #7a7373;
-    z-index: 10;
-    border: none;
-}*/
-
-.cuadro-contenedorConfirmarRegistro{
-    width: 60%;
-    display: flex; 
-    gap: 0.4rem;
-    border-radius: 2px;
-    border: 0px solid black;
-    flex-direction: column;
-}
-.cuadro-contenedorRegistroIzquierda {
-    color: black;
-    flex: 1;
-    min-width: 250px; 
-    display: flex; 
-    gap: 0.4rem;
-    background-color:rgba(162, 167, 173, 0.2);
-    padding: 1rem 1rem 2rem 1rem; /* para cuadrar el espacio del ultimo input al contenedor */
-    border-radius: 12px;
-    border: 2px solid #7a7373;
-    backdrop-filter: blur(20px); 
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-    flex-direction: column;
-    
-}
-
-.cuadro-contenedorRegistroDerecha
-{
-    flex: 1; 
-    min-width: 250px;
-    display: flex; /* Activo flexbox*/
-    gap: 0.4rem; /* espacio entre cada item */
-    padding: 1rem 1rem 2rem 1rem; /* para cuadrar el espacio del ultimo input al contenedor */
-    background-color: rgba(162, 167, 173, 0.2);;
-    border-radius: 12px; /* borde del input */
-    border: 2px solid #7a7373; 
-    backdrop-filter: blur(20px); 
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-    flex-direction: column;
-}
-
-.btn-Registro{
-    height: 5vh;
-    border-radius: 10px;
-    border: none;
-    background-color:  #7a7373;
-}
-
-.label-correo,.label-contraseniaRegistro,.label-fechaNacimiento, .label-nombre, .label-Apellidos, .label-tipoDocumento, .label-numeroDocumento,.label-telefono {
-    font-size: 1rem;
-    color: white;
-    margin-bottom: 0.5rem;
-    margin-left:4%;
-    font-family: 'Raleway', sans-serif;
-}
-/* Inputs cuadro Derecha */
-.input-cuadroCorreo, .input-cuadroContraseniaRegistro, .input-cuadroFechaNacimiento, .input-cuadroTelefono{
-    width: 60%;
-    padding: 0.6rem;
-    border: 1px solid #7a7373;
-    border-radius: 6px;
-    font-size: 1rem;
-    display: block;
-    margin-left:4%; /* Centra horizontalmente */
-    
-
-}
-
-/* Inputs cuadro Izquierda */
-
-.input-cuadroNombre, .input-cuadroApellidos, .input-cuadroTipoDocumento, .input-cuadroNumeroDocumento{
-    width: 60%;
-    padding: 0.6rem;
-    border: 1px solid #4d4946;
-    border-radius: 6px;
-    font-size: 1rem;
-    display: block;
-    margin-left:4%; /* Centra horizontalmente */
-}
-
-/* NUEVOS ELEMENTOS: REGISTRO */
-
-/* Clase para ocultar elementos. */
-.hidden {
-    display: none;
-}
-
-/* Estilos para el nuevo contenedor unificado */
-.cuadro-unificado-registro {
-    background: rgba(255, 255, 255, 0.1); /* Efecto glassmorphism */
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    color: #00ffff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+    .btn-volver svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .btn-volver:hover {
+        transform: scale(1.1);
+        background: rgba(0, 255, 255, 0.2);
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+    }
+/* ===== ESTRUCTURA CENTRAL ===== */
+
+.centro-pagina {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+/* ===== ESTILOS DEL CUADRO DE REGISTRO ===== */
+
+.cuadro-unificado-registro {
+    background: rgba(10, 15, 30, 0.6);
+    backdrop-filter: blur(15px);
     border-radius: 15px;
     padding: 30px 40px;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
     width: 100%;
-    max-width: 700px;
+    max-width: 600px; /* Regla #2: Un tamaño más balanceado */
     display: flex;
-    flex-direction: column; 
-    gap: 0; /* Espacio entre los elementos del formulario */
+    flex-direction: column;
 }
 
-/* Estilos genéricos para labels e inputs para mantener la consistencia */
+.titulo-cuadro {
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+}
+/* Regla #4: Espaciado vertical consistente */
+
 .label-estilizado {
     color: #fff;
     font-weight: bold;
-    font-size: 1rem;
-    align-self: flex-start; 
+    font-size: 0.9rem;
+    margin-bottom: 8px; /* Espacio entre label y su input */
 }
+/* Regla #3: Ancho de inputs corregido */
 
 .input-estilizado {
-    width: 100%;
+    width: 100%; /* El box-sizing se encarga del resto */
     padding: 12px;
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 8px;
     background-color: rgba(0, 0, 0, 0.2);
     color: #fff;
     font-size: 1rem;
-    outline: none; 
+    outline: none;
+    margin-bottom: 2px; /* Espacio entre un campo y el siguiente label */
 }
 
     .input-estilizado::placeholder {
@@ -187,21 +144,21 @@ main {
     }
 
     .input-estilizado:focus {
-        border-color: #00ffff; 
+        border-color: #00ffff;
     }
+/* Botón de Registro */
 
-/* El botón de registro mantiene su estilo y se centra */
 .cuadro-contenedorConfirmarRegistro {
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .btn-Registro {
-    /* Estilos del botón */
     padding: 12px 30px;
-    background-color: #00c6ff; /* Un azul vibrante */
+    width: 100%;
+    background-color: #00c6ff;
     color: white;
     border: none;
     border-radius: 25px;
@@ -215,59 +172,32 @@ main {
         transform: scale(1.05);
         box-shadow: 0 0 15px #00c6ff;
     }
+/* Estilos para el separador y link, ahora dentro del cuadro */
 
-/* ===== BOTÓN FLOTANTE PARA VOLVER ===== */
-.btn-volver {
-    position: fixed; /* Lo deja fijo en la pantalla */
-    top: 25px;
-    left: 25px;
-    z-index: 100; /* Se asegura de que esté por encima de todo */
-    width: 45px;
-    height: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* El mismo efecto glassmorphism del formulario */
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 50%; /* Lo hacemos un círculo perfecto */
-
-    color: #00ffff; /* Color del ícono (nuestro cian neón) */
-    text-decoration: none;
-    transition: all 0.3s ease;
+.separador {
+    width: 100%;
+    border: none;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 20px 0 0 0;
 }
 
-    .btn-volver svg {
-        width: 24px;
-        height: 24px;
-        color: #00ffff; /* Hereda el color cian */
-    }
-
-    .btn-volver:hover {
-        transform: scale(1.1);
-        background: rgba(0, 255, 255, 0.2); /* Resalta con el color cian */
-        box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
-    }
-
-/* ===== LOGO SUPERIOR DE TEXTO ===== */
-.header-logo {
-    position: fixed; /* Fijo en la pantalla */
-    top: 25px;
-    left: 50%; /* Lo movemos al centro */
-    transform: translateX(-50%); /* Ajuste fino para centrarlo perfectamente */
-    z-index: 100;
+.link-secundario {
+    padding-top: 15px;
+    text-align: center;
     color: #ffffff;
-    font-family: 'Poppins', sans-serif; /* Usamos una fuente más moderna */
-    font-size: 1.8rem;
-    font-weight: 600;
-    text-decoration: none;
-    letter-spacing: 2px; /* Le da un aire más high-tech */
-    /* El toque mágico: un brillo de neón sutil */
-    text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
-    transition: text-shadow 0.3s ease;
+    font-size: 0.9rem;
 }
 
-    .header-logo:hover {
-        text-shadow: 0 0 16px rgba(0, 255, 255, 1);
+    .link-secundario a {
+        color: #00ffff;
+        font-weight: bold;
+        text-decoration: none;
     }
+/* Ocultar campos dinámicos de JS */
+
+.hidden {
+    display: none;
+}
+
+)

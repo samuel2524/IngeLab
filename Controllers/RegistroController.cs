@@ -1,61 +1,23 @@
-using IngeLab.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace IngeLab.Controllers
 {
     public class RegistroController : Controller
-    {     
-
-
-        private readonly BD bd = new BD();  
-        // Aquí puedes agregar métodos para manejar el registro de usuarios
-        // Por ejemplo, un método para mostrar el formulario de registro
+    {
         [HttpGet]
-        public IActionResult Registro()
+        public IActionResult Index()
         {
             return View();
         }
+
         [HttpPost]
-
-        public IActionResult Registro(Ingenieros ingenieros)
+        public IActionResult Registro(string Correo, string Contraseña) // Simplificado por ahora
         {
+            // AQUÍ IRÍA LA LÓGICA PARA GUARDAR EL NUEVO USUARIO EN LA BASE DE DATOS
+            // Por ahora, solo lo redirigimos al Login.
 
-            try
-            {
-                using (var conexion = bd.establecerConexion())
-                {
-                    string query = "INSERT INTO usuarios (nombre, apellidos, tipo_documento, numero_documento, correo, contraseña, fecha_nacimiento, telefono) " +
-                               "VALUES (@Nombre, @Apellido, @TipoDocumento, @NumeroDocumento, @Correo, @Contraseña, @FechaNacimiento, @Telefono)";
-                    
-
-                    using (var cmd = new Npgsql.NpgsqlCommand(query, conexion))
-                    {
-                        cmd.Parameters.AddWithValue("Nombre", ingenieros.Nombre);
-                        cmd.Parameters.AddWithValue("Apellido", ingenieros.Apellido);
-                        cmd.Parameters.AddWithValue("TipoDocumento", ingenieros.TipoDocumento);
-                        cmd.Parameters.AddWithValue("NumeroDocumento", ingenieros.NumeroDocumento);
-                        cmd.Parameters.AddWithValue("Correo", ingenieros.Correo);
-                        cmd.Parameters.AddWithValue("Contraseña", ingenieros.Contraseña);
-                        cmd.Parameters.AddWithValue("FechaNacimiento", ingenieros.FechaNacimiento);
-                        cmd.Parameters.AddWithValue("Telefono", ingenieros.Telefono);
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-
-                ViewBag.mensaje = "Usuario registrado exitosamente";
-                return View("~/Views/Registro/Registro.cshtml");
-
-            }
-
-
-
-            catch (Exception e)
-            {
-
-                return Content("Error al registrar el usuario: " + e.Message);
-            }
-                           
+            // Redirige al login después del registro exitoso
+            return RedirectToAction("Index", "Login");
         }
     }
 }

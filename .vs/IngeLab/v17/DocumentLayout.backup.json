@@ -1,42 +1,58 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\",
+  "WorkspaceRootPath": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab Actual UC\\IngeLab\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab\\ingelab\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab actual uc\\ingelab\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab\\ingelab\\wwwroot\\css\\login.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:wwwroot\\css\\login.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab\\ingelab\\views\\registro\\registro.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:views\\registro\\registro.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab\\ingelab\\wwwroot\\css\\registro.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:wwwroot\\css\\registro.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab\\ingelab\\wwwroot\\css\\principal.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:wwwroot\\css\\principal.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab\\ingelab\\views\\principal\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab actual uc\\ingelab\\views\\principal\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:views\\principal\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab\\ingelab\\views\\cuenta\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:views\\cuenta\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab actual uc\\ingelab\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab\\ingelab\\wwwroot\\js\\registro.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:wwwroot\\js\\registro.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab actual uc\\ingelab\\controllers\\principalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:controllers\\principalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab\\ingelab\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab actual uc\\ingelab\\views\\registro\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:views\\registro\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab actual uc\\ingelab\\controllers\\registrocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:controllers\\registrocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab actual uc\\ingelab\\views\\login\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:views\\login\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab actual uc\\ingelab\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab actual uc\\ingelab\\wwwroot\\css\\login.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:wwwroot\\css\\login.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab actual uc\\ingelab\\wwwroot\\css\\principal.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:wwwroot\\css\\principal.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab actual uc\\ingelab\\wwwroot\\css\\registro.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:wwwroot\\css\\registro.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab actual uc\\ingelab\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab actual uc\\ingelab\\wwwroot\\js\\registro.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:wwwroot\\js\\registro.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     }
   ],
   "DocumentGroupContainers": [
@@ -46,7 +62,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -65,12 +81,98 @@
               "Name": "ST:0:0:{6324226f-61b6-4f28-92ee-18d4b5fe1e48}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab Actual UC\\IngeLab\\Views\\Registro\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Registro\\Index.cshtml",
+              "ToolTip": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab Actual UC\\IngeLab\\Views\\Registro\\Index.cshtml",
+              "RelativeToolTip": "Views\\Registro\\Index.cshtml",
+              "ViewState": "AgIAACYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-25T21:59:08.255Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab Actual UC\\IngeLab\\Views\\Login\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Login\\Index.cshtml",
+              "ToolTip": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab Actual UC\\IngeLab\\Views\\Login\\Index.cshtml",
+              "RelativeToolTip": "Views\\Login\\Index.cshtml",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAAABgAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-25T21:58:06.275Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "LoginController.cs",
+              "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab Actual UC\\IngeLab\\Controllers\\LoginController.cs",
+              "RelativeDocumentMoniker": "Controllers\\LoginController.cs",
+              "ToolTip": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab Actual UC\\IngeLab\\Controllers\\LoginController.cs",
+              "RelativeToolTip": "Controllers\\LoginController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAUwCYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-25T21:58:01.814Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab Actual UC\\IngeLab\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab Actual UC\\IngeLab\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-25T21:58:00.464Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "RegistroController.cs",
+              "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab Actual UC\\IngeLab\\Controllers\\RegistroController.cs",
+              "RelativeDocumentMoniker": "Controllers\\RegistroController.cs",
+              "ToolTip": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab Actual UC\\IngeLab\\Controllers\\RegistroController.cs",
+              "RelativeToolTip": "Controllers\\RegistroController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-25T21:57:57.27Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PrincipalController.cs",
+              "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab Actual UC\\IngeLab\\Controllers\\PrincipalController.cs",
+              "RelativeDocumentMoniker": "Controllers\\PrincipalController.cs",
+              "ToolTip": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab Actual UC\\IngeLab\\Controllers\\PrincipalController.cs",
+              "RelativeToolTip": "Controllers\\PrincipalController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-25T21:57:53.4Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "Login.css",
-              "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\wwwroot\\css\\Login.css",
+              "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab Actual UC\\IngeLab\\wwwroot\\css\\Login.css",
               "RelativeDocumentMoniker": "wwwroot\\css\\Login.css",
-              "ToolTip": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\wwwroot\\css\\Login.css",
+              "ToolTip": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab Actual UC\\IngeLab\\wwwroot\\css\\Login.css",
               "RelativeToolTip": "wwwroot\\css\\Login.css",
               "ViewState": "AgIAADMAAAAAAAAAAAAAAD8AAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
@@ -78,36 +180,24 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 7,
               "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\Views\\Shared\\_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab Actual UC\\IngeLab\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab Actual UC\\IngeLab\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABcAAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-08-24T21:15:48.045Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Login.cshtml",
-              "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\Views\\Cuenta\\Login.cshtml",
-              "RelativeDocumentMoniker": "Views\\Cuenta\\Login.cshtml",
-              "ToolTip": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\Views\\Cuenta\\Login.cshtml",
-              "RelativeToolTip": "Views\\Cuenta\\Login.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-08-24T21:08:43.042Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 9,
               "Title": "Principal.css",
-              "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\wwwroot\\css\\Principal.css",
+              "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab Actual UC\\IngeLab\\wwwroot\\css\\Principal.css",
               "RelativeDocumentMoniker": "wwwroot\\css\\Principal.css",
-              "ToolTip": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\wwwroot\\css\\Principal.css",
+              "ToolTip": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab Actual UC\\IngeLab\\wwwroot\\css\\Principal.css",
               "RelativeToolTip": "wwwroot\\css\\Principal.css",
               "ViewState": "AgIAACoAAAAAAAAAAAAAACUAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
@@ -115,23 +205,24 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\Views\\Principal\\Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab Actual UC\\IngeLab\\Views\\Principal\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Principal\\Index.cshtml",
-              "ToolTip": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\Views\\Principal\\Index.cshtml",
+              "ToolTip": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab Actual UC\\IngeLab\\Views\\Principal\\Index.cshtml",
               "RelativeToolTip": "Views\\Principal\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADAAAAAAAAAAAAAmwFUAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-08-24T19:57:24.178Z"
+              "WhenOpened": "2025-08-24T19:57:24.178Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 10,
               "Title": "Registro.css",
-              "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\wwwroot\\css\\Registro.css",
+              "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab Actual UC\\IngeLab\\wwwroot\\css\\Registro.css",
               "RelativeDocumentMoniker": "wwwroot\\css\\Registro.css",
-              "ToolTip": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\wwwroot\\css\\Registro.css",
+              "ToolTip": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab Actual UC\\IngeLab\\wwwroot\\css\\Registro.css",
               "RelativeToolTip": "wwwroot\\css\\Registro.css",
               "ViewState": "AgIAAO0AAAAAAAAAAAAmwBABAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
@@ -139,11 +230,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 11,
               "Title": "site.js",
-              "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\wwwroot\\js\\site.js",
+              "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab Actual UC\\IngeLab\\wwwroot\\js\\site.js",
               "RelativeDocumentMoniker": "wwwroot\\js\\site.js",
-              "ToolTip": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\wwwroot\\js\\site.js",
+              "ToolTip": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab Actual UC\\IngeLab\\wwwroot\\js\\site.js",
               "RelativeToolTip": "wwwroot\\js\\site.js",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
@@ -151,31 +242,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 12,
               "Title": "registro.js",
-              "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\wwwroot\\js\\registro.js",
+              "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab Actual UC\\IngeLab\\wwwroot\\js\\registro.js",
               "RelativeDocumentMoniker": "wwwroot\\js\\registro.js",
-              "ToolTip": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\wwwroot\\js\\registro.js",
+              "ToolTip": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab Actual UC\\IngeLab\\wwwroot\\js\\registro.js",
               "RelativeToolTip": "wwwroot\\js\\registro.js",
               "ViewState": "AgIAABQAAAAAAAAAAAAAwB0AAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2025-08-24T19:28:39.752Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Registro.cshtml",
-              "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\Views\\Registro\\Registro.cshtml",
-              "RelativeDocumentMoniker": "Views\\Registro\\Registro.cshtml",
-              "ToolTip": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\Views\\Registro\\Registro.cshtml",
-              "RelativeToolTip": "Views\\Registro\\Registro.cshtml",
-              "ViewState": "AgIAADcAAAAAAAAAAAAmwFkAAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-08-24T18:48:28.222Z"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             }
           ]
         }

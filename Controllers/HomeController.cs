@@ -13,7 +13,7 @@ namespace IngeLab.Controllers
             _logger = logger;
         }
 
-        public IActionResult Login()
+        public IActionResult Index()
         {
             return View();
         }
