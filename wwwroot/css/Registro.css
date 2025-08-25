@@ -160,7 +160,7 @@ main {
     max-width: 700px;
     display: flex;
     flex-direction: column; 
-    gap: 15px; /* Espacio entre los elementos del formulario */
+    gap: 0; /* Espacio entre los elementos del formulario */
 }
 
 /* Estilos genéricos para labels e inputs para mantener la consistencia */
