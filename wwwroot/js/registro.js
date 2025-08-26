@@ -9,16 +9,27 @@ document.addEventListener('DOMContentLoaded', function () {
     // Función para actualizar la visibilidad de los formularios.
     function actualizarFormulario() {
         const seleccion = selectorTipoUsuario.value;
+        
+        const inputsIngeniero = camposIngeniero.querySelectorAll("input, select");
+        const inputsEmpresa = camposEmpresa.querySelectorAll("input, select");
 
         // "If" para controlar el flow.
         if (seleccion === 'ingeniero') {
             // Si es ingeniero, mostramos sus campos y ocultamos los de la empresa.
             camposIngeniero.classList.remove('hidden');
             camposEmpresa.classList.add('hidden');
+
+            //desactivamos los inputs del formulario oculto para que no se envíen
+            inputsIngeniero.forEach(el => el.disabled = false);
+            inputsEmpresa.forEach(el => el.disabled = true);
         } else if (seleccion === 'empresa') {
             // Si es empresa, hacemos lo contrario.
             camposIngeniero.classList.add('hidden');
             camposEmpresa.classList.remove('hidden');
+
+            //desactivamos los inputs del formulario oculto para que no se envíen
+            inputsIngeniero.forEach(el => el.disabled = true);
+            inputsEmpresa.forEach(el => el.disabled = false);
         }
     }
 

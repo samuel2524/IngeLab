@@ -236,7 +236,7 @@ html, body {
     display: block;
     min-height: 20px;
     font-size: 0.9em;
-    color: rgb(110, 54, 54);
+    color: red;
     font-family: 'Poppins', sans-serif;
 }
 
@@ -251,6 +251,8 @@ html, body {
     display: flex;
     align-items: center;
     gap: 10px;
+    max-width: 600px;
+    margin: 20px auto;
 }
 
 .icono {
@@ -271,4 +273,18 @@ html, body {
 .cerrar:hover {
     transform: scale(1.2);  /* efecto al pasar el mouse */
 }
+/* Animación de desvanecimiento */
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
 
+.alerta.fade-out {
+    animation: fadeOut 0.5s ease forwards;
+}

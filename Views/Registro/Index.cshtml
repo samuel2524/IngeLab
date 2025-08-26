@@ -1,3 +1,4 @@
+@model IngeLab.Models.Registro_Ingenieros_empresas
 @{
     ViewData["Title"] = "Registro";
     Layout = null;
@@ -20,62 +21,120 @@
     <a href="/" class="header-logo">IngeLab</a>
     <div class="background"></div>
 
-    @* @if (ViewBag.mensaje != null) ???????
-    {
 
-        <div class="alert alert-success">@ViewBag.mensaje</div>
-        <script>
+    @if (ViewBag.mensaje != null)
+    {   
+        
+        <div id="mensajeError" class="alerta">
+            <span>@ViewBag.mensaje</span>
+            <button onclick="this.parentElement.style.display='none'" class="cerrar">×</button>
+        </div>
+
+        
+
+    }
+    <script>
+        window.onload = function () {
             setTimeout(function () {
-                var mensaje = document.getElementById("mensajeExito");
+                var mensaje = document.getElementById("mensajeError");
                 if (mensaje) {
-                    mensaje.style.display = "none";
+                    mensaje.classList.add("fade-out");
+                    setTimeout(() => mensaje.style.display = "none", 500);
                 }
-            }, 3000); // 3000 milisegundos = 3 segundos
-        </script>
+            }, 10000);
+        };
+    </script>
 
-    } *@
+
 
     <div class="centro-pagina">
         <form asp-controller="Registro" asp-action="Registro" method="post" class="cuadro-unificado-registro">
             <div class="titulo-cuadro">Registro</div>
             <label for="tipoUsuario" class="label-estilizado">Soy un:</label>
-            <select id="tipoUsuario" name="TipoUsuario" class="input-estilizado">
+            <select asp-for="TipoUsuario" id="tipoUsuario" class="input-estilizado" name="TipoUsuario">
                 <option value="ingeniero">Ingeniero</option>
                 <option value="empresa">Empresa</option>
             </select>
             <div id="camposIngeniero">
                 <label for="nombres" class="label-estilizado">Nombre</label>
-                <input type="text" id="nombres" name="Nombre" class="input-estilizado" required />
+                <input type="text" id="nombres" name="Ingeniero.Nombre" class="input-estilizado"/>
+                <span asp-validation-for="Ingeniero.Nombre" class="text-danger"></span>
+
                 <label for="apellidos" class="label-estilizado">Apellidos</label>
-                <input type="text" id="apellidos" name="Apellido" class="input-estilizado" required />
+                <input type="text" id="apellidos" name="Ingeniero.Apellido" class="input-estilizado"/>
+                <span asp-validation-for="Ingeniero.Apellido" class="text-danger"></span>
+
                 <label for="tipoDocumento" class="label-estilizado">Tipo de Documento</label>
-                <select id="tipoDocumento" name="TipoDocumento" class="input-estilizado">
+                <select id="tipoDocumento" name="Ingeniero.TipoDocumento" class="input-estilizado" required>
                     <option value="Cedula">Cédula</option>
                     <option value="TarjetaIdentidad">Tarjeta De Identidad</option>
                     <option value="Pasaporte">Pasaporte</option>
                     <option value="Otro">Otro</option>
                 </select>
+
                 <label for="numeroDocumento" class="label-estilizado">Número de Documento</label>
-                <input type="text" id="numeroDocumento" name="NumeroDocumento" class="input-estilizado" required />
+                <input type="text" id="numeroDocumento" name="Ingeniero.NumeroDocumento" class="input-estilizado"/>
+                <span asp-validation-for="Ingeniero.NumeroDocumento" class="text-danger"></span>
+
                 <label for="fechaNacimiento" class="label-estilizado">Fecha de Nacimiento</label>
-                <input type="date" id="fechaNacimiento" name="FechaNacimiento" class="input-estilizado" required />
+                <input type="date" id="fechaNacimiento" name="Ingeniero.FechaNacimiento" class="input-estilizado"/>
+                <span asp-validation-for="Ingeniero.FechaNacimiento" class="text-danger"></span>
+
+                <label for="correo" class="label-estilizado">Correo Electrónico</label>
+                <input type="email" id="correo" name="Ingeniero.Correo" class="input-estilizado"/>
+                <span asp-validation-for="Ingeniero.Correo" class="text-danger"></span>
+
+                <label for="contrasenia" class="label-estilizado">Contraseña</label>
+                <input type="password" id="contrasenia" name="Ingeniero.Contraseña" class="input-estilizado"/>
+                <span asp-validation-for="Ingeniero.Contraseña" class="text-danger"></span>
+
+                <label for="telefono" class="label-estilizado">Teléfono</label>
+                <input type="tel" id="telefono" name="Ingeniero.Telefono" class="input-estilizado" />
+                <span asp-validation-for="Ingeniero.Telefono" class="text-danger"></span>
+
+
             </div>
             <div id="camposEmpresa" class="hidden">
+
+
+        
                 <label for="nombreEmpresa" class="label-estilizado">Nombre de la Empresa</label>
-                <input type="text" id="nombreEmpresa" name="NombreEmpresa" class="input-estilizado" />
+                <input type="text" id="nombreEmpresa" name="Empresa.Nombre" class="input-estilizado" />
+                <span asp-validation-for="Empresa.Nombre" class="text-danger"></span>
+
+
                 <label for="nit" class="label-estilizado">NIT</label>
-                <input type="text" id="nit" name="NIT" class="input-estilizado" />
-                <label for="nombreContacto" class="label-estilizado">Nombre del Contacto</label>
-                <input type="text" id="nombreContacto" name="NombreContacto" class="input-estilizado" />
-            </div>
-            <div id="camposComunes">
+                <input type="text" id="nit" name="Empresa.NIT" class="input-estilizado" />
+                <span asp-validation-for="Empresa.NIT" class="text-danger"></span> 
+                
+
                 <label for="correo" class="label-estilizado">Correo Electrónico</label>
-                <input type="email" id="correo" name="Correo" class="input-estilizado" required />
+                <input type="email" id="correo_empresa" name="Empresa.Correo" class="input-estilizado"/>
+                <span asp-validation-for="Empresa.Correo" class="text-danger"></span>
+                
+                
                 <label for="contrasenia" class="label-estilizado">Contraseña</label>
-                <input type="password" id="contrasenia" name="Contraseña" class="input-estilizado" required />
+                <input type="password" id="contrasenia_Empresa" name="Empresa.Contraseña" class="input-estilizado"/>
+                <span asp-validation-for="Empresa.Contraseña" class="text-danger"></span>
+
+                <label for="telefono" class="label-estilizado">Teléfono</label>
+                <input type="tel" id="telefono_empresa" name="Empresa.Telefono" class="input-estilizado" />
+                <span asp-validation-for="Empresa.Telefono" class="text-danger"></span>
+
+            </div>
+            @* <div id="camposComunes">
+                <label for="correo" class="label-estilizado">Correo Electrónico</label>
+                <input type="email" id="correo" name="Correo" class="input-estilizado"/>
+                <span asp-validation-for="Correo" class="text-danger"></span>
+
+                <label for="contrasenia" class="label-estilizado">Contraseña</label>
+                <input type="password" id="contrasenia" name="Contraseña" class="input-estilizado"/>
+                <span asp-validation-for="Contraseña" class="text-danger"></span>
+
                 <label for="telefono" class="label-estilizado">Teléfono</label>
                 <input type="tel" id="telefono" name="Telefono" class="input-estilizado" />
-            </div>
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div> *@
             <div class="cuadro-contenedorConfirmarRegistro">
                 <button type="submit" class="btn-Registro">Registrarse</button>
             </div>
@@ -86,5 +145,9 @@
         </form>
     </div>
     <script src="~/js/registro.js" asp-append-version="true"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation-unobtrusive@3.2.12/jquery.validate.unobtrusive.min.js"></script>
+
 </body>
 </html>
