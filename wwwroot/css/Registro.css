@@ -240,38 +240,45 @@ html, body {
     font-family: 'Poppins', sans-serif;
 }
 
-.alerta{
-    background-color: #9b454c; /* rojo claro */
-    color: #f8d7da;            /* rojo oscuro */
-    border: 1px solid #000000;
-    padding: 8px 16px;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+.alerta {
+    background: rgba(165, 64, 64, 0.85); /* Fondo rojo fuerte semi-transparente */
+    color: #fff; /* Texto blanco */
+    border: 1px solid #b30000; 
+    padding: 14px 18px;
+    border-radius: 10px;
     font-weight: 500;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     max-width: 600px;
     margin: 20px auto;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    animation: aparecer 0.3s ease-out;
 }
 
 .icono {
-    font-size: 1.2em;
+    font-size: 1.5em;
     font-weight: bold;
-} 
+    color: #fff;
+}
 
+.mensaje {
+    flex: 1;
+}
 
 .cerrar {
-    background: none;
+    background: transparent;
     border: none;
-    font-size: 1.8em;
-    color: #000000;
+    font-size: 1.5em;
+    color: #fff;
     margin-left: auto;
     cursor: pointer;
+    transition: transform 0.2s, color 0.2s;
 }
 
 .cerrar:hover {
-    transform: scale(1.2);  /* efecto al pasar el mouse */
+    transform: scale(1.2);
+    color: #ffcccc;
 }
 /* Animación de desvanecimiento */
 @keyframes fadeOut {
@@ -288,3 +295,37 @@ html, body {
 .alerta.fade-out {
     animation: fadeOut 0.5s ease forwards;
 }
+
+
+
+.alerta-exito {
+    background: rgba(82, 202, 82, 0.85); /* Fondo verde fuerte */
+    color: #fff; /* Texto blanco */
+    border: 1px solid #008000; 
+    padding: 14px 18px;
+    border-radius: 10px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: 600px;
+    margin: 20px auto;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    animation: aparecer 0.3s ease-out;
+}
+
+.alerta-exito .cerrar {
+    background: transparent;
+    border: none;
+    font-size: 1.5em;
+    color: #fff;
+    margin-left: auto;
+    cursor: pointer;
+    transition: transform 0.2s, color 0.2s;
+}
+
+.alerta-exito .cerrar:hover {
+    transform: scale(1.2);
+    color: #ccffcc;
+}
+

@@ -1,16 +1,14 @@
 ﻿using IngeLab.Models;
 using Microsoft.AspNetCore.Mvc;
+using Npgsql;
+
 
 namespace IngeLab.Controllers
 {
     public class LoginController : Controller
     {
-        public List<Usuarios> listaUsuarios = new List<Usuarios>()
-        {
-            new Usuarios(){ Nombre="admin", Contraseña="123"},
-            new Usuarios(){ Nombre="user", Contraseña="12345"}
-        };
 
+        BD bd = new BD();
         // CAMBIO 1: Renombrar Login a Index
         [HttpGet]
         public IActionResult Index() // <--- ANTES SE LLAMABA Login
@@ -18,22 +16,81 @@ namespace IngeLab.Controllers
             return View();
         }
 
-        // CAMBIO 2: Renombrar el método POST también a Index
-        [HttpPost]
-        public IActionResult Index(string nombre, string contraseña) // <--- ANTES SE LLAMABA Login
-        {
-            var usuarioValido = listaUsuarios
-                .FirstOrDefault(u => u.Nombre == nombre && u.Contraseña == contraseña);
 
-            if (usuarioValido != null)
+
+        [HttpPost]
+        public IActionResult ValidarUsuario(Usuarios usuario)
+        {
+            try
             {
-                return RedirectToAction("Principal", "Principal");
-            }
-            else
+
+                using (var conexion = bd.establecerConexion())
+                {
+                    string sqlIngenieros = "SELECT * FROM usuarios WHERE correo = @Correo AND contraseña = @Contraseña";
+
+                    using (var cmd = new NpgsqlCommand(sqlIngenieros, conexion))
+                    {
+                        cmd.Parameters.AddWithValue("Correo", usuario.Correo);
+                        cmd.Parameters.AddWithValue("Contraseña", usuario.Contraseña);
+
+                        int countUsuarios = Convert.ToInt32(cmd.ExecuteScalar());
+
+                        if (countUsuarios > 0)
+                        {
+                            return RedirectToAction("Index", "Usuario");
+                        }
+                        // else
+                        // {
+                        //     ViewBag.Error = "Correo o contraseña incorrectos.";
+                            
+                        // }
+
+                    }
+
+                    string sqlEmpresas = "SELECT * FROM empresas WHERE correo = @Correo AND contraseña = @Contraseña";
+
+                    using (var cmd = new NpgsqlCommand(sqlEmpresas, conexion))
+                    {
+                        cmd.Parameters.AddWithValue("Correo", usuario.Correo);
+                        cmd.Parameters.AddWithValue("Contraseña", usuario.Contraseña);
+
+                        int countEmpresas = Convert.ToInt32(cmd.ExecuteScalar());
+
+                        if (countEmpresas > 0)
+                        {
+                            return RedirectToAction("Index", "Empresa");
+                        }
+                        // {
+                        //     ViewBag.Error = "Correo o contraseña incorrectos.";
+                        // }
+
+                    }
+
+
+                    ViewBag.Error = "Correo o contraseña incorrectos.";
+                    return View("~/Views/Login/Index.cshtml");
+                    
+                    
+                    
+
+
+                }
+            
+
+
+           }
+            catch (System.Exception e)
             {
-                ViewBag.Error = "Usuario o contraseña incorrectos";
-                return View();
+
+                return Content("Error al validar el usuario" + e.Message);
             }
+
+            
+        
         }
+
+       
+
+        
     }
 }

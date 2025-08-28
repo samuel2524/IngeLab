@@ -1,3 +1,5 @@
+@model IngeLab.Models.Usuarios
+
 @{
     ViewData["Title"] = "Login";
     Layout = null;
@@ -13,7 +15,7 @@
 </head>
 <body class="body_principal_login">
 
-    <a href="/" class="btn-volver" aria-label="Volver a la página principal">
+    <a href="/" class="btn-volver" aria-label="Volver a la pï¿½gina principal">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="15 18 9 12 15 6"></polyline>
         </svg>
@@ -22,19 +24,38 @@
     <div class="background"></div>
     <div class="centro-pagina">
 
-        <form method="post" asp-controller="Login" asp-action="Index" class="cuadro-unificado-login">
-            <div class="titulo-cuadro">Iniciar Sesión</div>
+        @if (ViewBag.Error != null)
+        {
+            <div id = "mensajeError" class="alert alert-danger">
+            <span> @ViewBag.Error</span>
+            <button onclick="this.parentElement.style.display='none'" class="cerrar">Ã—</button>
+            </div>
+        }
+        <script>
+        window.onload = function () {
+            setTimeout(function () {
+                var mensaje = document.getElementById("mensajeError");
+                if (mensaje) {
+                    mensaje.classList.add("fade-out");
+                    setTimeout(() => mensaje.style.display = "none", 500);
+                }
+            }, 10000);
+        };
+      </script>
 
-            @if (ViewBag.Error != null)
-            {
-                <div class="alert alert-danger">@ViewBag.Error</div>
-            }
+        
 
-            <label for="correo" class="label-estilizado">Correo Electrónico</label>
+        <form method="post" asp-controller="Login" asp-action="ValidarUsuario" class="cuadro-unificado-login">
+            <div class="titulo-cuadro">Iniciar Sesion</div>
+
+        
+            <label for="correo" class="label-estilizado">Correo Electronico</label>
             <input type="email" id="correo" name="Correo" class="input-estilizado" placeholder="tu@correo.com" required />
+            <span asp-validation-for="Correo" class="text-danger"></span>
 
-            <label for="contrasenia" class="label-estilizado">Contraseña</label>
-            <input type="password" id="contrasenia" name="Contraseña" class="input-estilizado" placeholder="Tu contraseña" required />
+            <label for="contrasenia" class="label-estilizado">ContraseÃ±a</label>
+            <input type="password" id="contrasenia" name="ContraseÃ±a" class="input-estilizado" placeholder="Tu contraseÃ±a" required />
+            <span asp-validation-for="ContraseÃ±a" class="text-danger"></span>
 
             <div class="cuadro-contenedorConfirmar">
                 <button type="submit" class="btn-Login">Ingresar</button>
@@ -43,10 +64,9 @@
             <hr class="separador">
 
             <div class="link-registro">
-                <p>¿No tienes una cuenta? <a asp-controller="Registro" asp-action="Index">Créala aquí</a></p>
+                <p>Â¿No tienes una cuenta? <a asp-controller="Registro" asp-action="Index">Creala aqui</a></p>
             </div>
         </form>
-
     </div>
 </body>
 </html>

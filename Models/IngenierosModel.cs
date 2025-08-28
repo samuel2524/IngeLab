@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace IngeLab.Models
@@ -19,9 +20,9 @@ namespace IngeLab.Models
         public void ControlDeErrores(ModelStateDictionary modelState)
         {
             bool soloLetrasNombre = !string.IsNullOrWhiteSpace(Nombre) && Nombre.All(c => char.IsLetter(c));
-            bool soloLetrasApellido = !string.IsNullOrWhiteSpace(Apellido) && Apellido.All(c => char.IsLetter(c));
             bool soloNumerosDocumento = !string.IsNullOrWhiteSpace(NumeroDocumento) && NumeroDocumento.All(c => char.IsDigit(c));
             bool soloNumerosTelefono = !string.IsNullOrWhiteSpace(Telefono)&& Telefono.All(c => char.IsDigit(c));
+            bool apellidoValido = Regex.IsMatch(Apellido, @"^[a-zA-Z\s]+$");
            
 
 
@@ -38,9 +39,9 @@ namespace IngeLab.Models
             {
                 modelState.AddModelError("Ingeniero.Apellido", "El apellido es obligatorio.");
             }
-            if (!soloLetrasApellido)
+            if(!apellidoValido)
             {
-                modelState.AddModelError("Ingeniero.Apellido", "El apellido solo debe contener letras.");
+                modelState.AddModelError("Ingeniero.Apellido", "El apellido solo debe contener letras y espacios.");
             }
 
             if (string.IsNullOrWhiteSpace(TipoDocumento))
@@ -75,6 +76,7 @@ namespace IngeLab.Models
             else
             {
                 bool contraseñaMayuscula = Contraseña.Any(c => char.IsUpper(c));
+                bool caracteresEspeciales = Contraseña.Any(c => !char.IsLetterOrDigit(c));
 
                 if (Contraseña.Length < 6)
                 {
@@ -84,6 +86,10 @@ namespace IngeLab.Models
                 if (!contraseñaMayuscula)
                 {
                     modelState.AddModelError("Ingeniero.Contraseña", "La contraseña debe contener al menos una letra mayúscula.");
+                }
+                if (!caracteresEspeciales)
+                {
+                    modelState.AddModelError("Ingeniero.Contraseña", "La contraseña debe contener al menos un carácter especial.");
                 }
 
                 

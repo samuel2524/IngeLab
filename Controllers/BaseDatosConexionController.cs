@@ -24,25 +24,13 @@ namespace IngeLab.Controllers
             return conexion;
         }
 
+        
+
+        
 
 
-        public IActionResult ProbarConexion()
-        {
-            try
-            {
-                BD bd = new BD();
-                using var conexionPrueba = bd.establecerConexion();
-                using var cmd = new NpgsqlCommand("SELECT version();", conexionPrueba);
-                var version = cmd.ExecuteScalar()?.ToString();
-                return Content($"✅ Conexión exitosa. PostgreSQL versión: {version}");
 
-            }
-            catch (Exception ex)
-            {
-
-                return Content("Error al conectar" + ex);
-            }
-        }
+     
 
     }
     

@@ -29,6 +29,10 @@ namespace IngeLab.Models
             {
                 modelState.AddModelError("Empresa.NIT", "El NIT solo debe contener números.");
             }
+            if(NIT.Length != 9)
+            {
+                modelState.AddModelError("Empresa.NIT", "El NIT debe tener 9 dígitos.");
+            }
 
             if (string.IsNullOrWhiteSpace(Correo))
             {
@@ -55,7 +59,7 @@ namespace IngeLab.Models
                 }
                 if (!contraseñaCaracterEspecial)
                 {
-                    modelState.AddModelError("Empresa.Contraseña", "La contraseña debe contener     al menos un carácter especial.");
+                    modelState.AddModelError("Empresa.Contraseña", "La contraseña debe contener al menos un carácter especial.");
                 }
             }
             

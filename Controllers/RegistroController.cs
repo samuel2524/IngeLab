@@ -25,43 +25,11 @@ namespace IngeLab.Controllers
            
                 if (modelo.TipoUsuario == "ingeniero")
                 {
-                    modelo.Ingeniero.ControlDeErrores(ModelState);
-
-                    if (!ModelState.IsValid)
-                    {
-                        // Si hay errores de validación, vuelve a mostrar el formulario con los mensajes de error
-                        ViewBag.mensaje = "Por favor corrige los errores en el formulario.";
-                        return View("~/Views/Registro/Index.cshtml",modelo);
-                    }
-                    using (var conexion = bd.establecerConexion())
-                    {
-                        string query = "INSERT INTO usuarios (nombre, apellidos, tipo_documento, numero_documento, correo, contraseña, fecha_nacimiento, telefono) " +
-                            "VALUES (@Nombre, @Apellido, @TipoDocumento, @NumeroDocumento, @Correo, @Contraseña, @FechaNacimiento, @Telefono)";
-
-
-                        using (var cmd = new Npgsql.NpgsqlCommand(query, conexion))
-                        {
-                            cmd.Parameters.AddWithValue("Nombre", modelo.Ingeniero.Nombre);
-                            cmd.Parameters.AddWithValue("Apellido", modelo.Ingeniero.Apellido);
-                            cmd.Parameters.AddWithValue("TipoDocumento", modelo.Ingeniero.TipoDocumento);
-                            cmd.Parameters.AddWithValue("NumeroDocumento", modelo.Ingeniero.NumeroDocumento);
-                            cmd.Parameters.AddWithValue("Correo", modelo.Ingeniero.Correo);
-                            cmd.Parameters.AddWithValue("Contraseña", modelo.Ingeniero.Contraseña);
-                            cmd.Parameters.AddWithValue("FechaNacimiento", modelo.Ingeniero.FechaNacimiento);
-                            cmd.Parameters.AddWithValue("Telefono", modelo.Ingeniero.Telefono);
-                            cmd.ExecuteNonQuery();
-                        }
-                    }
-
-                    ViewBag.mensaje = "Usuario registrado exitosamente";
-                    return View("~/Views/Registro/Index.cshtml",modelo);
+                    return RegistroUsuario(modelo.Ingeniero);
                 }
                 else if (modelo.TipoUsuario == "empresa")
                 {
-
                     return RegistroEmpresa(modelo.Empresa);
-
-
                 }
 
 
@@ -81,6 +49,57 @@ namespace IngeLab.Controllers
 
 
         }
+
+
+
+
+        public IActionResult RegistroUsuario(Ingenieros Ingeniero)
+        {
+            ModelState.Clear();
+            Ingeniero.ControlDeErrores(ModelState);
+
+            if (!ModelState.IsValid)
+            {
+                // Si hay errores de validación, vuelve a mostrar el formulario con los mensajes de error
+                ViewBag.mensaje = "Por favor corrige los errores en el formulario.";
+                return View("~/Views/Registro/Index.cshtml");
+            }
+
+            try
+            {
+                using (var conexion = bd.establecerConexion())
+                {
+                    string query = "INSERT INTO usuarios (nombre, apellidos, tipo_documento, numero_documento, correo, contraseña, fecha_nacimiento, telefono) " +
+                    "VALUES (@Nombre, @Apellido, @TipoDocumento, @NumeroDocumento, @Correo, @Contraseña, @FechaNacimiento, @Telefono)";
+
+
+                    using (var cmd = new Npgsql.NpgsqlCommand(query, conexion))
+                    {
+                        cmd.Parameters.AddWithValue("Nombre", Ingeniero.Nombre);
+                        cmd.Parameters.AddWithValue("Apellido", Ingeniero.Apellido);
+                        cmd.Parameters.AddWithValue("TipoDocumento", Ingeniero.TipoDocumento);
+                        cmd.Parameters.AddWithValue("NumeroDocumento", Ingeniero.NumeroDocumento);
+                        cmd.Parameters.AddWithValue("Correo", Ingeniero.Correo);
+                        cmd.Parameters.AddWithValue("Contraseña", Ingeniero.Contraseña);
+                        cmd.Parameters.AddWithValue("FechaNacimiento", Ingeniero.FechaNacimiento);
+                        cmd.Parameters.AddWithValue("Telefono", Ingeniero.Telefono);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
+                ViewBag.Exito = "Usuario registrado exitosamente";
+                return View("~/Views/Registro/Index.cshtml");
+                
+            }
+            catch (System.Exception e)
+            {
+
+                return Content("Error al registrar el usuario: " + e.Message);
+            }
+
+            
+        }
+
 
 
         [HttpPost]
@@ -122,7 +141,7 @@ namespace IngeLab.Controllers
                     }
                 }
 
-                ViewBag.mensaje = "Empresa registrada exitosamente";
+                ViewBag.Exito = "Empresa registrada exitosamente";
                 return View("~/Views/Registro/Index.cshtml",
                 new Registro_Ingenieros_empresas { Empresa = empresas, TipoUsuario = "empresa" });
             }

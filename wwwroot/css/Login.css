@@ -194,3 +194,59 @@ html, body {
             text-decoration: underline;
             text-shadow: 0 0 8px rgba(0, 255, 255, 0.7);
         }
+
+/* Contenedor de la alerta */
+
+.alert {
+    position: relative;
+    display: flex;
+    padding: 8px 16px;  
+    margin: 50px auto 20px auto;  
+    max-width: 400px;   
+    gap: 10px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 500;  
+    align-items: center;
+    max-width: 600px;  
+    
+}
+/* Alerta de error */
+.alert-danger {
+    background: rgba(255, 0, 0, 0.15);  /* rojo suave con transparencia */
+    border: 1px solid #ff4d4d;
+    color: #ff4d4d;
+}
+
+/* Botón de cerrar (la X) */
+.cerrar {
+    background: transparent;
+    border: none;
+    font-size: 1.8em;
+    margin-left: auto;
+    color: inherit;
+    cursor: pointer;
+}
+
+.alert .cerrar:hover {
+    transform: scale(1.2); /* Mantiene centrado al hacer hover */
+    color: #ff1a1a;
+}
+
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+.alerta.fade-out {
+    animation: fadeOut 0.5s ease forwards;
+}
+
+
