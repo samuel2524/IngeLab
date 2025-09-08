@@ -37,7 +37,7 @@ namespace IngeLab.Controllers
 
                         if (countUsuarios > 0)
                         {
-                            return RedirectToAction("Index", "Usuario");
+                            return RedirectToAction("Index", "VistaIngenieros");
                         }
                         // else
                         // {
@@ -58,7 +58,7 @@ namespace IngeLab.Controllers
 
                         if (countEmpresas > 0)
                         {
-                            return RedirectToAction("Index", "Empresa");
+                            return RedirectToAction("Index", "VistaEmpresa");
                         }
                         // {
                         //     ViewBag.Error = "Correo o contraseña incorrectos.";
