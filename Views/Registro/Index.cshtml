@@ -13,6 +13,7 @@
     <title>@ViewData["Title"] - IngeLab</title>
 </head>
 <body class="body_principal_registro">
+    @* --- Tu código de header, alertas y script se mantiene igual --- *@
     <a href="/" class="btn-volver" aria-label="Volver a la página principal">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="15 18 9 12 15 6"></polyline>
@@ -21,146 +22,151 @@
     <a href="/" class="header-logo">IngeLab</a>
     <div class="background"></div>
 
-
     @if (ViewBag.mensaje != null)
-    {   
-        
+    {
         <div id="mensajeError" class="alerta">
             <span>@ViewBag.mensaje</span>
             <button onclick="this.parentElement.style.display='none'" class="cerrar">×</button>
         </div>
     }
 
-
-    <script>
-        window.onload = function () {
-            setTimeout(function () {
-                var mensaje = document.getElementById("mensajeError");
-                if (mensaje) {
-                    mensaje.classList.add("fade-out");
-                    setTimeout(() => mensaje.style.display = "none", 500);
-                }
-            }, 10000);
-        };
-    </script>
-
     @if (ViewBag.Exito != null)
-    {   
-        
+    {
         <div id="mensajeExito" class="alerta alerta-exito">
             <span>@ViewBag.Exito</span>
             <button onclick="this.parentElement.style.display='none'" class="cerrar">×</button>
         </div>
     }
 
-     <script>
+    <script>
         window.onload = function () {
             setTimeout(function () {
-                var mensaje = document.getElementById("mensajeExito");
-                if (mensaje) {
-                    mensaje.classList.add("fade-out");
-                    setTimeout(() => mensaje.style.display = "none", 500);
+                var mensajeError = document.getElementById("mensajeError");
+                if (mensajeError) {
+                    mensajeError.classList.add("fade-out");
+                    setTimeout(() => mensajeError.style.display = "none", 500);
+                }
+            }, 10000);
+
+            setTimeout(function () {
+                var mensajeExito = document.getElementById("mensajeExito");
+                if (mensajeExito) {
+                    mensajeExito.classList.add("fade-out");
+                    setTimeout(() => mensajeExito.style.display = "none", 500);
                 }
             }, 10000);
         };
     </script>
 
-
     <div class="centro-pagina">
         <form asp-controller="Registro" asp-action="Registro" method="post" class="cuadro-unificado-registro">
             <div class="titulo-cuadro">Registro</div>
-            <label for="tipoUsuario" class="label-estilizado">Soy un:</label>
-            <select asp-for="TipoUsuario" id="tipoUsuario" class="input-estilizado" name="TipoUsuario">
-                <option value="ingeniero">Ingeniero</option>
-                <option value="empresa">Empresa</option>
-            </select>
-            <div id="camposIngeniero">
-                <label for="nombres" class="label-estilizado">Nombre</label>
-                <input type="text" id="nombres" name="Ingeniero.Nombre" class="input-estilizado"
-                    oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '');"
-                    required>
-                <span asp-validation-for="Ingeniero.Nombre" class="text-danger"></span>
 
-                <label for="apellidos" class="label-estilizado">Apellidos</label>
-                <input type="text" id="apellidos" name="Ingeniero.Apellido" class="input-estilizado"
-                    oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '');"
-                    required>
-                <span asp-validation-for="Ingeniero.Apellido" class="text-danger"></span>
-
-                <label for="tipoDocumento" class="label-estilizado">Tipo de Documento</label>
-                <select id="tipoDocumento" name="Ingeniero.TipoDocumento" class="input-estilizado" required>
-                    <option value="Cedula">Cédula</option>
-                    <option value="TarjetaIdentidad">Tarjeta De Identidad</option>
-                    <option value="Pasaporte">Pasaporte</option>
-                    <option value="Otro">Otro</option>
+            <div class="form-group">
+                <label for="tipoUsuario" class="label-estilizado">Soy un:</label>
+                <select asp-for="TipoUsuario" id="tipoUsuario" class="input-estilizado">
+                    <option value="ingeniero">Ingeniero</option>
+                    <option value="empresa">Empresa</option>
                 </select>
-
-                <label for="numeroDocumento" class="label-estilizado">Número de Documento</label>
-                <input type="text" id="numeroDocumento" name="Ingeniero.NumeroDocumento" class="input-estilizado" 
-                    pattern="[0-9]{10}" 
-                    inputmode="numeric"
-                    oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,10);" 
-                    required>
-                <span asp-validation-for="Ingeniero.NumeroDocumento" class="text-danger"></span>
-
-                <label for="fechaNacimiento" class="label-estilizado">Fecha de Nacimiento</label>
-                <input type="date" id="fechaNacimiento" name="Ingeniero.FechaNacimiento" class="input-estilizado"/>
-                <span asp-validation-for="Ingeniero.FechaNacimiento" class="text-danger"></span>
-
-                <label for="correo" class="label-estilizado">Correo Electrónico</label>
-                <input type="email" id="correo" name="Ingeniero.Correo" class="input-estilizado"/>
-                <span asp-validation-for="Ingeniero.Correo" class="text-danger"></span>
-
-                <label for="contrasenia" class="label-estilizado">Contraseña</label>
-                <input type="password" id="contrasenia" name="Ingeniero.Contraseña" class="input-estilizado"/>
-                <span asp-validation-for="Ingeniero.Contraseña" class="text-danger"></span>
-
-                <label for="telefono" class="label-estilizado">Teléfono</label>
-                <input type="tel" id="telefono" name="Ingeniero.Telefono" class="input-estilizado"maxlength="10" 
-                    pattern="[0-9]{10}" 
-                    inputmode="numeric"
-                    oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,10);" 
-                    required>
-                <span asp-validation-for="Ingeniero.Telefono" class="text-danger"></span>
-
-
             </div>
+
+            <div id="camposIngeniero">
+                <div class="form-group">
+                    <label for="Ingeniero_Nombre" class="label-estilizado">Nombre</label>
+                    <input type="text" asp-for="Ingeniero.Nombre" class="input-estilizado" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '');" />
+                    <span asp-validation-for="Ingeniero.Nombre" class="text-danger"></span>
+                    <small class="form-hint">Solo debe contener letras.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="Ingeniero_Apellido" class="label-estilizado">Apellidos</label>
+                    <input type="text" asp-for="Ingeniero.Apellido" class="input-estilizado" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '');" />
+                    <span asp-validation-for="Ingeniero.Apellido" class="text-danger"></span>
+                    <small class="form-hint">Solo debe contener letras.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="Ingeniero_TipoDocumento" class="label-estilizado">Tipo de Documento</label>
+                    <select asp-for="Ingeniero.TipoDocumento" class="input-estilizado">
+                        <option value="Cedula">Cédula</option>
+                        <option value="TarjetaIdentidad">Tarjeta De Identidad</option>
+                        <option value="Pasaporte">Pasaporte</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                    <span asp-validation-for="Ingeniero.TipoDocumento" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="Ingeniero_NumeroDocumento" class="label-estilizado">Número de Documento</label>
+                    <input type="text" asp-for="Ingeniero.NumeroDocumento" class="input-estilizado" oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
+                    <span asp-validation-for="Ingeniero.NumeroDocumento" class="text-danger"></span>
+                    <small class="form-hint">Solo debe contener números.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="Ingeniero_FechaNacimiento" class="label-estilizado">Fecha de Nacimiento</label>
+                    <input type="date" asp-for="Ingeniero.FechaNacimiento" class="input-estilizado" />
+                    <span asp-validation-for="Ingeniero.FechaNacimiento" class="text-danger"></span>
+                    <small class="form-hint">No puedes seleccionar una fecha futura.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="Ingeniero_Correo" class="label-estilizado">Correo Electrónico</label>
+                    <input type="email" asp-for="Ingeniero.Correo" class="input-estilizado" />
+                    <span asp-validation-for="Ingeniero.Correo" class="text-danger"></span>
+                    <small class="form-hint">Debe ser un formato de correo válido.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="Ingeniero_Contraseña" class="label-estilizado">Contraseña</label>
+                    <input type="password" asp-for="Ingeniero.Contraseña" class="input-estilizado" />
+                    <span asp-validation-for="Ingeniero.Contraseña" class="text-danger"></span>
+                    <small class="form-hint">Mínimo 6 caracteres, 1 mayúscula y 1 símbolo.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="Ingeniero_Telefono" class="label-estilizado">Teléfono</label>
+                    <input type="tel" asp-for="Ingeniero.Telefono" class="input-estilizado" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,10);" />
+                    <span asp-validation-for="Ingeniero.Telefono" class="text-danger"></span>
+                    <small class="form-hint">Debe ser un número de 10 dígitos.</small>
+                </div>
+            </div>
+
             <div id="camposEmpresa" class="hidden">
+                <div class="form-group">
+                    <label for="Empresa_Nombre" class="label-estilizado">Nombre de la Empresa</label>
+                    <input type="text" asp-for="Empresa.Nombre" class="input-estilizado" />
+                    <span asp-validation-for="Empresa.Nombre" class="text-danger"></span>
+                </div>
 
+                <div class="form-group">
+                    <label for="Empresa_NIT" class="label-estilizado">NIT</label>
+                    <input type="text" asp-for="Empresa.NIT" class="input-estilizado" maxlength="9" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,9);" />
+                    <span asp-validation-for="Empresa.NIT" class="text-danger"></span>
+                    <small class="form-hint">Debe ser un número de 9 dígitos.</small>
+                </div>
 
-        
-                <label for="nombreEmpresa" class="label-estilizado">Nombre de la Empresa</label>
-                <input type="text" id="nombreEmpresa" name="Empresa.Nombre" class="input-estilizado" />
-                <span asp-validation-for="Empresa.Nombre" class="text-danger"></span>
+                <div class="form-group">
+                    <label for="Empresa_Correo" class="label-estilizado">Correo Electrónico</label>
+                    <input type="email" asp-for="Empresa.Correo" class="input-estilizado" />
+                    <span asp-validation-for="Empresa.Correo" class="text-danger"></span>
+                </div>
 
+                <div class="form-group">
+                    <label for="Empresa_Contraseña" class="label-estilizado">Contraseña</label>
+                    <input type="password" asp-for="Empresa.Contraseña" class="input-estilizado" />
+                    <span asp-validation-for="Empresa.Contraseña" class="text-danger"></span>
+                    <small class="form-hint">Mínimo 6 caracteres, 1 mayúscula y 1 símbolo.</small>
+                </div>
 
-                <label for="nit" class="label-estilizado">NIT</label>
-                <input type="text" id="nit" name="Empresa.NIT" class="input-estilizado" 
-                    pattern="[0-9]{10}" 
-                    inputmode="numeric"
-                    oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,10);" 
-                    required> 
-                <span asp-validation-for="Empresa.NIT" class="text-danger"></span> 
-                
-
-                <label for="correo" class="label-estilizado">Correo Electrónico</label>
-                <input type="email" id="correo_empresa" name="Empresa.Correo" class="input-estilizado"/>
-                <span asp-validation-for="Empresa.Correo" class="text-danger"></span>
-                
-                
-                <label for="contrasenia" class="label-estilizado">Contraseña</label>
-                <input type="password" id="contrasenia_Empresa" name="Empresa.Contraseña" class="input-estilizado"/>
-                <span asp-validation-for="Empresa.Contraseña" class="text-danger"></span>
-
-                <label for="telefono" class="label-estilizado">Teléfono</label>
-                <input type="tel" id="telefono_empresa" name="Empresa.Telefono" class="input-estilizado"  
-                    pattern="[0-9]{10}" 
-                    inputmode="numeric"
-                    oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,10);" 
-                    required>
-                <span asp-validation-for="Empresa.Telefono" class="text-danger"></span>
-
+                <div class="form-group">
+                    <label for="Empresa_Telefono" class="label-estilizado">Teléfono</label>
+                    <input type="tel" asp-for="Empresa.Telefono" class="input-estilizado" maxlength="10" oninput="this.value = this.value.replace(/[^0-g]/g, '').slice(0,10);" />
+                    <span asp-validation-for="Empresa.Telefono" class="text-danger"></span>
+                    <small class="form-hint">Debe ser un número de 10 dígitos.</small>
+                </div>
             </div>
+
             <div class="cuadro-contenedorConfirmarRegistro">
                 <button type="submit" class="btn-Registro">Registrarse</button>
             </div>

@@ -1,0 +1,257 @@
+﻿/* ===== ESTILOS GLOBALES Y DE FONDO ===== */
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif;
+    color: #e0e0e0;
+}
+
+.body_principal_perfil {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    overflow-x: hidden;
+    background-color: #0a0a14;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    /* Usamos una imagen similar a la del registro para mantener la coherencia */
+    background-image: url('../images/AI_Generated_Ing_Data.png');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+    filter: brightness(0.9);
+}
+
+/* ===== LOGO ===== */
+.header-logo {
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+    transition: text-shadow 0.3s ease;
+}
+
+    .header-logo:hover {
+        text-shadow: 0 0 16px rgba(0, 255, 255, 1);
+    }
+
+/* ===== ESTRUCTURA CENTRAL ===== */
+.centro-pagina {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 20px 40px; /* Más padding arriba para que no choque con el logo */
+}
+
+/* ===== ESTILOS DEL CUADRO DE PERFIL ===== */
+.cuadro-unificado-perfil {
+    background: rgba(10, 15, 30, 0.6);
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
+    padding: 30px 40px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 700px; /* Un poco más ancho para el grid */
+    display: flex;
+    flex-direction: column;
+}
+
+.titulo-cuadro {
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 5px;
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+}
+
+.subtitulo-cuadro {
+    text-align: center;
+    color: #ccc;
+    font-size: 1rem;
+    margin-bottom: 25px;
+}
+
+/* ===== FOTO DE PERFIL ===== */
+.campo-foto-perfil {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.label-foto {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    color: #00ffff;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+    .label-foto:hover {
+        transform: scale(1.05);
+        text-shadow: 0 0 8px rgba(0, 255, 255, 0.7);
+    }
+
+    .label-foto img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 3px solid rgba(0, 255, 255, 0.5);
+        object-fit: cover;
+        transition: border-color 0.3s ease;
+    }
+
+    .label-foto:hover img {
+        border-color: rgba(0, 255, 255, 1);
+    }
+
+.input-foto {
+    display: none; /* Ocultamos el input de archivo por defecto */
+}
+
+/* ===== GRID DEL FORMULARIO ===== */
+.grid-formulario {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px 20px; /* Espacio vertical y horizontal */
+    width: 100%;
+}
+
+.campo-individual {
+    display: flex;
+    flex-direction: column;
+}
+
+.campo-full {
+    grid-column: 1 / -1; /* Ocupa todo el ancho del grid */
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== CAMPOS DEL FORMULARIO (Inputs, Selects, Textareas) ===== */
+.label-estilizado {
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.input-estilizado {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+    .input-estilizado::placeholder {
+        color: #888;
+    }
+
+    .input-estilizado:focus {
+        border-color: #00ffff;
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    }
+
+/* Estilo para el texto de opción deshabilitada */
+select option:disabled {
+    color: #888;
+}
+
+textarea.input-estilizado {
+    resize: vertical;
+    min-height: 60px;
+}
+
+/* ===== BOTÓN Y LINK FINAL ===== */
+.cuadro-contenedorConfirmar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.btn-Guardar {
+    padding: 12px 30px;
+    width: 100%;
+    background-color: #00c6ff;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .btn-Guardar:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px #00c6ff;
+    }
+
+.link-omitir {
+    text-align: center;
+    margin-top: 15px;
+}
+
+    .link-omitir a {
+        color: #ccc;
+        font-size: 0.9rem;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+        .link-omitir a:hover {
+            color: #00ffff;
+            text-decoration: underline;
+        }
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    .cuadro-unificado-perfil {
+        max-width: 100%;
+        padding: 20px;
+    }
+
+    .grid-formulario {
+        grid-template-columns: 1fr; /* Una sola columna en pantallas pequeñas */
+        gap: 15px 0;
+    }
+
+    .titulo-cuadro {
+        font-size: 1.8rem;
+    }
+}
+
+/* Pon esto en cualquier parte de tu archivo CompletarPerfil.css, la usaremos para ocultar el campo de texto por defecto. */
+.hidden {
+    display: none;
+}

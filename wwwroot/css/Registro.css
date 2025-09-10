@@ -128,15 +128,16 @@ html, body {
 /* Regla #3: Ancho de inputs corregido */
 
 .input-estilizado {
-    width: 100%; /* El box-sizing se encarga del resto */
+    width: 100%;
     padding: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Borde un poco más sutil */
     border-radius: 8px;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.08); /* <-- LA MAGIA: Efecto cristal esmerilado */
     color: #fff;
     font-size: 1rem;
     outline: none;
-    margin-bottom: 2px; /* Espacio entre un campo y el siguiente label */
+    margin-bottom: 2px;
+    transition: all 0.3s ease; /* Transición suave para el foco */
 }
 
     .input-estilizado::placeholder {
@@ -231,13 +232,26 @@ html, body {
         text-shadow: 0 0 16px rgba(0, 255, 255, 1);
     }
 
-.text-danger {
+/* --- PEGA ESTAS DOS REGLAS EN TU Registro.css --- */
 
+/* 1. Estilo para los ERRORES (cuando la validación falla) */
+.text-danger {
     display: block;
-    min-height: 20px;
-    font-size: 0.9em;
-    color: red;
+    min-height: 18px;
+    padding-top: 0px;
+    font-size: 0.85em;
+    font-weight: 500;
     font-family: 'Poppins', sans-serif;
+    text-shadow: 0 0 6px rgba(255, 85, 85, 0.5);
+}
+
+/* 2. Estilo para las PISTAS (el texto que se ve siempre) */
+.form-hint {
+    font-size: 0.8em;
+    color: rgba(255, 255, 255, 0.6); /* Un gris claro, sutil y elegante */
+    padding-top: 0px;
+    font-weight: 450;
+    display: block; /* Asegura que ocupe su propia línea */
 }
 
 .alerta {
@@ -327,5 +341,30 @@ html, body {
 .alerta-exito .cerrar:hover {
     transform: scale(1.2);
     color: #ccffcc;
+}
+
+/* --- AÑADIR ESTO AL FINAL DE Registro.css (Y BORRA EL .form-hint anterior) --- */
+
+/* El contenedor que crea el espacio uniforme y perfecto ENTRE cada campo */
+.form-group {
+    margin-bottom: 8px; /* <--- ¡ESTA ES LA REGLA MÁGICA! Ajusta este valor si quieres más o menos espacio */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ajustes finos para los elementos DENTRO de cada grupo */
+.label-estilizado {
+    margin-bottom: 4px; /* Espacio entre el título y la caja de texto */
+}
+
+.input-estilizado,
+select.input-estilizado {
+    margin-bottom: 4px; /* Espacio entre la caja y los mensajes de abajo */
+}
+
+.text-danger {
+    min-height: auto; /* Ocupa espacio solo cuando hay un error, no siempre */
+    margin-bottom: 4px; /* Un pequeño respiro si aparece el error */
+    line-height: 1.2;
 }
 

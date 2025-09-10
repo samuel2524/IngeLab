@@ -1,0 +1,112 @@
+﻿@{
+    // Usamos Layout = null para que la página sea independiente, como tus otras vistas.
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Completa tu Perfil - IngeLab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/IngCompletarPerfil.css" asp-append-version="true">
+</head>
+<body class="body_principal_perfil">
+
+    <a href="/" class="header-logo">IngeLab</a>
+    <div class="background"></div>
+
+    <div class="centro-pagina">
+        <form method="post" action="#" class="cuadro-unificado-perfil">
+            <div class="titulo-cuadro">Un Último Paso...</div>
+            <p class="subtitulo-cuadro">Completa tu perfil para que las mejores empresas te encuentren.</p>
+
+            <div class="campo-foto-perfil">
+                <label for="fotoPerfil" class="label-foto">
+                    <img id="preview" src="https://via.placeholder.com/100" alt="Vista previa de perfil" />
+                    <span>Sube tu foto (Opcional)</span>
+                </label>
+                <input type="file" id="fotoPerfil" name="FotoPerfil" class="input-foto" accept="image/*">
+            </div>
+
+            <div class="grid-formulario">
+                <div class="campo-individual">
+                    <label for="especialidad" class="label-estilizado">Especialidad</label>
+                    <select id="especialidad" name="Especialidad" class="input-estilizado">
+                        <option value="" disabled selected>Selecciona tu área</option>
+                        <option value="software">Ingeniería de Software</option>
+                        <option value="civil">Ingeniería Civil</option>
+                        <option value="electrico">Ingeniería Eléctrica</option>
+                        <option value="mecanico">Ingeniería Mecánica</option>
+                        <option value="industrial">Ingeniería Industrial</option>
+                        <option value="otro">Otra</option>
+                    </select>
+                </div>
+
+                <div id="otro-especialidad-container" class="campo-individual hidden">
+                    <label for="otraEspecialidad" class="label-estilizado">¿Cuál?</label>
+                    <input type="text" id="otraEspecialidad" name="OtraEspecialidad" class="input-estilizado" placeholder="Ej: Ing. Biomédica">
+                </div>
+
+                <div class="campo-individual">
+                    <label for="experiencia" class="label-estilizado">Años de Experiencia</label>
+                    <input type="number" id="experiencia" name="AñosExperiencia" class="input-estilizado" placeholder="Ej: 5" min="0">
+                </div>
+
+                <div class="campo-individual">
+                    <label for="disponibilidad" class="label-estilizado">Disponibilidad</label>
+                    <select id="disponibilidad" name="Disponibilidad" class="input-estilizado">
+                        <option value="" disabled selected>Define tu disponibilidad</option>
+                        <option value="full-time">Jornada Completa</option>
+                        <option value="part-time">Media Jornada</option>
+                        <option value="freelance">Freelance / Por Proyecto</option>
+                        <option value="open">Abierto a Ofertas</option>
+                    </select>
+                </div>
+
+                <div class="campo-individual">
+                    <label for="nivelAcademico" class="label-estilizado">Nivel Académico</label>
+                    <select id="nivelAcademico" name="NivelAcademico" class="input-estilizado">
+                        <option value="" disabled selected>Tu máximo nivel de estudios</option>
+                        <option value="bachillerato">Bachillerato</option>
+                        <option value="certificaciones">Certificaciones</option>
+                        <option value="licenciatura">Licenciatura / Pregrado</option>
+                        <option value="maestria">Maestría / Postgrado</option>
+                        <option value="doctorado">Doctorado</option>
+                    </select>
+                </div>
+
+                <div class="campo-full">
+                    <label for="habilidades" class="label-estilizado">Habilidades Técnicas</label>
+                    <textarea id="habilidades" name="Habilidades" class="input-estilizado" rows="3" placeholder="Ej: C#, .NET, Azure, SQL, Metodologías Ágiles..."></textarea>
+                </div>
+
+                <div class="campo-full">
+                    <label for="idiomas" class="label-estilizado">Idiomas</label>
+                    <textarea id="idiomas" name="Idiomas" class="input-estilizado" rows="2" placeholder="Ej: Español (Nativo), Inglés (C1)..."></textarea>
+                </div>
+            </div>
+
+            <div class="cuadro-contenedorConfirmar">
+                <button type="submit" class="btn-Guardar">Guardar y Finalizar</button>
+            </div>
+
+            <div class="link-omitir">
+                <a href="#">Omitir por ahora</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('fotoPerfil').onchange = function (evt) {
+            const [file] = this.files;
+            if (file) {
+                document.getElementById('preview').src = URL.createObjectURL(file);
+            }
+        };
+    </script>
+
+    <script src="~/js/IngPerfil.js" asp-append-version="true"></script>
+
+</body>
+</html>
