@@ -2,7 +2,7 @@
 
 namespace IngeLab.Controllers
 {
-    public class IngCompletarPerfilController : Controller
+    public class EmpCompletarPerfilController : Controller
     {
         public IActionResult Index()
         {
@@ -14,7 +14,7 @@ namespace IngeLab.Controllers
         public IActionResult Completar()
         {
             // Esta línea busca y devuelve tu archivo .cshtml
-            return View("IngCompletarPerfil");
+            return View("EmpCompletarPerfil");
         }
     }
 }

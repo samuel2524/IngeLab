@@ -3,6 +3,30 @@
   "WorkspaceRootPath": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab\\ingelab\\views\\empcompletarperfil\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:views\\empcompletarperfil\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab\\ingelab\\views\\ingcompletarperfil\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:views\\ingcompletarperfil\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab\\ingelab\\wwwroot\\css\\completarperfil.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:wwwroot\\css\\completarperfil.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab\\ingelab\\controllers\\ingcompletarperfilcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:controllers\\ingcompletarperfilcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab\\ingelab\\controllers\\empcompletarperfilcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:controllers\\empcompletarperfilcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab\\ingelab\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab\\ingelab\\wwwroot\\css\\registro.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
       "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:wwwroot\\css\\registro.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
@@ -15,28 +39,12 @@
       "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:controllers\\registrocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab\\ingelab\\wwwroot\\css\\ingcompletarperfil.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:wwwroot\\css\\ingcompletarperfil.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab\\ingelab\\views\\ingcompletarperfil\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:views\\ingcompletarperfil\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab\\ingelab\\controllers\\ingcompletarperfilcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:controllers\\ingcompletarperfilcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab\\ingelab\\wwwroot\\js\\ingperfil.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:wwwroot\\js\\ingperfil.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab\\ingelab\\wwwroot\\js\\registro.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:wwwroot\\js\\registro.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab\\ingelab\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{16160770-8F18-1A8D-FC90-DECD201F2A0C}|IngeLab.csproj|c:\\users\\mesaj\\onedrive\\documents\\ingelab\\ingelab\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -86,7 +94,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 15,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -114,33 +122,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "IngCompletarPerfil.css",
-              "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\wwwroot\\css\\IngCompletarPerfil.css",
-              "RelativeDocumentMoniker": "wwwroot\\css\\IngCompletarPerfil.css",
-              "ToolTip": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\wwwroot\\css\\IngCompletarPerfil.css",
-              "RelativeToolTip": "wwwroot\\css\\IngCompletarPerfil.css",
-              "ViewState": "AgIAABsAAAAAAAAAAAAAABwAAAA+AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-09-10T06:03:52.292Z",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\Views\\EmpCompletarPerfil\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\EmpCompletarPerfil\\Index.cshtml",
+              "ToolTip": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\Views\\EmpCompletarPerfil\\Index.cshtml",
+              "RelativeToolTip": "Views\\EmpCompletarPerfil\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-10T14:54:13.973Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\Views\\IngCompletarPerfil\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\IngCompletarPerfil\\Index.cshtml",
               "ToolTip": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\Views\\IngCompletarPerfil\\Index.cshtml",
               "RelativeToolTip": "Views\\IngCompletarPerfil\\Index.cshtml",
-              "ViewState": "AgIAAFgAAAAAAAAAAAAAAGwAAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-09-10T06:03:04.474Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "_ViewImports.cshtml",
               "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\Views\\_ViewImports.cshtml",
               "RelativeDocumentMoniker": "Views\\_ViewImports.cshtml",
@@ -148,12 +156,11 @@
               "RelativeToolTip": "Views\\_ViewImports.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-09-10T06:02:05.075Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-10T06:02:05.075Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "_ViewStart.cshtml",
               "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\Views\\_ViewStart.cshtml",
               "RelativeDocumentMoniker": "Views\\_ViewStart.cshtml",
@@ -161,12 +168,11 @@
               "RelativeToolTip": "Views\\_ViewStart.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-09-10T06:01:54.828Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-10T06:01:54.828Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\Views\\Registro\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Registro\\Index.cshtml",
@@ -174,12 +180,11 @@
               "RelativeToolTip": "Views\\Registro\\Index.cshtml",
               "ViewState": "AgIAAJ4AAAAAAAAAAAAIwKoAAABPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-08-25T21:59:08.255Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-25T21:59:08.255Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\Views\\Login\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Login\\Index.cshtml",
@@ -191,7 +196,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "LoginController.cs",
               "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\Controllers\\LoginController.cs",
               "RelativeDocumentMoniker": "Controllers\\LoginController.cs",
@@ -199,12 +204,11 @@
               "RelativeToolTip": "Controllers\\LoginController.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAUwCYAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T21:58:01.814Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-25T21:58:01.814Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 5,
               "Title": "HomeController.cs",
               "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
@@ -217,7 +221,46 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IngCompletarPerfilController.cs",
+              "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\Controllers\\IngCompletarPerfilController.cs",
+              "RelativeDocumentMoniker": "Controllers\\IngCompletarPerfilController.cs",
+              "ToolTip": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\Controllers\\IngCompletarPerfilController.cs",
+              "RelativeToolTip": "Controllers\\IngCompletarPerfilController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T06:06:28.378Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "CompletarPerfil.css",
+              "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\wwwroot\\css\\CompletarPerfil.css",
+              "RelativeDocumentMoniker": "wwwroot\\css\\CompletarPerfil.css",
+              "ToolTip": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\wwwroot\\css\\CompletarPerfil.css",
+              "RelativeToolTip": "wwwroot\\css\\CompletarPerfil.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAOgAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-09-10T06:03:52.292Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "EmpCompletarPerfilController.cs",
+              "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\Controllers\\EmpCompletarPerfilController.cs",
+              "RelativeDocumentMoniker": "Controllers\\EmpCompletarPerfilController.cs",
+              "ToolTip": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\Controllers\\EmpCompletarPerfilController.cs",
+              "RelativeToolTip": "Controllers\\EmpCompletarPerfilController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-10T14:55:18.4Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "RegistroController.cs",
               "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\Controllers\\RegistroController.cs",
               "RelativeDocumentMoniker": "Controllers\\RegistroController.cs",
@@ -225,38 +268,24 @@
               "RelativeToolTip": "Controllers\\RegistroController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAIEAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T21:57:57.27Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-25T21:57:57.27Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "Registro.css",
               "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\wwwroot\\css\\Registro.css",
               "RelativeDocumentMoniker": "wwwroot\\css\\Registro.css",
               "ToolTip": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\wwwroot\\css\\Registro.css",
               "RelativeToolTip": "wwwroot\\css\\Registro.css",
-              "ViewState": "AgIAAN4AAAAAAAAAAAAAAHEBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABQBAAAAAAAAAAAAAHEBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
               "WhenOpened": "2025-08-24T19:29:16.807Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "IngCompletarPerfilController.cs",
-              "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\Controllers\\IngCompletarPerfilController.cs",
-              "RelativeDocumentMoniker": "Controllers\\IngCompletarPerfilController.cs",
-              "ToolTip": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\Controllers\\IngCompletarPerfilController.cs",
-              "RelativeToolTip": "Controllers\\IngCompletarPerfilController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-10T06:06:28.378Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "IngPerfil.js",
               "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\wwwroot\\js\\IngPerfil.js",
               "RelativeDocumentMoniker": "wwwroot\\js\\IngPerfil.js",
@@ -264,12 +293,11 @@
               "RelativeToolTip": "wwwroot\\js\\IngPerfil.js",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-09-10T06:26:33.462Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-10T06:26:33.462Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 10,
               "Title": "registro.js",
               "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\wwwroot\\js\\registro.js",
               "RelativeDocumentMoniker": "wwwroot\\js\\registro.js",
@@ -277,12 +305,11 @@
               "RelativeToolTip": "wwwroot\\js\\registro.js",
               "ViewState": "AgIAABEAAAAAAAAAAAAAwB0AAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-08-24T19:28:39.752Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-24T19:28:39.752Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 15,
               "Title": "PrincipalController.cs",
               "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\Controllers\\PrincipalController.cs",
               "RelativeDocumentMoniker": "Controllers\\PrincipalController.cs",
@@ -294,7 +321,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 16,
               "Title": "Login.css",
               "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\wwwroot\\css\\Login.css",
               "RelativeDocumentMoniker": "wwwroot\\css\\Login.css",
@@ -306,7 +333,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 17,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
@@ -318,7 +345,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 18,
               "Title": "Principal.css",
               "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\wwwroot\\css\\Principal.css",
               "RelativeDocumentMoniker": "wwwroot\\css\\Principal.css",
@@ -330,7 +357,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 19,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\Views\\Principal\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Principal\\Index.cshtml",
@@ -342,7 +369,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 20,
               "Title": "site.js",
               "DocumentMoniker": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab\\IngeLab\\wwwroot\\js\\site.js",
               "RelativeDocumentMoniker": "wwwroot\\js\\site.js",

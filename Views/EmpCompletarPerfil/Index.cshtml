@@ -1,0 +1,110 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Completa Perfil de Empresa - IngeLab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/CompletarPerfil.css" asp-append-version="true">
+</head>
+<body class="body_principal_perfil">
+
+    <a href="/" class="header-logo">IngeLab</a>
+    <div class="background"></div>
+
+    <div class="centro-pagina">
+        <form method="post" action="#" class="cuadro-unificado-perfil">
+            <div class="titulo-cuadro">El Perfil de tu Empresa</div>
+            <p class="subtitulo-cuadro">Atrae al mejor talento mostrando quiénes son y qué los hace únicos.</p>
+
+            <div class="campo-foto-perfil">
+                <label for="logoEmpresa" class="label-foto">
+                    <img id="preview" src="https://via.placeholder.com/100" alt="Vista previa del logo" />
+                    <span>Sube el logo de tu empresa</span>
+                </label>
+                <input type="file" id="logoEmpresa" name="Logo" class="input-foto" accept="image/*">
+            </div>
+
+            <div class="grid-formulario">
+
+                <div class="campo-individual">
+                    <label for="ubicacion" class="label-estilizado">Ubicación (Ciudad, País)</label>
+                    <input type="text" id="ubicacion" name="Ubicacion" class="input-estilizado" placeholder="Ej: Medellín, Colombia">
+                </div>
+
+                <div class="campo-individual">
+                    <label for="sector" class="label-estilizado">Sector Industrial</label>
+                    <select id="sector" name="Sector" class="input-estilizado">
+                        <option value="" disabled selected>Selecciona un sector</option>
+                        <option value="tecnologia">Tecnología / Software</option>
+                        <option value="construccion">Construcción</option>
+                        <option value="energia">Energía</option>
+                        <option value="salud">Salud / Biotech</option>
+                        <option value="financiero">Financiero / FinTech</option>
+                        <option value="consultoria">Consultoría</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+
+                <div class="campo-individual">
+                    <label for="tamano" class="label-estilizado">Tamaño de la Empresa</label>
+                    <select id="tamano" name="Tamano" class="input-estilizado">
+                        <option value="" disabled selected>Nº de empleados</option>
+                        <option value="1-10">1-10 empleados (Startup)</option>
+                        <option value="11-50">11-50 empleados</option>
+                        <option value="51-200">51-200 empleados</option>
+                        <option value="201-1000">201-1000 empleados</option>
+                        <option value="1000+">Más de 1000 empleados</option>
+                    </select>
+                </div>
+
+                <div class="campo-individual">
+                    <label for="modalidad" class="label-estilizado">Modalidad de Trabajo</label>
+                    <select id="modalidad" name="Modalidad" class="input-estilizado">
+                        <option value="" disabled selected>¿Cómo trabajan?</option>
+                        <option value="remoto">Remoto</option>
+                        <option value="hibrido">Híbrido</option>
+                        <option value="presencial">Presencial</option>
+                    </select>
+                </div>
+
+                <div class="campo-full">
+                    <label for="website" class="label-estilizado">Sitio Web</label>
+                    <input type="url" id="website" name="SitioWeb" class="input-estilizado" placeholder="https://www.tuempresa.com">
+                </div>
+
+                <div class="campo-full">
+                    <label for="descripcion" class="label-estilizado">Descripción de la Empresa</label>
+                    <textarea id="descripcion" name="Descripcion" class="input-estilizado" rows="4" placeholder="Cuéntanos sobre tu misión, visión, cultura y qué los hace un gran lugar para trabajar..."></textarea>
+                </div>
+
+                <div class="campo-full">
+                    <label for="tecnologias" class="label-estilizado">Tecnologías Clave (Tech Stack)</label>
+                    <textarea id="tecnologias" name="Tecnologias" class="input-estilizado" rows="2" placeholder="Ej: .NET, Azure, React, SQL Server, Microservicios..."></textarea>
+                </div>
+            </div>
+
+            <div class="cuadro-contenedorConfirmar">
+                <button type="submit" class="btn-Guardar">Guardar Perfil de Empresa</button>
+            </div>
+
+            <div class="link-omitir">
+                <a href="#">Completar más tarde</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('logoEmpresa').onchange = function (evt) {
+            const [file] = this.files;
+            if (file) {
+                document.getElementById('preview').src = URL.createObjectURL(file);
+            }
+        };
+    </script>
+
+</body>
+</html>
