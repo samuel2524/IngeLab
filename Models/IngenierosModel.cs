@@ -13,6 +13,15 @@ namespace IngeLab.Models
         public string NumeroDocumento { get; set; }
         public DateTime FechaNacimiento { get; set; }
 
+      
+        public int Anios_Experiencia { get; set; }
+        public string Nivel_Academico { get; set; }
+        public string Habilidades_Tecnicas { get; set; }
+        public string Especializacion { get; set; }
+        public string Idiomas { get; set; }
+        public int Id_Usuario { get; set; }
+
+
 
 
 
@@ -21,9 +30,9 @@ namespace IngeLab.Models
         {
             bool soloLetrasNombre = !string.IsNullOrWhiteSpace(Nombre) && Nombre.All(c => char.IsLetter(c));
             bool soloNumerosDocumento = !string.IsNullOrWhiteSpace(NumeroDocumento) && NumeroDocumento.All(c => char.IsDigit(c));
-            bool soloNumerosTelefono = !string.IsNullOrWhiteSpace(Telefono)&& Telefono.All(c => char.IsDigit(c));
+            bool soloNumerosTelefono = !string.IsNullOrWhiteSpace(Telefono) && Telefono.All(c => char.IsDigit(c));
             bool apellidoValido = Regex.IsMatch(Apellido, @"^[a-zA-Z\s]+$");
-           
+
 
 
             if (string.IsNullOrWhiteSpace(Nombre))
@@ -39,7 +48,7 @@ namespace IngeLab.Models
             {
                 modelState.AddModelError("Ingeniero.Apellido", "El apellido es obligatorio.");
             }
-            if(!apellidoValido)
+            if (!apellidoValido)
             {
                 modelState.AddModelError("Ingeniero.Apellido", "El apellido solo debe contener letras y espacios.");
             }
@@ -92,11 +101,11 @@ namespace IngeLab.Models
                     modelState.AddModelError("Ingeniero.Contraseña", "La contraseña debe contener al menos un carácter especial.");
                 }
 
-                
-            }
-           
 
-          
+            }
+
+
+
 
             if (FechaNacimiento == default)
             {
@@ -111,7 +120,7 @@ namespace IngeLab.Models
             {
                 modelState.AddModelError("Ingeniero.Telefono", "El teléfono es obligatorio.");
             }
-            
+
             if (!soloNumerosTelefono)
             {
                 modelState.AddModelError("Ingeniero.Telefono", "El teléfono solo debe contener números.");

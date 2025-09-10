@@ -17,7 +17,7 @@
     <div class="background"></div>
 
     <div class="centro-pagina">
-        <form method="post" action="#" class="cuadro-unificado-perfil">
+        <form asp-controller="IngCompletarPerfil" asp-action="CompletarPerfil" method="post" class="cuadro-unificado-perfil">
             <div class="titulo-cuadro">Un Último Paso...</div>
             <p class="subtitulo-cuadro">Completa tu perfil para que las mejores empresas te encuentren.</p>
 
@@ -32,7 +32,7 @@
             <div class="grid-formulario">
                 <div class="campo-individual">
                     <label for="especialidad" class="label-estilizado">Especialidad</label>
-                    <select id="especialidad" name="Especialidad" class="input-estilizado">
+                    <select id="Especializacion" name="Especializacion" class="input-estilizado">
                         <option value="" disabled selected>Selecciona tu área</option>
                         <option value="software">Ingeniería de Software</option>
                         <option value="civil">Ingeniería Civil</option>
@@ -43,17 +43,17 @@
                     </select>
                 </div>
 
-                <div id="otro-especialidad-container" class="campo-individual hidden">
+                @* <div id="otro-especialidad-container" class="campo-individual hidden">
                     <label for="otraEspecialidad" class="label-estilizado">¿Cuál?</label>
-                    <input type="text" id="otraEspecialidad" name="OtraEspecialidad" class="input-estilizado" placeholder="Ej: Ing. Biomédica">
-                </div>
+                    <input type="text" id="otraEspecialidad" name="otraEspecialidad" class="input-estilizado" placeholder="Ej: Ing. Biomédica">
+                </div> *@
 
                 <div class="campo-individual">
                     <label for="experiencia" class="label-estilizado">Años de Experiencia</label>
-                    <input type="number" id="experiencia" name="AñosExperiencia" class="input-estilizado" placeholder="Ej: 5" min="0">
+                    <input type="number" id="Anios_Experiencia" name="Anios_Experiencia" class="input-estilizado" placeholder="Ej: 5" min="0">
                 </div>
 
-                <div class="campo-individual">
+                @* <div class="campo-individual">
                     <label for="disponibilidad" class="label-estilizado">Disponibilidad</label>
                     <select id="disponibilidad" name="Disponibilidad" class="input-estilizado">
                         <option value="" disabled selected>Define tu disponibilidad</option>
@@ -62,11 +62,11 @@
                         <option value="freelance">Freelance / Por Proyecto</option>
                         <option value="open">Abierto a Ofertas</option>
                     </select>
-                </div>
+                </div> *@
 
                 <div class="campo-individual">
                     <label for="nivelAcademico" class="label-estilizado">Nivel Académico</label>
-                    <select id="nivelAcademico" name="NivelAcademico" class="input-estilizado">
+                    <select id="Nivel_Academico" name="Nivel_Academico" class="input-estilizado"  required>
                         <option value="" disabled selected>Tu máximo nivel de estudios</option>
                         <option value="bachillerato">Bachillerato</option>
                         <option value="certificaciones">Certificaciones</option>
@@ -78,13 +78,14 @@
 
                 <div class="campo-full">
                     <label for="habilidades" class="label-estilizado">Habilidades Técnicas</label>
-                    <textarea id="habilidades" name="Habilidades" class="input-estilizado" rows="3" placeholder="Ej: C#, .NET, Azure, SQL, Metodologías Ágiles..."></textarea>
+                    <textarea id="Habilidades_Tecnicas" name="Habilidades_Tecnicas" class="input-estilizado" rows="3" placeholder="Ej: C#, .NET, Azure, SQL, Metodologías Ágiles..."></textarea>
                 </div>
 
                 <div class="campo-full">
                     <label for="idiomas" class="label-estilizado">Idiomas</label>
-                    <textarea id="idiomas" name="Idiomas" class="input-estilizado" rows="2" placeholder="Ej: Español (Nativo), Inglés (C1)..."></textarea>
+                    <textarea id="Idiomas" name="Idiomas" class="input-estilizado" rows="2" placeholder="Ej: Español (Nativo), Inglés (C1)..."></textarea>
                 </div>
+                <input type="hidden" name="Id_Usuario" value="@ViewBag.IdUsuario" />
             </div>
 
             <div class="cuadro-contenedorConfirmar">
