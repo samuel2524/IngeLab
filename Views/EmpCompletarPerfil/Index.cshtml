@@ -16,7 +16,7 @@
     <div class="background"></div>
 
     <div class="centro-pagina">
-        <form method="post" action="#" class="cuadro-unificado-perfil">
+        <form asp-controller="EmpCompletarPerfil" asp-action="CompletarPerfil" class="cuadro-unificado-perfil">
             <div class="titulo-cuadro">El Perfil de tu Empresa</div>
             <p class="subtitulo-cuadro">Atrae al mejor talento mostrando quiénes son y qué los hace únicos.</p>
 
@@ -32,12 +32,12 @@
 
                 <div class="campo-individual">
                     <label for="ubicacion" class="label-estilizado">Ubicación (Ciudad, País)</label>
-                    <input type="text" id="ubicacion" name="Ubicacion" class="input-estilizado" placeholder="Ej: Medellín, Colombia">
+                    <input type="text" id="Ubicacion" name="Ubicacion" class="input-estilizado" placeholder="Ej: Medellín, Colombia">
                 </div>
 
                 <div class="campo-individual">
                     <label for="sector" class="label-estilizado">Sector Industrial</label>
-                    <select id="sector" name="Sector" class="input-estilizado">
+                    <select id="Sector" name="Sector" class="input-estilizado">
                         <option value="" disabled selected>Selecciona un sector</option>
                         <option value="tecnologia">Tecnología / Software</option>
                         <option value="construccion">Construcción</option>
@@ -51,7 +51,7 @@
 
                 <div class="campo-individual">
                     <label for="tamano" class="label-estilizado">Tamaño de la Empresa</label>
-                    <select id="tamano" name="Tamano" class="input-estilizado">
+                    <select id="Tamano" name="Tamano" class="input-estilizado">
                         <option value="" disabled selected>Nº de empleados</option>
                         <option value="1-10">1-10 empleados (Startup)</option>
                         <option value="11-50">11-50 empleados</option>
@@ -63,7 +63,7 @@
 
                 <div class="campo-individual">
                     <label for="modalidad" class="label-estilizado">Modalidad de Trabajo</label>
-                    <select id="modalidad" name="Modalidad" class="input-estilizado">
+                    <select id="Modalidad" name="Modalidad" class="input-estilizado">
                         <option value="" disabled selected>¿Cómo trabajan?</option>
                         <option value="remoto">Remoto</option>
                         <option value="hibrido">Híbrido</option>
@@ -73,17 +73,17 @@
 
                 <div class="campo-full">
                     <label for="website" class="label-estilizado">Sitio Web</label>
-                    <input type="url" id="website" name="SitioWeb" class="input-estilizado" placeholder="https://www.tuempresa.com">
+                    <input type="url" id="Sitio_Web" name="Sitio_Web" class="input-estilizado" placeholder="https://www.tuempresa.com">
                 </div>
 
                 <div class="campo-full">
                     <label for="descripcion" class="label-estilizado">Descripción de la Empresa</label>
-                    <textarea id="descripcion" name="Descripcion" class="input-estilizado" rows="4" placeholder="Cuéntanos sobre tu misión, visión, cultura y qué los hace un gran lugar para trabajar..."></textarea>
+                    <textarea id="Descripcion_Empresa" name="Descripcion_Empresa" class="input-estilizado" rows="4" placeholder="Cuéntanos sobre tu misión, visión, cultura y qué los hace un gran lugar para trabajar..."></textarea>
                 </div>
 
                 <div class="campo-full">
                     <label for="tecnologias" class="label-estilizado">Tecnologías Clave (Tech Stack)</label>
-                    <textarea id="tecnologias" name="Tecnologias" class="input-estilizado" rows="2" placeholder="Ej: .NET, Azure, React, SQL Server, Microservicios..."></textarea>
+                    <textarea id="Tecnologias_Clave" name="Tecnologias_Clave" class="input-estilizado" rows="2" placeholder="Ej: .NET, Azure, React, SQL Server, Microservicios..."></textarea>
                 </div>
             </div>
 
@@ -94,6 +94,8 @@
             <div class="link-omitir">
                 <a href="#">Completar más tarde</a>
             </div>
+
+            <input type="hidden" name="Id_empresa" value="@ViewBag.IdEmpresa" />
         </form>
     </div>
 

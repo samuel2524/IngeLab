@@ -20,6 +20,7 @@ namespace IngeLab.Models
         public string Especializacion { get; set; }
         public string Idiomas { get; set; }
         public int Id_Usuario { get; set; }
+        public string Disponibilidad { get; set; }
 
 
 

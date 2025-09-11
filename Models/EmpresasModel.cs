@@ -8,6 +8,15 @@ namespace IngeLab.Models
 
         public string NIT { get; set; }
         public string Direccion { get; set; }
+
+        public int Id_empresa { get; set; }
+        public string Ubicacion { get; set; }
+        public string Sector { get; set; }
+        public string Tamano { get; set; }
+        public string Modalidad { get; set; }
+        public string Sitio_Web { get; set; }
+        public string Descripcion_Empresa { get; set; }
+        public string Tecnologias_Clave { get; set; }
         
 
 
@@ -15,7 +24,7 @@ namespace IngeLab.Models
         {
             bool soloNumerosNIT = !string.IsNullOrWhiteSpace(NIT) && NIT.All(c => char.IsDigit(c));
             bool soloNumerosTelefono = !string.IsNullOrWhiteSpace(Telefono) && Telefono.All(c => char.IsDigit(c));
-    
+
             if (string.IsNullOrWhiteSpace(Nombre))
             {
                 modelState.AddModelError("Empresa.Nombre", "El nombre de la empresa es obligatorio.");
@@ -29,7 +38,7 @@ namespace IngeLab.Models
             {
                 modelState.AddModelError("Empresa.NIT", "El NIT solo debe contener números.");
             }
-            if(NIT.Length != 9)
+            if (NIT.Length != 9)
             {
                 modelState.AddModelError("Empresa.NIT", "El NIT debe tener 9 dígitos.");
             }
@@ -62,8 +71,8 @@ namespace IngeLab.Models
                     modelState.AddModelError("Empresa.Contraseña", "La contraseña debe contener al menos un carácter especial.");
                 }
             }
-            
-          
+
+
             if (string.IsNullOrWhiteSpace(Telefono))
             {
                 modelState.AddModelError("Empresa.Telefono", "El teléfono es obligatorio.");

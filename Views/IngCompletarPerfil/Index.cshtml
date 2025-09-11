@@ -34,35 +34,32 @@
                     <label for="especialidad" class="label-estilizado">Especialidad</label>
                     <select id="Especializacion" name="Especializacion" class="input-estilizado">
                         <option value="" disabled selected>Selecciona tu área</option>
-                        <option value="software">Ingeniería de Software</option>
-                        <option value="civil">Ingeniería Civil</option>
-                        <option value="electrico">Ingeniería Eléctrica</option>
-                        <option value="mecanico">Ingeniería Mecánica</option>
-                        <option value="industrial">Ingeniería Industrial</option>
+                        <option value="software">Infraestructura</option>
+                        <option value="civil">Ciberseguridad</option>
+                        <option value="electrico">Desarrollo de web</option>
+                        <option value="mecanico">Analista de datos</option>
+                        <option value="industrial">Inteligencia artificial</option>
                         <option value="otro">Otra</option>
                     </select>
                 </div>
 
-                @* <div id="otro-especialidad-container" class="campo-individual hidden">
-                    <label for="otraEspecialidad" class="label-estilizado">¿Cuál?</label>
-                    <input type="text" id="otraEspecialidad" name="otraEspecialidad" class="input-estilizado" placeholder="Ej: Ing. Biomédica">
-                </div> *@
+
 
                 <div class="campo-individual">
                     <label for="experiencia" class="label-estilizado">Años de Experiencia</label>
                     <input type="number" id="Anios_Experiencia" name="Anios_Experiencia" class="input-estilizado" placeholder="Ej: 5" min="0">
                 </div>
 
-                @* <div class="campo-individual">
+                <div class="campo-individual">
                     <label for="disponibilidad" class="label-estilizado">Disponibilidad</label>
-                    <select id="disponibilidad" name="Disponibilidad" class="input-estilizado">
+                    <select id="Disponibilidad" name="Disponibilidad" class="input-estilizado">
                         <option value="" disabled selected>Define tu disponibilidad</option>
                         <option value="full-time">Jornada Completa</option>
                         <option value="part-time">Media Jornada</option>
                         <option value="freelance">Freelance / Por Proyecto</option>
                         <option value="open">Abierto a Ofertas</option>
                     </select>
-                </div> *@
+                </div>
 
                 <div class="campo-individual">
                     <label for="nivelAcademico" class="label-estilizado">Nivel Académico</label>
@@ -85,7 +82,7 @@
                     <label for="idiomas" class="label-estilizado">Idiomas</label>
                     <textarea id="Idiomas" name="Idiomas" class="input-estilizado" rows="2" placeholder="Ej: Español (Nativo), Inglés (C1)..."></textarea>
                 </div>
-                <input type="hidden" name="Id_Usuario" value="@ViewBag.IdUsuario" />
+                <input type="hidden" name="Id_Usuario" value="@ViewBag.idEmpresa" />
             </div>
 
             <div class="cuadro-contenedorConfirmar">

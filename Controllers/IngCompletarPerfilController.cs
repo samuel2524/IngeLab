@@ -27,12 +27,13 @@ namespace IngeLab.Controllers
                 using (var conexion = bd.establecerConexion())
                 {
                     string query = @"INSERT INTO datosprofesionales 
-                                    (id_usuario, anios_experiencia, nivel_academico, habilidades_tecnicas, especializacion, idiomas)
-                                    VALUES(@Id_Usuario, @Anios_Experiencia, @Nivel_Academico, @Habilidades_Tecnicas, @Especializacion, @Idiomas)";
+                                    (id_usuario, anios_experiencia, nivel_academico, habilidades_tecnicas, especializacion, idiomas,disponibilidad)
+                                    VALUES(@Id_Usuario, @Anios_Experiencia, @Nivel_Academico, @Habilidades_Tecnicas, @Especializacion, @Idiomas,@Disponibilidad)";
 
                     using (var cmd = new Npgsql.NpgsqlCommand(query, conexion))
                     {
                         cmd.Parameters.AddWithValue("Id_Usuario", ingenieros.Id_Usuario);
+                        cmd.Parameters.AddWithValue("disponibilidad", ingenieros.Disponibilidad);
                         cmd.Parameters.AddWithValue("Anios_Experiencia", ingenieros.Anios_Experiencia);
                         cmd.Parameters.AddWithValue("Nivel_Academico", ingenieros.Nivel_Academico);
                         cmd.Parameters.AddWithValue("Habilidades_Tecnicas", ingenieros.Habilidades_Tecnicas);

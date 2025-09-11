@@ -131,7 +131,7 @@ namespace IngeLab.Controllers
                 using (var conexion = bd.establecerConexion())
                 {
                     string query = "INSERT INTO empresas (nombre, nit, correo, contraseña, telefono) " +
-                        "VALUES (@Nombre, @NIT, @Correo, @Contraseña, @Telefono) " ;
+                        "VALUES (@Nombre, @NIT, @Correo, @Contraseña, @Telefono) RETURNING id_Empresa" ;
 
                     using (var cmd = new Npgsql.NpgsqlCommand(query, conexion))
                     {
@@ -140,12 +140,13 @@ namespace IngeLab.Controllers
                         cmd.Parameters.AddWithValue("Correo", empresas.Correo);
                         cmd.Parameters.AddWithValue("Contraseña", empresas.Contraseña);
                         cmd.Parameters.AddWithValue("Telefono", empresas.Telefono);
-                        cmd.ExecuteNonQuery();
+                        var idEmpresa = (int)cmd.ExecuteScalar();
+                        ViewBag.idEmpresa = idEmpresa;
                     }
                 }
 
                 ViewBag.Exito = "Empresa registrada exitosamente";
-                return View("~/Views/Registro/Index.cshtml",
+                return View("~/Views/EmpCompletarPerfil/Index.cshtml",
                 new Registro_Ingenieros_empresas { Empresa = empresas, TipoUsuario = "empresa" });
             }
             catch (System.Exception e)
