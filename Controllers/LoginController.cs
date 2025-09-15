@@ -16,14 +16,11 @@ namespace IngeLab.Controllers
             return View();
         }
 
-
-
         [HttpPost]
         public IActionResult ValidarUsuario(Usuarios usuario)
         {
             try
             {
-
                 using (var conexion = bd.establecerConexion())
                 {
                     string sqlIngenieros = "SELECT * FROM usuarios WHERE correo = @Correo AND contraseña = @Contraseña";
@@ -44,7 +41,6 @@ namespace IngeLab.Controllers
                         //     ViewBag.Error = "Correo o contraseña incorrectos.";
                             
                         // }
-
                     }
 
                     string sqlEmpresas = "SELECT * FROM empresas WHERE correo = @Correo AND contraseña = @Contraseña";
@@ -66,31 +62,14 @@ namespace IngeLab.Controllers
 
                     }
 
-
                     ViewBag.Error = "Correo o contraseña incorrectos.";
                     return View("~/Views/Login/Index.cshtml");
-                    
-                    
-                    
-
-
                 }
-            
-
-
            }
             catch (System.Exception e)
             {
-
                 return Content("Error al validar el usuario" + e.Message);
-            }
-
-            
-        
-        }
-
-       
-
-        
+            }       
+        }      
     }
 }

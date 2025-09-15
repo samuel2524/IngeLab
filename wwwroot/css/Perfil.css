@@ -1,0 +1,278 @@
+﻿/* Importamos las variables base para mantener consistencia */
+@import url('VistaEmpresa.css');
+
+.body-perfil {
+    background-color: var(--dark-bg);
+    color: var(--text-color);
+    font-family: var(--font-family);
+    overflow-x: hidden;
+    background-image: url('../images/AI_Generated_Ing_Data.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.perfil-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* ===== HEADER DEL PERFIL (BANNER, AVATAR, INFO) ===== */
+.perfil-header {
+    background: rgba(10, 15, 30, 0.6);
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 30px;
+    overflow: hidden; /* Clave para que el banner no se salga */
+}
+
+.perfil-banner {
+    height: 250px;
+}
+
+    .perfil-banner img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+.perfil-info-bar {
+    display: flex;
+    align-items: flex-end;
+    padding: 0 40px 20px;
+    position: relative;
+    margin-top: -80px; /* Sube la barra para que se monte sobre el banner */
+}
+
+.perfil-avatar {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 5px solid var(--dark-bg);
+    overflow: hidden;
+    margin-right: 25px;
+    z-index: 2;
+}
+
+    .perfil-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+.perfil-nombre {
+    flex-grow: 1;
+    z-index: 2;
+}
+
+    .perfil-nombre h1 {
+        color: var(--title-color);
+        font-size: 2.2rem;
+        margin: 0;
+        text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    }
+
+    .perfil-nombre p {
+        font-size: 1.1rem;
+        color: var(--text-color);
+        margin: 0;
+        text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    }
+
+.perfil-acciones {
+    display: flex;
+    gap: 10px;
+    z-index: 2;
+}
+
+.btn-editar-perfil, .btn-contactar {
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid var(--primary-color);
+}
+
+.btn-editar-perfil {
+    background-color: var(--primary-color);
+    color: var(--dark-bg);
+}
+
+.btn-contactar {
+    background-color: transparent;
+    color: var(--primary-color);
+}
+
+.btn-editar-perfil:hover {
+    background-color: transparent;
+    color: var(--primary-color);
+    box-shadow: 0 0 10px var(--primary-color);
+}
+
+.btn-contactar:hover {
+    background-color: var(--primary-color);
+    color: var(--dark-bg);
+}
+
+/* ===== GRID PRINCIPAL DEL PERFIL ===== */
+.perfil-grid {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+/* Columna Izquierda */
+.columna-info {
+    position: sticky;
+    top: 30px; /* Se quedará fija al hacer scroll */
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.panel-card-perfil {
+    background: rgba(10, 15, 30, 0.6);
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
+    padding: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.panel-titulo {
+    color: var(--title-color);
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-left: 3px solid var(--primary-color);
+    padding-left: 10px;
+}
+
+.bio {
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
+
+.tags-container-perfil {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.skill-tag-perfil {
+    background: rgba(0, 255, 255, 0.1);
+    color: var(--primary-color);
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Columna Derecha */
+.columna-contenido {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.item-experiencia {
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+    .item-experiencia:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .item-experiencia h4 {
+        color: var(--title-color);
+        font-size: 1.1rem;
+        margin: 0 0 2px 0;
+    }
+
+    .item-experiencia h5 {
+        color: var(--text-color);
+        font-size: 0.9rem;
+        font-weight: 400;
+        margin: 0 0 8px 0;
+    }
+
+    .item-experiencia p {
+        margin: 0;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+.post-card-perfil {
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0,0,0,0.1);
+    border-radius: 10px;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+    .post-card-perfil:last-child {
+        margin-bottom: 0;
+    }
+
+    .post-card-perfil.pinned {
+        border-color: var(--primary-color);
+    }
+
+.pin-indicator-perfil {
+    color: var(--primary-color);
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+    .pin-indicator-perfil .fa-thumbtack {
+        margin-right: 5px;
+    }
+
+.post-opciones-perfil {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.btn-opciones-perfil {
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+    .perfil-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .columna-info {
+        position: static;
+    }
+
+    .perfil-info-bar {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-top: -100px;
+        padding-bottom: 20px;
+    }
+
+    .perfil-avatar {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+
+    .perfil-acciones {
+        margin-top: 20px;
+    }
+}

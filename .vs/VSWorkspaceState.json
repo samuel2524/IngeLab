@@ -3,6 +3,7 @@
     "",
     "\\Controllers",
     "\\Views",
+    "\\Views\\EmpCompletarPerfil",
     "\\Views\\Shared"
   ],
   "SelectedNode": "\\IngeLab.sln",

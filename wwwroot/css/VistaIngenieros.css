@@ -1,0 +1,365 @@
+﻿/* Importamos las variables y estilos base para mantener consistencia */
+@import url('VistaEmpresa.css');
+
+.body-vista-ingeniero {
+    background-color: var(--dark-bg);
+    color: var(--text-color);
+    font-family: var(--font-family);
+    overflow-x: hidden;
+}
+
+/* ===== HEADER ===== */
+.header-ingeniero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background: rgba(10, 10, 20, 0.6);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.perfil-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--title-color);
+    font-weight: 600;
+}
+
+.perfil-foto {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 2px solid var(--primary-color);
+}
+
+.notificaciones-container {
+    position: relative;
+}
+
+.btn-notificaciones {
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+    .btn-notificaciones:hover {
+        color: var(--primary-color);
+        transform: scale(1.1);
+    }
+
+.notificacion-badge {
+    position: absolute;
+    top: -5px;
+    right: -8px;
+    background-color: #ff4d4d;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--dark-bg);
+}
+
+.buscador-container {
+    position: relative;
+    width: 400px;
+}
+
+.input-buscador {
+    width: 100%;
+    padding: 10px 15px 10px 40px; /* Espacio para el icono */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #fff;
+}
+
+.buscador-icono {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* ===== DASHBOARD GRID LAYOUT ===== */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr 280px; /* Columnas: Izq, Central, Der */
+    gap: 30px;
+    padding: 30px 5%;
+    align-items: flex-start;
+}
+
+/* ===== PANELES LATERALES ===== */
+.panel-card {
+    background: rgba(10, 15, 30, 0.6);
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.panel-titulo {
+    color: var(--title-color);
+    margin-bottom: 15px;
+    border-left: 3px solid var(--primary-color);
+    padding-left: 10px;
+}
+
+.lista-ofertas {
+    list-style: none;
+}
+
+    .lista-ofertas li {
+        margin-bottom: 15px;
+        padding-left: 10px;
+        border-left: 2px solid transparent;
+    }
+
+        .lista-ofertas li.no-leida {
+            border-left-color: var(--primary-color);
+            font-weight: 600;
+        }
+
+.empresa-oferta {
+    display: block;
+    color: var(--title-color);
+    font-size: 0.95rem;
+}
+
+.titulo-oferta {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-color);
+}
+
+.link-ver-todas {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.skill-tag {
+    background: rgba(0, 255, 255, 0.1);
+    color: var(--primary-color);
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* ===== COLUMNA CENTRAL (FEED) ===== */
+.columna-central {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.crear-post-card {
+    background: rgba(10, 15, 30, 0.6);
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.input-post {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-color);
+    font-family: var(--font-family);
+    font-size: 1.1rem;
+    resize: vertical;
+    min-height: 80px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 15px;
+}
+
+.post-acciones {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-accion-post {
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    font-weight: 600;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-accion-post:hover {
+        background-color: rgba(0, 255, 255, 0.1);
+    }
+
+.btn-publicar {
+    background-color: var(--primary-color);
+    color: var(--dark-bg);
+    border: none;
+    padding: 10px 25px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .btn-publicar:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px var(--primary-color);
+    }
+
+/* --- Estilos de las Tarjetas de Post --- */
+.post-card {
+    background: rgba(10, 15, 30, 0.6);
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.post-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.post-autor-foto {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+.post-autor-info {
+    flex-grow: 1;
+}
+
+    .post-autor-info h4 {
+        color: var(--title-color);
+        margin: 0;
+    }
+
+    .post-autor-info p {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.85rem;
+        margin: 0;
+    }
+
+.post-opciones {
+    position: relative;
+}
+
+.btn-opciones {
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+}
+
+    .btn-opciones:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+.opciones-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 30px;
+    background: var(--light-bg);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    width: 180px;
+    overflow: hidden;
+    z-index: 10;
+}
+
+    .opciones-menu a {
+        display: block;
+        padding: 10px 15px;
+        color: var(--text-color);
+        text-decoration: none;
+        font-size: 0.9rem;
+    }
+
+        .opciones-menu a:hover {
+            background-color: rgba(0, 255, 255, 0.1);
+        }
+
+    .opciones-menu .opcion-eliminar {
+        color: #ff4d4d;
+    }
+
+.post-contenido {
+    padding-top: 15px;
+    margin-left: 60px; /* Alineado con la info del autor */
+    line-height: 1.7;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1200px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr 2fr; /* Ocultamos la columna derecha */
+    }
+
+    .columna-derecha {
+        display: none;
+    }
+}
+
+@media (max-width: 800px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr; /* Una sola columna */
+    }
+
+    .columna-izquierda {
+        display: none;
+    }
+
+    .header-ingeniero {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .buscador-container {
+        width: 100%;
+    }
+}

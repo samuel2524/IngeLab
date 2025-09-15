@@ -1,17 +1,125 @@
+@model IngeLab.Models.IngenieroDashboardViewModel
+@{
+    Layout = null;
+    ViewData["Title"] = "Mi Feed";
+    var notificacionesNoLeidas = Model.Notificaciones.Count(n => !n.IsLeida);
+}
 
-    @{
-        Layout = null;
-        ViewData["HideNavbar"] = true;
-    }
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - IngeLab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="~/css/VistaIngenieros.css" asp-append-version="true">
+</head>
+<body class="body-vista-ingeniero">
 
-    <!DOCTYPE html>
-    <html lang="es">
+    <header class="header-ingeniero">
+        <div class="header-left">
+            <a href="#" class="perfil-link">
+                <img src="https://via.placeholder.com/50" alt="Foto de perfil" class="perfil-foto">
+                <span>Mi Perfil</span>
+            </a>
+            <div class="notificaciones-container">
+                <button class="btn-notificaciones">
+                    <i class="fas fa-bell"></i>
+                    @if (notificacionesNoLeidas > 0)
+                    {
+                        <span class="notificacion-badge">@notificacionesNoLeidas</span>
+                    }
+                </button>
+            </div>
+        </div>
+        <div class="buscador-container">
+            <i class="fas fa-search buscador-icono"></i>
+            <input type="search" placeholder="Buscar empresas o colegas..." class="input-buscador">
+        </div>
+    </header>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
+    <main class="dashboard-grid">
+        <aside class="columna-izquierda">
+            <div class="panel-card">
+                <h3 class="panel-titulo">Ofertas Recientes</h3>
+                <ul class="lista-ofertas">
+                    @foreach (var notificacion in Model.Notificaciones.Take(3))
+                    {
+                        <li class="@(notificacion.IsLeida ? "" : "no-leida")">
+                            <span class="empresa-oferta">@notificacion.EmpresaNombre</span>
+                            <span class="titulo-oferta">@notificacion.TituloOferta</span>
+                        </li>
+                    }
+                </ul>
+                <a href="#" class="link-ver-todas">Ver todas las ofertas</a>
+            </div>
+        </aside>
 
-    <body>
-        <h1 class="texto">soy Ingeniero jijijijijijijijij</h1>
-    </body>
+        <section class="columna-central">
+            <div class="crear-post-card">
+                <textarea class="input-post" placeholder="¿En qué proyecto estás trabajando, @Model.PerfilActual.Nombre?"></textarea>
+                <div class="post-acciones">
+                    <button class="btn-accion-post"><i class="fas fa-image"></i> Foto/Video</button>
+                    <button class="btn-accion-post"><i class="fas fa-code"></i> Fragmento de código</button>
+                    <button class="btn-publicar">Publicar</button>
+                </div>
+            </div>
+
+            @foreach (var post in Model.PostsFeed)
+            {
+                <div class="post-card">
+                    <div class="post-header">
+                        <img src="https://via.placeholder.com/45" alt="autor" class="post-autor-foto">
+                        <div class="post-autor-info">
+                            <h4>@post.AutorNombre</h4>
+                            <p>@post.AutorEspecialidad &middot; @post.FechaCreacion.ToString("dd MMM, HH:mm")</p>
+                        </div>
+                        <div class="post-opciones">
+                            <button class="btn-opciones" onclick="toggleMenu(this)"><i class="fas fa-ellipsis-h"></i></button>
+                            <div class="opciones-menu">
+                                <a href="#">Editar Publicación</a>
+                                <a href="#" class="opcion-eliminar">Eliminar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-contenido">
+                        <p>@post.Contenido</p>
+                    </div>
+                </div>
+            }
+        </section>
+
+        <aside class="columna-derecha">
+            <div class="panel-card">
+                <h3 class="panel-titulo">Habilidades en Tendencia</h3>
+                <div class="tags-container">
+                    @foreach (var skill in Model.HabilidadesEnTendencia)
+                    {
+                        <span class="skill-tag">@skill</span>
+                    }
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <script>
+        // Script simple para el menú de opciones de cada post
+        function toggleMenu(button) {
+            const menu = button.nextElementSibling;
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Cierra el menú si se hace clic en cualquier otro lugar
+        document.addEventListener('click', function (e) {
+            document.querySelectorAll('.opciones-menu').forEach(menu => {
+                const btn = menu.previousElementSibling;
+                if (!menu.contains(e.target) && !btn.contains(e.target)) {
+                    menu.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
