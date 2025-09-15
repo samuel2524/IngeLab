@@ -1,0 +1,93 @@
+﻿@model IngeLab.Models.EmpresaPerfilViewModel
+@{
+    Layout = null;
+    ViewData["Title"] = Model.Perfil.Nombre;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - IngeLab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="~/css/Perfil.css" asp-append-version="true">
+</head>
+<body class="body-perfil">
+
+    <div class="perfil-container">
+        <header class="perfil-header">
+            <div class="perfil-banner">
+                <img src="~/images/AI_Generated_WEB.png" alt="Banner de la empresa">
+            </div>
+            <div class="perfil-info-bar">
+                <div class="perfil-avatar">
+                    <img src="https://via.placeholder.com/150" alt="Logo de la empresa">
+                </div>
+                <div class="perfil-nombre">
+                    <h1>@Model.Perfil.Nombre</h1>
+                    <p>@Model.Perfil.Direccion</p>
+                </div>
+                <div class="perfil-acciones">
+                    @if (Model.IsOwnProfile)
+                    {
+                        <a href="#" class="btn-editar-perfil"><i class="fas fa-pen"></i> Editar Perfil</a>
+                    }
+                    <a href="#" class="btn-contactar">Seguir</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="perfil-grid">
+            <aside class="columna-info">
+                <div class="panel-card-perfil">
+                    <h3 class="panel-titulo">Nuestra Misión</h3>
+                    <p class="bio">Impulsar la transformación digital de nuestros clientes a través de soluciones de software innovadoras, seguras y escalables, construidas por el mejor talento de la industria.</p>
+                </div>
+                <div class="panel-card-perfil">
+                    <h3 class="panel-titulo">Nuestro Tech Stack</h3>
+                    <div class="tags-container-perfil">
+                        @foreach (var tech in Model.TechStack)
+                        {
+                            <span class="skill-tag-perfil">@tech</span>
+                        }
+                    </div>
+                </div>
+            </aside>
+
+            <section class="columna-contenido">
+                <div class="panel-card-perfil">
+                    <h3 class="panel-titulo">Vacantes Abiertas</h3>
+                    @foreach (var oferta in Model.OfertasAbiertas)
+                    {
+                        <div class="item-experiencia">
+                            <h4>@oferta.Titulo</h4>
+                            <h5>@oferta.Modalidad &middot; @oferta.Ubicacion</h5>
+                        </div>
+                    }
+                </div>
+                <div class="panel-card-perfil">
+                    <h3 class="panel-titulo">Actividad Reciente</h3>
+                    @foreach (var post in Model.Posts.OrderByDescending(p => p.IsPinned))
+                    {
+                        <div class="post-card-perfil @(post.IsPinned ? "pinned" : "")">
+                            @if (post.IsPinned)
+                            {
+                                <div class="pin-indicator-perfil"><i class="fas fa-thumbtack"></i> Fijada</div>
+                            }
+                            <p>@post.Contenido</p>
+                            @if (Model.IsOwnProfile)
+                            {
+                                <div class="post-opciones-perfil">
+                                    <button class="btn-opciones-perfil"><i class="fas fa-ellipsis-h"></i></button>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

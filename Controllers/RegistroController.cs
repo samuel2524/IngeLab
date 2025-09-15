@@ -14,8 +14,7 @@ namespace IngeLab.Controllers
 
             return View();  
         }
-
-    
+ 
         [HttpPost]
         public IActionResult Registro(Registro_Ingenieros_empresas modelo)
         {
@@ -38,22 +37,11 @@ namespace IngeLab.Controllers
                 return null; 
             
             }
-
-
-
-
-
             catch (Exception e)
             {
-
                 return Content("Error al registrar el usuario: " + e.Message);
             }
-
-
         }
-
-
-
 
         public IActionResult RegistroUsuario(Ingenieros Ingeniero)
         {
@@ -96,21 +84,13 @@ namespace IngeLab.Controllers
             }
             catch (System.Exception e)
             {
-
                 return Content("Error al registrar el usuario: " + e.Message);
-            }
-
-            
+            }           
         }
 
-
-
         [HttpPost]
-
         public IActionResult RegistroEmpresa(Empresas empresas)
         {
-
-
             ModelState.Clear(); // limpiar errores automaticcos antes de la validación personalizada
 
             empresas.ControlDeErrores(ModelState);
@@ -122,12 +102,9 @@ namespace IngeLab.Controllers
                 return View("~/Views/Registro/Index.cshtml",
                new Registro_Ingenieros_empresas { Empresa = empresas, TipoUsuario = "empresa" });
             }
-    
-    
+      
             try
-            {
-
-                
+            {               
                 using (var conexion = bd.establecerConexion())
                 {
                     string query = "INSERT INTO empresas (nombre, nit, correo, contraseña, telefono) " +
@@ -143,7 +120,6 @@ namespace IngeLab.Controllers
                         cmd.ExecuteNonQuery();
                     }
                 }
-
                 ViewBag.Exito = "Empresa registrada exitosamente";
                 return View("~/Views/Registro/Index.cshtml",
                 new Registro_Ingenieros_empresas { Empresa = empresas, TipoUsuario = "empresa" });
@@ -152,8 +128,6 @@ namespace IngeLab.Controllers
             {
                 return Content("Error al registrar la empresa: " + e.Message);
             }
-        }
-      
-                
+        }               
     }
 }

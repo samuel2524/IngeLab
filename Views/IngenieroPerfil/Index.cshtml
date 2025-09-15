@@ -1,0 +1,94 @@
+﻿@model IngeLab.Models.IngenieroPerfilViewModel
+@{
+    Layout = null;
+    ViewData["Title"] = $"{Model.Perfil.Nombre} {Model.Perfil.Apellido}";
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - IngeLab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="~/css/Perfil.css" asp-append-version="true">
+</head>
+<body class="body-perfil">
+
+    <div class="perfil-container">
+        <header class="perfil-header">
+            <div class="perfil-banner">
+                <img src="~/images/AI_Generated_Banner_One.png" alt="Banner del perfil">
+            </div>
+            <div class="perfil-info-bar">
+                <div class="perfil-avatar">
+                    <img src="https://via.placeholder.com/150" alt="Foto de perfil">
+                </div>
+                <div class="perfil-nombre">
+                    <h1>@Model.Perfil.Nombre @Model.Perfil.Apellido</h1>
+                    <p>@Model.Perfil.Especializacion</p>
+                </div>
+                <div class="perfil-acciones">
+                    @if (Model.IsOwnProfile)
+                    {
+                        <a href="#" class="btn-editar-perfil"><i class="fas fa-pen"></i> Editar Perfil</a>
+                    }
+                    <a href="#" class="btn-contactar">Contactar</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="perfil-grid">
+            <aside class="columna-info">
+                <div class="panel-card-perfil">
+                    <h3 class="panel-titulo">Acerca de Mí</h3>
+                    <p class="bio">Apasionado por la tecnología y la creación de soluciones escalables en la nube. Con 5+ años de experiencia, mi objetivo es transformar desafíos complejos en software robusto y eficiente.</p>
+                </div>
+                <div class="panel-card-perfil">
+                    <h3 class="panel-titulo">Habilidades Clave</h3>
+                    <div class="tags-container-perfil">
+                        @foreach (var skill in Model.Habilidades)
+                        {
+                            <span class="skill-tag-perfil">@skill</span>
+                        }
+                    </div>
+                </div>
+            </aside>
+
+            <section class="columna-contenido">
+                <div class="panel-card-perfil">
+                    <h3 class="panel-titulo">Experiencia Laboral</h3>
+                    @foreach (var exp in Model.Experiencias)
+                    {
+                        <div class="item-experiencia">
+                            <h4>@exp.Cargo</h4>
+                            <h5>@exp.Empresa &middot; @exp.Periodo</h5>
+                            <p>@exp.Descripcion</p>
+                        </div>
+                    }
+                </div>
+                <div class="panel-card-perfil">
+                    <h3 class="panel-titulo">Publicaciones</h3>
+                    @foreach (var post in Model.Posts.OrderByDescending(p => p.IsPinned))
+                    {
+                        <div class="post-card-perfil @(post.IsPinned ? "pinned" : "")">
+                            @if (post.IsPinned)
+                            {
+                                <div class="pin-indicator-perfil"><i class="fas fa-thumbtack"></i> Fijada</div>
+                            }
+                            <p>@post.Contenido</p>
+                            @if (Model.IsOwnProfile)
+                            {
+                                <div class="post-opciones-perfil">
+                                    <button class="btn-opciones-perfil"><i class="fas fa-ellipsis-h"></i></button>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

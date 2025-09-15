@@ -23,15 +23,5 @@ namespace IngeLab.Controllers
 
             return conexion;
         }
-
-        
-
-        
-
-
-
-     
-
-    }
-    
+    }  
 }

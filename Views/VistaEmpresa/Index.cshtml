@@ -1,17 +1,75 @@
-
+@model List<IngeLab.Models.Ingenieros>
 @{
     Layout = null;
-    ViewData["HideNavbar"] = true;
+    ViewData["Title"] = "Dashboard de Talentos";
 }
 
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - IngeLab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/VistaEmpresa.css" asp-append-version="true">
 </head>
+<body class="body-vista-empresa">
 
-<body>
-    <h1 class="texto">soy Empresario jijijijijijijijij</h1>
+    <header class="header-empresa">
+        <div class="perfil-link-container">
+            <a asp-controller="EmpCompletarPerfil" asp-action="Index" class="perfil-link">
+                <img src="https://via.placeholder.com/50" alt="Logo de la Empresa" class="perfil-logo">
+                <span>Mi Perfil</span>
+            </a>
+        </div>
+        <div class="logo-central">
+            <a href="/" class="header-logo">IngeLab</a>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="buscador-container">
+            <input type="search" placeholder="Buscar por habilidad, especialidad o nombre..." class="input-buscador">
+            <button class="btn-buscar">Buscar</button>
+        </div>
+
+        <div class="feed-container">
+            <section class="columna-talento">
+                <h2 class="columna-titulo">Ingenieros Destacados</h2>
+                <div class="cards-scroll-container">
+                    @foreach (var ingeniero in Model)
+                    {
+                        <div class="ingeniero-card">
+                            <div class="card-header">
+                                <img src="https://via.placeholder.com/60" alt="Foto de @ingeniero.Nombre" class="card-foto-perfil">
+                                <div class="card-info-principal">
+                                    <h3>@ingeniero.Nombre @ingeniero.Apellido</h3>
+                                    <p>@ingeniero.Especializacion</p>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h4>Habilidades Clave:</h4>
+                                <p>@ingeniero.Habilidades_Tecnicas</p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="#" class="btn-ver-perfil">Ver Perfil Completo</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </section>
+
+            <section class="columna-talento">
+                <h2 class="columna-titulo">Mi Pipeline de Talentos</h2>
+                <div class="cards-scroll-container">
+                    <div class="placeholder-card">
+                        <p>Aún no has añadido ingenieros a tu pipeline.</p>
+                        <p>¡Explora y guarda los perfiles que más te interesen!</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
 </body>
+</html>
