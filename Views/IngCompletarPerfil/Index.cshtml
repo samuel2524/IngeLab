@@ -34,11 +34,11 @@
                     <label for="especialidad" class="label-estilizado">Especialidad</label>
                     <select id="Especializacion" name="Especializacion" class="input-estilizado">
                         <option value="" disabled selected>Selecciona tu área</option>
-                        <option value="software">Infraestructura</option>
-                        <option value="civil">Ciberseguridad</option>
-                        <option value="electrico">Desarrollo de web</option>
-                        <option value="mecanico">Analista de datos</option>
-                        <option value="industrial">Inteligencia artificial</option>
+                        <option value="Infraestructura">Infraestructura</option>
+                        <option value="Ciberseguridad">Ciberseguridad</option>
+                        <option value="Desarrollo de web">Desarrollo de web</option>
+                        <option value="Analista de datos">Analista de datos</option>
+                        <option value="Inteligencia artificial">Inteligencia artificial</option>
                         <option value="otro">Otra</option>
                     </select>
                 </div>
@@ -82,7 +82,10 @@
                     <label for="idiomas" class="label-estilizado">Idiomas</label>
                     <textarea id="Idiomas" name="Idiomas" class="input-estilizado" rows="2" placeholder="Ej: Español (Nativo), Inglés (C1)..."></textarea>
                 </div>
-                <input type="hidden" name="Id_Usuario" value="@ViewBag.idEmpresa" />
+                @{
+                    var idUsuario = Context.Session.GetInt32("UsuarioId") ?? 0;
+                }
+            <input type="hidden" name="Id_Usuario" value="@idUsuario" />
             </div>
 
             <div class="cuadro-contenedorConfirmar">

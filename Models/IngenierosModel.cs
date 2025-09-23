@@ -23,6 +23,17 @@ namespace IngeLab.Models
         public string Disponibilidad { get; set; }
 
 
+        public string Contenido { get; set; }
+        public DateTime FechaCreacion { get; set; }
+        public string Tipo_Contenido { get; set; }
+
+        public string Oferta { get; set; } 
+        
+        public string ContratadoPor { get; set; }
+
+        public int Id_Contactado { get; set; }
+        public int Id_Deseado { get; set; }
+
 
 
 

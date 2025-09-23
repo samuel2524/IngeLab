@@ -1,4 +1,4 @@
-@model List<IngeLab.Models.Ingenieros>
+@model IngeLab.Models.EmpresaDashboardViewModel
 @{
     Layout = null;
     ViewData["Title"] = "Dashboard de Talentos";
@@ -12,47 +12,129 @@
     <title>@ViewData["Title"] - IngeLab</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/css/VistaEmpresa.css" asp-append-version="true">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-pap8i..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body class="body-vista-empresa">
 
     <header class="header-empresa">
         <div class="perfil-link-container">
-            <a asp-controller="EmpCompletarPerfil" asp-action="Index" class="perfil-link">
+            <a href="/EmpresaPerfil/Index" class="perfil-link">
                 <img src="https://via.placeholder.com/50" alt="Logo de la Empresa" class="perfil-logo">
                 <span>Mi Perfil</span>
             </a>
         </div>
+        <div class="notificaciones-container">
+            <button class="btn-notificaciones" id="btnNotificaciones">
+                <i class="fas fa-bell"></i>
+                @if (Model.Notificaciones != null && Model.Notificaciones.Any(n => !n.Leido))
+                {
+                    <span class="notificacion-badge">@Model.Notificaciones.Count(n => !n.Leido)</span>
+                }
+            </button>
+
+            <div class="notificaciones-dropdown" id="notificacionesDropdown">
+                <div class="notificaciones-header">
+                    <h4>Notificaciones</h4>
+                    @if (Model.Notificaciones != null && Model.Notificaciones.Count > 0)
+                    {
+                        <button class="btn-marcar-leidas" onclick="marcarComoLeida()">
+                            Marcar todas como leídas
+                        </button>
+                    }
+                </div>
+                    <div class="notificaciones-lista">
+                        @if (Model.Notificaciones != null && Model.Notificaciones.Any())
+                        {
+                            @foreach (var notificacion in Model.Notificaciones)
+                            {
+                                <div class="notificacion-item" data-id="@notificacion.IdNotificacion">
+                                    <div class="notificacion-empresa">
+                                        <strong>@notificacion.NombreUsuario</strong>
+                                    </div>
+                                    <div class="notificacion-oferta">
+                                        @notificacion.Mensaje
+                                    </div>
+                                    <div class="notificacion-fecha">
+                                        <small>@notificacion.Fecha.ToString("dd/MM/yyyy HH:mm")</small>
+                                    </div>
+                                    </div>
+
+                            }
+                        }
+                        else
+                        {
+                            <div class="no-notificaciones">
+                                <i class="fas fa-bell-slash"></i>
+                                <p>No tienes notificaciones nuevas</p>
+                            </div>
+                        }
+                </div>
+        </div>
+    </div>
         <div class="logo-central">
             <a href="/" class="header-logo">IngeLab</a>
         </div>
     </header>
 
-    <main class="main-container">
-        <div class="buscador-container">
-            <input type="search" placeholder="Buscar por habilidad, especialidad o nombre..." class="input-buscador">
-            <button class="btn-buscar">Buscar</button>
-        </div>
+   <main class="main-container">
+        <form asp-controller="VistaEmpresa" asp-action="FiltrarAvanzado" method="post">
+            <div class="buscador-container">
+                <input type="search" name="PalabrasClave" placeholder="Buscar por habilidad, especialidad o nombre..." class="input-buscador" />
 
+                <select name="Disponibilidad" class="input-filtro">
+                    <option value="">Disponibilidad</option>
+                    <option value="full-time">Jornada Completa</option>
+                    <option value="part-time">Media Jornada</option>
+                    <option value="freelance">Freelance / Por Proyecto</option>
+                    <option value="open">Abierto a Ofertas</option>
+                </select>
+
+                <input type="number" name="Anios_Experiencia" placeholder="Años de experiencia" class="input-filtro" min="0" />
+
+                <select name="Nivel_Academico" class="input-filtro">
+                    <option value="">Nivel académico</option>
+                    <option value="bachillerato">Bachillerato</option>
+                    <option value="certificaciones">Certificaciones</option>
+                    <option value="licenciatura">Licenciatura / Pregrado</option>
+                    <option value="maestria">Maestría / Postgrado</option>
+                    <option value="doctorado">Doctorado</option>
+                </select>
+
+                <button type="submit" class="btn-buscar">Buscar</button>
+            </div>
+        </form>
+ </main>
         <div class="feed-container">
             <section class="columna-talento">
-                <h2 class="columna-titulo">Ingenieros Destacados</h2>
+                <h2 class="columna-titulo">Ingenieros Contactados</h2>
                 <div class="cards-scroll-container">
-                    @foreach (var ingeniero in Model)
+                    @foreach (var contacto in Model.Contactados)
                     {
                         <div class="ingeniero-card">
                             <div class="card-header">
-                                <img src="https://via.placeholder.com/60" alt="Foto de @ingeniero.Nombre" class="card-foto-perfil">
+                                <img src="https://via.placeholder.com/60" alt="Foto de @contacto.Nombre" class="card-foto-perfil">
                                 <div class="card-info-principal">
-                                    <h3>@ingeniero.Nombre @ingeniero.Apellido</h3>
-                                    <p>@ingeniero.Especializacion</p>
+                                    <h3>@contacto.Apellido</h3>
+                                    <p>@contacto.Especializacion</p>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <h4>Habilidades Clave:</h4>
-                                <p>@ingeniero.Habilidades_Tecnicas</p>
+                                <p>@contacto.Habilidades_Tecnicas</p>
                             </div>
                             <div class="card-footer">
-                                <a href="#" class="btn-ver-perfil">Ver Perfil Completo</a>
+                                <a asp-controller="VistaEmpresaVerPerfilIng" 
+                                    asp-action="Index" 
+                                    asp-route-idUsuario="@contacto.Id_Usuario" 
+                                    class="btn-ver-perfil">
+                                    Ver Perfil Completo
+                                </a>
+                            </div>
+                            <div class="card-footer">
+                                <form asp-controller="VistaEmpresa" asp-action="EliminarContactado" method="post">
+                                    <input type="hidden" name="idContacto" value="@contacto.Id_Contactado" />
+                                    <button type="submit" class="btn-ver-perfil">Eliminar</button>
+                                </form>
                             </div>
                         </div>
                     }
@@ -60,12 +142,50 @@
             </section>
 
             <section class="columna-talento">
-                <h2 class="columna-titulo">Mi Pipeline de Talentos</h2>
-                <div class="cards-scroll-container">
-                    <div class="placeholder-card">
-                        <p>A�n no has a�adido ingenieros a tu pipeline.</p>
-                        <p>�Explora y guarda los perfiles que m�s te interesen!</p>
-                    </div>
+                <h2 class="columna-titulo">Ingenieros Deseados</h2>
+                <div class="cards-scroll-container" id="deseadosContainer">
+                    @if (Model.Deseados != null && Model.Deseados.Any())
+                    {
+                        @foreach (var deseado in Model.Deseados)
+                        {
+                            <div class="ingeniero-card">
+                                <div class="card-header">
+                                    <img src="https://via.placeholder.com/60" alt="Foto de @deseado.Nombre" class="card-foto-perfil">
+                                    <div class="card-info-principal">
+                                        <h3>@deseado.Nombre @deseado.Apellido</h3>
+                                        <p>@deseado.Especializacion</p>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                <h4>Habilidades Clave:</h4>
+                                <p>@deseado.Habilidades_Tecnicas</p>
+
+                                <div class="card-footer">
+                                    <a asp-controller="VistaEmpresaVerPerfilIng" 
+                                    asp-action="Index" 
+                                    asp-route-idUsuario="@deseado.Id_Usuario" 
+                                    class="btn-ver-perfil">
+                                    Ver Perfil Completo
+                                </a>
+                                </div>
+
+                                <form asp-controller="VistaEmpresa" asp-action="EliminarDeseado" method="post">
+                                    <input type="hidden" name="idDeseado" value="@deseado.Id_Deseado" />
+                                    <button type="submit" class="btn-ver-perfil">Eliminar de Deseados</button>
+                                </form>
+                            </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="placeholder-card">
+                            <p>Aún no has añadido ingenieros a tu lista de deseados.</p>
+                            <p>¡Explora y guarda los perfiles que más te interesen!</p>
+                        </div>
+                    }
+
+
                 </div>
             </section>
         </div>
@@ -73,3 +193,39 @@
 
 </body>
 </html>
+
+<script>
+    const btnNotificaciones = document.getElementById('btnNotificaciones');
+    const dropdown = document.getElementById('notificacionesDropdown');
+
+    btnNotificaciones.addEventListener('click', () => {
+        dropdown.classList.toggle('active');
+    });
+
+    // Cerrar si se hace clic fuera
+    document.addEventListener('click', (e) => {
+        if (!btnNotificaciones.contains(e.target) && !dropdown.contains(e.target)) {
+            dropdown.classList.remove('active');
+        }
+    });
+    function marcarComoLeida() {
+    fetch('/VistaEmpresa/MarcarComoLeida', { method: 'POST' })
+        .then(res => res.json())
+        .then(data => {
+            if(data.success){
+                // quitar el badge
+                const badge = document.querySelector('.notificacion-badge');
+                if(badge) badge.remove();
+
+                // opcional: marcar visualmente todas como leídas
+                document.querySelectorAll('.notificacion-item.nueva').forEach(item => {
+                    item.classList.remove('nueva');
+                    item.classList.add('leida');
+                });
+            }
+        })
+        .catch(err => console.error(err));
+    }
+
+
+</script>

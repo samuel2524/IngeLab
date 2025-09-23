@@ -1,0 +1,203 @@
+@model FiltroIngenieroViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Ingenieros</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/FiltrarIngeniero.css" asp-append-version="true">
+</head>
+<body class="body-vista-empresa">
+    <header class="header-empresa">
+        <div class="perfil-link-container">
+            <a href="/EmpresaPerfil/Index" class="perfil-link">
+                <img src="https://via.placeholder.com/50" alt="Logo de la Empresa" class="perfil-logo">
+                <span>Mi Perfil</span>
+            </a>
+        </div>
+        <div class="logo-central">
+            <a href="/" class="header-logo">IngeLab</a>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <form asp-controller="VistaEmpresa" asp-action="FiltrarAvanzado" method="post">
+            <div class="buscador-container">
+                <input type="search" name="PalabrasClave" placeholder="Buscar por habilidad, especialidad o nombre..." class="input-buscador" />
+
+                <select name="Disponibilidad" class="input-filtro">
+                    <option value="">Disponibilidad</option>
+                    <option value="full-time">Jornada Completa</option>
+                    <option value="part-time">Media Jornada</option>
+                    <option value="freelance">Freelance / Por Proyecto</option>
+                    <option value="open">Abierto a Ofertas</option>
+                </select>
+
+                <input type="number" name="Anios_Experiencia" placeholder="Años de experiencia" class="input-filtro" min="0" />
+
+                <select name="Nivel_Academico" class="input-filtro">
+                    <option value="">Nivel académico</option>
+                    <option value="bachillerato">Bachillerato</option>
+                    <option value="certificaciones">Certificaciones</option>
+                    <option value="licenciatura">Licenciatura / Pregrado</option>
+                    <option value="maestria">Maestría / Postgrado</option>
+                    <option value="doctorado">Doctorado</option>
+                    
+                </select>
+
+                
+
+                <button type="submit" class="btn-buscar">Buscar</button>
+            </div>
+        </form>
+
+        <div class="feed-container">
+            <div class="columna-talento">
+                <h2 class="columna-titulo">Talentos Encontrados</h2>
+                <div class="cards-scroll-container">
+                    @if (Model.Resultados != null && Model.Resultados.Any())
+                    {
+                        foreach (var ing in Model.Resultados)
+                        {
+                            <div class="ingeniero-card">
+                                <div class="card-header">
+                                    <img src="https://via.placeholder.com/60" alt="Foto" class="card-foto-perfil" />
+                                    <div class="card-info-principal">
+                                        <h3>@ing.Nombre @ing.Apellido</h3>
+                                        <p>@ing.Nivel_Academico</p>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <h4>Especialización</h4>
+                                    <p>@ing.Especializacion</p>
+                                    <h4>Habilidades Técnicas</h4>
+                                    <p>@ing.Habilidades_Tecnicas</p>
+                                    <h4>Idiomas</h4>
+                                    <p>@ing.Idiomas</p>
+                                    <h4>Disponibilidad</h4>
+                                    <p>@ing.Disponibilidad</p>
+                                    <h4>Experiencia</h4>
+                                    <p>@ing.Anios_Experiencia años</p>
+                                </div>
+                                <div class="card-footer">
+                                    <a asp-controller="VistaEmpresaVerPerfilIng" 
+                                    asp-action="Index" 
+                                    asp-route-idUsuario="@ing.Id_Usuario" 
+                                    class="btn-ver-perfil">
+                                    Ver Perfil Completo
+                                </a>
+                                    <!-- Botón que abre el modal -->
+                                    <button type="button" class="btn-ver-perfil" onclick="abrirModal(@ing.Id_Usuario)">Contactar</button>
+
+                                    <button type="button" class="btn-ver-perfil" onclick="agregarADeseados(@ing.Id_Usuario)">Lista de Deseados</button>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="placeholder-card">
+                            <p>No se encontraron ingenieros con esos criterios.</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Modal de Contacto (fuera del foreach) -->
+    <div id="modal-contacto" class="modal">
+        <div class="modal-content">
+            <span class="cerrar" onclick="cerrarModal()">&times;</span>
+            <h2>Enviar oferta</h2>
+            
+            <!-- Hidden para saber a qué ingeniero va dirigido -->
+            <input type="hidden" id="modalIngenieroId" />
+
+            <label for="mensajeOferta">Escribe tu oferta:</label>
+            <textarea id="modalOferta" placeholder="Escribe tu propuesta..." rows="4"></textarea>
+
+            <div class="modal-buttons">
+                <button class="btn-enviar" onclick="enviarOferta()">Enviar</button>
+                <button class="btn-cancelar" onclick="cerrarModal()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <div style="position: fixed; top: 20px; left: 20px;">
+        <a href="/VistaEmpresa/Index" class="btn-volver">
+            <i class="fas fa-arrow-left"></i> Volver al Dashboard
+        </a>
+    </div>
+
+</body>
+</html>
+ <script>
+function abrirModal(idIngeniero) {
+    // Guarda el ID del ingeniero en un input oculto
+    document.getElementById("modalIngenieroId").value = idIngeniero;
+    // Muestra el modal
+    document.getElementById("modal-contacto").style.display = "flex";
+}
+
+function cerrarModal() {
+    // Oculta el modal
+    document.getElementById("modal-contacto").style.display = "none";
+}
+
+function enviarOferta() {
+    const id = document.getElementById("modalIngenieroId").value;
+    const oferta = document.getElementById("modalOferta").value;
+
+    if (!oferta.trim()) {
+        alert("Por favor escribe una oferta antes de enviar.");
+        return;
+    }
+
+    // 🔥 Llamada al backend con lectura de JSON
+    fetch('/VistaEmpresa/ContactarIngeniero', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `idIngeniero=${encodeURIComponent(id)}&oferta=${encodeURIComponent(oferta)}`
+    })
+    .then(response => response.json()) // <- ahora leemos el JSON que envía el controlador
+    .then(data => {
+        if (data.success) {
+            alert(data.message || "Oferta enviada con éxito 🚀");
+            cerrarModal();
+            location.reload(); // Recarga la página para ver el cambio en la lista
+        } else {
+            alert(data.message || "Hubo un error al enviar la oferta.");
+        }
+    })
+    .catch(error => {
+        console.error("Error en el envío:", error);
+        alert("Error en la comunicación con el servidor.");
+    });
+}
+
+function agregarADeseados(idIngeniero) {
+    fetch('/VistaEmpresa/ListaDeseados', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `idIngeniero=${encodeURIComponent(idIngeniero)}`
+    })
+    .then(res => res.json())
+    .then(data => {
+        if(data.success){
+            alert('Ingeniero agregado a la lista de deseados ✅');
+        } else {
+            alert('No se pudo agregar. Intenta de nuevo ❌');
+        }
+    })
+    .catch(err => console.error(err));
+}
+
+</script>
+
+

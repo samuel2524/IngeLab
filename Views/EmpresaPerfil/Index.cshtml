@@ -1,7 +1,7 @@
 ﻿@model IngeLab.Models.EmpresaPerfilViewModel
 @{
     Layout = null;
-    ViewData["Title"] = Model.Perfil.Nombre;
+    ViewData["Title"] = Model.Perfil_Empresa.Nombre;
 }
 
 <!DOCTYPE html>
@@ -26,68 +26,204 @@
                     <img src="https://via.placeholder.com/150" alt="Logo de la empresa">
                 </div>
                 <div class="perfil-nombre">
-                    <h1>@Model.Perfil.Nombre</h1>
-                    <p>@Model.Perfil.Direccion</p>
+                    <h1>@Model.Perfil_Empresa.Nombre</h1>
+                    <p>@Model.Perfil_Empresa.Sector</p>
+                    
                 </div>
                 <div class="perfil-acciones">
                     @if (Model.IsOwnProfile)
                     {
-                        <a href="#" class="btn-editar-perfil"><i class="fas fa-pen"></i> Editar Perfil</a>
+                        <button type="button" class="btn-editar-perfil" onclick="mostrarFormularioEdicion()">
+                            <i class="fas fa-pen"></i> Editar Perfil
+                       </button>
                     }
                     <a href="#" class="btn-contactar">Seguir</a>
+
                 </div>
             </div>
         </header>
 
         <main class="perfil-grid">
             <aside class="columna-info">
+
                 <div class="panel-card-perfil">
                     <h3 class="panel-titulo">Nuestra Misión</h3>
-                    <p class="bio">Impulsar la transformación digital de nuestros clientes a través de soluciones de software innovadoras, seguras y escalables, construidas por el mejor talento de la industria.</p>
+                    <p class="bio">@Model.Perfil_Empresa.Descripcion_Empresa</p>
                 </div>
                 <div class="panel-card-perfil">
                     <h3 class="panel-titulo">Nuestro Tech Stack</h3>
                     <div class="tags-container-perfil">
-                        @foreach (var tech in Model.TechStack)
+                        @foreach (var tech in Model.TecnologiasClave)
                         {
                             <span class="skill-tag-perfil">@tech</span>
                         }
                     </div>
                 </div>
+                <div class="panel-card-perfil">
+                    <h3 class="panel-titulo">Página Web</h3>
+                    <p class="bio">
+                        <a href="@Model.Perfil_Empresa.Sitio_Web" target="_blank">
+                            @Model.Perfil_Empresa.Sitio_Web
+                        </a>
+                    </p>
+                </div>
+
+
+                <div class="panel-card-perfil">
+                    <h3 class="panel-titulo">Cosas Importantes(Bro Organiza esto como quieras, tu veras como organizas estos datos en la pagina)</h3>
+                   <p class="bio">
+                        <strong>Modalidad:</strong> @Model.Perfil_Empresa.Modalidad <br />
+                        <strong>Ubicación:</strong> @Model.Perfil_Empresa.Ubicacion <br />
+                        <strong>Tamaño:</strong> @Model.Perfil_Empresa.Tamano
+                   </p>
+                </div>
+
             </aside>
 
-            <section class="columna-contenido">
+        <section class="columna-contenido">
+            
+            <div id="perfil-view">
                 <div class="panel-card-perfil">
-                    <h3 class="panel-titulo">Vacantes Abiertas</h3>
-                    @foreach (var oferta in Model.OfertasAbiertas)
-                    {
-                        <div class="item-experiencia">
-                            <h4>@oferta.Titulo</h4>
-                            <h5>@oferta.Modalidad &middot; @oferta.Ubicacion</h5>
-                        </div>
-                    }
+                    <h3 class="panel-titulo">Datos personales Empresa</h3>
+                        <div class="campo-individual">
+                            <label class="label-estilizado">Nombre Empresa</label>
+                            <input type="text" class="input-estilizado" value="@Model.Perfil_Empresa.Nombre" disabled />
+                        </div> 
+                        <div class="campo-individual">
+                            <label class="label-estilizado">Nit</label>
+                            <input type="text" class="input-estilizado" value="@Model.Perfil_Empresa.NIT" disabled />
+                        </div> 
+                        <div class="campo-individual">
+                            <label class="label-estilizado">Correo Electrónico</label>
+                            <input type="text" class="input-estilizado" value="@Model.Perfil_Empresa.Correo" disabled />
+                        </div> 
+                        <div class="campo-individual">
+                            <label class="label-estilizado">Telefono</label>
+                            <input type="text" class="input-estilizado" value="@Model.Perfil_Empresa.Telefono" disabled />
+                        </div> 
                 </div>
-                <div class="panel-card-perfil">
-                    <h3 class="panel-titulo">Actividad Reciente</h3>
-                    @foreach (var post in Model.Posts.OrderByDescending(p => p.IsPinned))
-                    {
-                        <div class="post-card-perfil @(post.IsPinned ? "pinned" : "")">
-                            @if (post.IsPinned)
-                            {
-                                <div class="pin-indicator-perfil"><i class="fas fa-thumbtack"></i> Fijada</div>
-                            }
-                            <p>@post.Contenido</p>
-                            @if (Model.IsOwnProfile)
-                            {
-                                <div class="post-opciones-perfil">
-                                    <button class="btn-opciones-perfil"><i class="fas fa-ellipsis-h"></i></button>
-                                </div>
-                            }
+            </div>
+
+
+            <div id="perfil-edit" class="panel-card-perfil" style="display:none;">
+                <h3 class="panel-titulo">Editar Datos Personales</h3>
+                    <form asp-controller="EmpresaPerfil" asp-action="Editar" method="post">
+
+                        <div class="campo-individual">
+                            <label for="Nombre" class="label-estilizado">Nombre Empresa</label>
+                            <input type="text" id="Nombre" name="Nombre" class="input-estilizado" value="@Model.Perfil_Empresa.Nombre" />
+                        </div> 
+
+                        <div class="campo-individual">
+                            <label for="NIT" class="label-estilizado">Nit</label>
+                            <input type="text" id="NIT" name="NIT" class="input-estilizado" value="@Model.Perfil_Empresa.NIT" />
+                        </div> 
+                        <div class="campo-individual">
+                            <label for="Correo" class="label-estilizado">Correo Electrónico</label>
+                            <input type="email" id="Correo" name="Correo" class="input-estilizado" value="@Model.Perfil_Empresa.Correo" />
+                        </div> 
+                        <div class="campo-individual">
+                            <label for="Telefono" class="label-estilizado">Telefono</label>
+                            <input type="text" id="Telefono" name="Telefono" class="input-estilizado" value="@Model.Perfil_Empresa.Telefono" />
+                        </div> 
+
+                        <div class="campo-individual">
+                            <label for="ubicacion" class="label-estilizado">Ubicación (Ciudad, País)</label>
+                            <input type="text" id="Ubicacion" name="Ubicacion" class="input-estilizado" placeholder="Ej: Medellín, Colombia" value="@Model.Perfil_Empresa.Ubicacion">
                         </div>
-                    }
-                </div>
-            </section>
-        </main>
+                                
+                        <div class="campo-individual">
+                            <label for="sector" class="label-estilizado">Sector Industrial</label>
+                                <select id="Sector" name="Sector" class="input-estilizado">
+                                    <option value="" disabled selected>Selecciona un sector</option>
+                                    <option value="tecnologia" selected = "@(Model.Perfil_Empresa.Sector == "tecnologia")">Tecnología / Software</option>
+                                    <option value="construccion" selected = "@(Model.Perfil_Empresa.Sector == "construccion")">Construcción</option>
+                                    <option value="energia" selected = "@(Model.Perfil_Empresa.Sector == "energia")">Energía</option>
+                                    <option value="salud" selected = "@(Model.Perfil_Empresa.Sector == "salud")">Salud / Biotech</option>
+                                    <option value="financiero" selected = "@(Model.Perfil_Empresa.Sector == "financiero")">Financiero / FinTech</option>
+                                    <option value="consultoria" selected = "@(Model.Perfil_Empresa.Sector == "consultoria")">Consultoría</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                        </div>
+
+                        <div class="campo-individual">
+                            <label for="tamano" class="label-estilizado">Tamaño de la Empresa</label>
+                                <select id="Tamano" name="Tamano" class="input-estilizado">
+                                    <option value="" disabled selected>Nº de empleados</option>
+                                    <option value="1-10" selected = "@(Model.Perfil_Empresa.Tamano == "1-10")">1-10 empleados (Startup)</option>
+                                    <option value="11-50" selected = "@(Model.Perfil_Empresa.Tamano == "11-50")">11-50 empleados</option>
+                                    <option value="51-200" selected = "@(Model.Perfil_Empresa.Tamano == "51-200")">51-200 empleados</option>
+                                    <option value="201-1000" selected = "@(Model.Perfil_Empresa.Tamano == "201-1000")">201-1000 empleados</option>
+                                    <option value="1000+" selected = "@(Model.Perfil_Empresa.Tamano == "1000+")">Más de 1000 empleados</option>
+                                </select>
+                        </div>
+
+                        <div class="campo-individual">
+                            <label for="modalidad" class="label-estilizado">Modalidad de Trabajo</label>
+                                <select id="Modalidad" name="Modalidad" class="input-estilizado">
+                                    <option value="" disabled selected>¿Cómo trabajan?</option>
+                                    <option value="remoto" selected = "@(Model.Perfil_Empresa.Modalidad == "remoto")">Remoto</option>
+                                    <option value="hibrido" selected = "@(Model.Perfil_Empresa.Modalidad == "hibrido")">Híbrido</option>
+                                    <option value="presencial" selected = "@(Model.Perfil_Empresa.Modalidad == "presencial")">Presencial</option>
+                                </select>
+                        </div>
+
+                        <div class="campo-full">
+                            <label for="website" class="label-estilizado">Pagina Web</label>
+                            <input type="url" id="Sitio_Web" name="Sitio_Web" class="input-estilizado" placeholder="https://www.tuempresa.com" value="@Model.Perfil_Empresa.Sitio_Web">
+                        </div>
+
+
+                        <div class="campo-full">
+                            <label for="descripcion" class="label-estilizado">Descripción de la Empresa</label>
+                            <textarea id="Descripcion_Empresa" name="Descripcion_Empresa" class="input-estilizado" rows="4" placeholder="Cuéntanos sobre tu misión, visión, cultura y qué los hace un gran lugar para trabajar...">@Model.Perfil_Empresa.Descripcion_Empresa</textarea>
+                        </div>
+
+                        <div class="campo-full">
+                            <label for="tecnologias" class="label-estilizado">Tecnologías Clave (Tech Stack)</label>
+                            <textarea id="Tecnologias_Clave" name="Tecnologias_Clave" class="input-estilizado" rows="2" placeholder="Ej: .NET, Azure, React, SQL Server, Microservicios...">@Model.Perfil_Empresa.Tecnologias_Clave</textarea>
+                        </div>
+
+                        @{
+                        var idEmpresa = Context.Session.GetInt32("EmpresaId") ?? 0;
+                        }
+                        <input type="hidden" name="Id_empresa" value="@idEmpresa" />
+
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <button type="button" class="btn btn-secondary" onclick="cancelarEdicion()">Cancelar</button>
+                        
+                    </form>
+            </div>
+
+            
+
+        </section> 
+    </main> 
+    </div>
+    </div>
+    <div style="position: fixed; top: 20px; left: 20px;">
+        <a href="/VistaEmpresa/Index" class="btn-volver">
+            <i class="fas fa-arrow-left"></i> Volver al Dashboard
+        </a>
     </div>
 </body>
 </html>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const btnEditar = document.querySelector(".btn-editar-perfil");
+        const vista = document.getElementById("perfil-view");
+        const edicion = document.getElementById("perfil-edit");
+
+        btnEditar.addEventListener("click", function (e) {
+            e.preventDefault(); // para que no te mande a otra URL
+            vista.style.display = "none";
+            edicion.style.display = "block";
+        });
+    });
+
+    function cancelarEdicion() {
+        document.getElementById("perfil-view").style.display = "block";
+        document.getElementById("perfil-edit").style.display = "none";
+    }
+</script>

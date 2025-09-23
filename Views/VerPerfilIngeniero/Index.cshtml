@@ -1,0 +1,135 @@
+
+@model IngeLab.Models.IngenieroPerfilViewModel
+@{
+    Layout = null;
+    ViewData["Title"] = $"{Model.Perfil_Ingeniero.Nombre} {Model.Perfil_Ingeniero.Apellido}";
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - IngeLab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="~/css/Perfil.css" asp-append-version="true">
+</head>
+<body class="body-perfil">
+
+    <div class="perfil-container">
+        <header class="perfil-header">
+            <div class="perfil-banner">
+                <img src="~/images/AI_Generated_Banner_One.png" alt="Banner del perfil">
+            </div>
+            <div class="perfil-info-bar">
+                <div class="perfil-avatar">
+                    <img src="https://via.placeholder.com/150" alt="Foto de perfil">
+                </div>
+                <div class="perfil-nombre">
+                    <h1>@Model.Perfil_Ingeniero.Nombre @Model.Perfil_Ingeniero.Apellido</h1>
+                    <p>@(string.IsNullOrEmpty(Model.Perfil_Ingeniero.Especializacion) ? "Especialización no definida" : Model.Perfil_Ingeniero.Especializacion)</p>
+                    <p class="perfil-contratado-por">@(string.IsNullOrEmpty(Model.Perfil_Ingeniero.ContratadoPor) ? "No contratado" : "Contratado por: " + Model.Perfil_Ingeniero.ContratadoPor)
+                </div>
+                <div class="perfil-acciones">
+                    @if (Model.IsOwnProfile)
+                    {
+                       <button type="button" class="btn-editar-perfil" onclick="mostrarFormularioEdicion()">
+                            <i class="fas fa-pen"></i> Editar Perfil
+                       </button>
+                    }
+                    <a href="#" class="btn-contactar">Contactar</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="perfil-grid">
+            <aside class="columna-info">
+                <div class="panel-card-perfil">
+                    <h3 class="panel-titulo">Información Profesional</h3>
+                    @if (Model.Perfil_Ingeniero.Anios_Experiencia > 0)
+                    {
+                        <p><strong>Experiencia:</strong> @Model.Perfil_Ingeniero.Anios_Experiencia años</p>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Perfil_Ingeniero.Nivel_Academico))
+                    {
+                        <p><strong>Nivel Académico:</strong> @Model.Perfil_Ingeniero.Nivel_Academico</p>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Perfil_Ingeniero.Disponibilidad))
+                    {
+                        <p><strong>Disponibilidad:</strong> @Model.Perfil_Ingeniero.Disponibilidad</p>
+                    }
+                    
+                    @if (Model.Perfil_Ingeniero.Anios_Experiencia == 0 && string.IsNullOrEmpty(Model.Perfil_Ingeniero.Nivel_Academico))
+                    {
+                        <p>Completa tu perfil profesional para mostrar más información.</p>
+                        <a href="@Url.Action("Index", "IngCompletarPerfil")" class="btn btn-primary">Completar Perfil</a>
+                    }
+                </div>
+                
+                @if (Model.Lista_Habilidades != null && Model.Lista_Habilidades.Any())
+                {
+                    <div class="panel-card-perfil">
+                        <h3 class="panel-titulo">Habilidades Técnicas</h3>
+                        <div class="tags-container-perfil">
+                            @foreach (var skill in Model.Lista_Habilidades)
+                            {
+                                <span class="skill-tag-perfil">@skill</span>
+                            }
+                        </div>
+                    </div>
+                }
+
+                @if(Model.Idiomas != null && Model.Idiomas.Any())
+                {
+                    <div class="panel-card-perfil">
+                            <h3 class="panel-titulo">Idiomas</h3>
+                            <div class="tags-container-perfil">
+                                @foreach (var skill in Model.Idiomas)
+                                {
+                                    <span class="skill-tag-perfil">@skill</span>
+                                }
+                            </div>
+                        </div>
+                    }
+            </aside>
+
+                <div class="panel-card-perfil">
+                    <h3 class="panel-titulo">Publicaciones</h3>
+                    @if (Model.Posts != null && Model.Posts.Any())
+                    {
+                        @foreach (var post in Model.Posts.OrderByDescending(p => p.IsPinned))
+                        {
+                            <div class="post-card-perfil @(post.IsPinned ? "pinned" : "")">
+                                @if (post.IsPinned)
+                                {
+                                    <div class="pin-indicator-perfil"><i class="fas fa-thumbtack"></i> Fijada</div>
+                                }
+                                <p>@post.Contenido</p>
+                                @if (Model.IsOwnProfile)
+                                {
+                                    <div class="post-opciones-perfil">
+                                        <button class="btn-opciones-perfil"><i class="fas fa-ellipsis-h"></i></button>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p>No hay publicaciones aún</p>
+                    }
+                </div>
+            </section>
+        </main>
+    </div> 
+
+    <!-- Botón para volver al dashboard -->
+    <div style="position: fixed; top: 20px; left: 20px;">
+        <a href="/VistaEmpresa/Index" class="btn-volver">
+            <i class="fas fa-arrow-left"></i> Volver al Dashboard
+        </a>
+    </div>
+
+</body>
+</html>

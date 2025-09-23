@@ -2,7 +2,8 @@
 @{
     Layout = null;
     ViewData["Title"] = "Mi Feed";
-    var notificacionesNoLeidas = Model.Notificaciones.Count(n => !n.IsLeida);
+    
+    @* var notificacionesNoLeidas = Model.N.Count(n => !n.IsLeida); *@
 }
 
 <!DOCTYPE html>
@@ -13,33 +14,88 @@
     <title>@ViewData["Title"] - IngeLab</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+
+    @* <script src="~/js/ingDashboard.js"></script> *@
     <link rel="stylesheet" href="~/css/VistaIngenieros.css" asp-append-version="true">
 </head>
-<body class="body-vista-ingeniero">
+    <body class="body-vista-ingeniero">
 
-    <header class="header-ingeniero">
-        <div class="header-left">
-            <a href="#" class="perfil-link">
-                <img src="https://via.placeholder.com/50" alt="Foto de perfil" class="perfil-foto">
-                <span>Mi Perfil</span>
-            </a>
-            <div class="notificaciones-container">
-                <button class="btn-notificaciones">
-                    <i class="fas fa-bell"></i>
-                    @if (notificacionesNoLeidas > 0)
-                    {
-                        <span class="notificacion-badge">@notificacionesNoLeidas</span>
-                    }
-                </button>
+        <header class="header-ingeniero">
+            <div class="header-left">
+                <a href="/IngenieroPerfil/Index" class="perfil-link">
+                    <img src="https://via.placeholder.com/50" alt="Foto de perfil" class="perfil-foto">
+                    <span>Mi Perfil</span>
+                </a>
+                <div class="notificaciones-container">
+                    <button class="btn-notificaciones" id="btnNotificaciones">
+                        <i class="fas fa-bell"></i>
+                        @if (Model != null && Model.Notificaciones.Count() > 0)
+                        {
+                            <span class="notificacion-badge">@Model.Notificaciones.Count()</span>
+                        }
+                    </button>
+                    
+                    <!-- Dropdown de notificaciones -->
+                    <div class="notificaciones-dropdown" id="notificacionesDropdown">
+                        <div class="notificaciones-header">
+                            <h4>Notificaciones</h4>
+                            @if (Model != null && Model.Notificaciones.Count() > 0)
+                            {
+                                <button class="btn-marcar-leidas" onclick="marcarTodasComoLeidas()">
+                                    Marcar todas como leídas
+                                </button>
+                            }
+                        </div>
+                        
+                    <div class="notificaciones-lista">
+                       @if (Model != null && Model.Notificaciones.Any())
+                        {
+                            @foreach (var notificacion in Model.Notificaciones)
+                            {
+                                <div class="notificacion-item" data-id="@notificacion.IdContacto">
+                                    <div class="notificacion-empresa">
+                                        <strong>@notificacion.Empresa</strong>
+                                    </div>
+                                    <div class="notificacion-oferta">
+                                        @notificacion.Oferta
+                                    </div>
+                                    <div class="notificacion-fecha">
+                                        <small>@notificacion.Fecha.ToString("dd/MM/yyyy HH:mm")</small>
+                                    </div>
+
+                                    <div class="notificacion-acciones">
+                                        <button class="btn-marcar-leida" onclick="marcarComoLeida(@notificacion.IdContacto)">
+                                            <i class="fas fa-check"></i>
+                                        </button>
+
+                                        <button class="btn-aceptar" onclick="aceptarOferta(@notificacion.IdContacto)">
+                                            <i class="fas fa-thumbs-up"></i> Aceptar
+                                        </button>
+
+                                        <button class="btn-rechazar" onclick="rechazarOferta(@notificacion.IdContacto)">
+                                            <i class="fas fa-thumbs-down"></i> Rechazar
+                                        </button>
+                                    </div>
+                                </div>
+                            }
+                            }
+                            else
+                            {
+                                <div class="no-notificaciones">
+                                    <i class="fas fa-bell-slash"></i>
+                                    <p>No tienes notificaciones nuevas</p>
+                                </div>
+                            }
+
+                </div>
             </div>
+
         </div>
-        <div class="buscador-container">
-            <i class="fas fa-search buscador-icono"></i>
-            <input type="search" placeholder="Buscar empresas o colegas..." class="input-buscador">
-        </div>
+        
     </header>
 
-    <main class="dashboard-grid">
+    @* <main class="dashboard-grid">
         <aside class="columna-izquierda">
             <div class="panel-card">
                 <h3 class="panel-titulo">Ofertas Recientes</h3>
@@ -54,41 +110,93 @@
                 </ul>
                 <a href="#" class="link-ver-todas">Ver todas las ofertas</a>
             </div>
-        </aside>
+        </aside> *@
 
+        <Form method="post" asp-controller="VistaIngenieros" asp-action="Post">
         <section class="columna-central">
             <div class="crear-post-card">
-                <textarea class="input-post" placeholder="�En qu� proyecto est�s trabajando, @Model.PerfilActual.Nombre?"></textarea>
+                <textarea class="input-post" id="Contenido" name="Contenido" placeholder="En que proyecto estas trabajando, @Model.PerfilActual.Nombre?"></textarea>
                 <div class="post-acciones">
                     <button class="btn-accion-post"><i class="fas fa-image"></i> Foto/Video</button>
-                    <button class="btn-accion-post"><i class="fas fa-code"></i> Fragmento de c�digo</button>
-                    <button class="btn-publicar">Publicar</button>
+                    <button class="btn-accion-post"><i class="fas fa-code"></i> Fragmento de código</button>
+                    <button type="submit" class="btn-publicar">Publicar</button>
                 </div>
             </div>
 
-            @foreach (var post in Model.PostsFeed)
+            @{
+                var idUsuario = Context.Session.GetInt32("UsuarioId") ?? 0;
+            }
+            <input type="hidden" name="Id_Usuario" value="@idUsuario" />
+            
+            </Form>
+
+          @foreach (var post in Model.PostsPublicados)
             {
                 <div class="post-card">
                     <div class="post-header">
                         <img src="https://via.placeholder.com/45" alt="autor" class="post-autor-foto">
                         <div class="post-autor-info">
-                            <h4>@post.AutorNombre</h4>
-                            <p>@post.AutorEspecialidad &middot; @post.FechaCreacion.ToString("dd MMM, HH:mm")</p>
+                            <h4>@Model.PerfilActual.Nombre</h4>
+                            <p>@post.FechaCreacion.ToString("dd MMM, HH:mm")</p>
                         </div>
+
                         <div class="post-opciones">
-                            <button class="btn-opciones" onclick="toggleMenu(this)"><i class="fas fa-ellipsis-h"></i></button>
+                            <button type="button" class="btn-opciones" onclick="toggleMenu(this)">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
                             <div class="opciones-menu">
-                                <a href="#">Editar Publicaci�n</a>
-                                <a href="#" class="opcion-eliminar">Eliminar</a>
+
+                                <!-- EDITAR -->
+                                <a href="javascript:void(0);" 
+                                class="opcion-editar" 
+                                onclick="editarPost(@post.Id_Post)">
+                                    Editar Publicación
+                                </a>
+
+                                <!-- FIJAR / DESFIJAR -->
+                               <a href="javascript:void(0);"
+                                    class="opcion-editar"
+                                    onclick="fijarPost(@post.Id_Post, @(post.Fijado ? "false" : "true"))">
+                                        @(post.Fijado ? "Desfijar" : "Fijar") Publicación
+                                </a>
+
+
+                                <!-- ELIMINAR -->
+                                <form asp-action="EliminarPost" asp-controller="VistaIngenieros" method="post" style="display:inline;">
+                                    <input type="hidden" name="idPost" value="@post.Id_Post" />
+                                    <a href="javascript:void(0);" 
+                                    class="opcion-eliminar" 
+                                    onclick="this.closest('form').submit(); return false;">
+                                        Eliminar
+                                    </a>
+                                </form>
+
                             </div>
                         </div>
                     </div>
-                    <div class="post-contenido">
+
+                    <!-- CONTENIDO -->
+                    <div class="post-contenido" id="post-contenido-@post.Id_Post">
                         <p>@post.Contenido</p>
+                    </div>
+
+                    <!-- FORMULARIO DE EDICIÓN -->
+                    <div id="form-editar-@post.Id_Post" style="display:none;">
+                        <form method="post" asp-controller="VistaIngenieros" asp-action="EditarPost">
+                            <input type="hidden" name="idPost" value="@post.Id_Post" />
+                            <textarea name="contenido" class="form-control">@post.Contenido</textarea>
+                            <div class="mt-2">
+                                <button type="submit" class="btn btn-success btn-sm">Guardar</button>
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="cancelarEdicion(@post.Id_Post)">Cancelar</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             }
-        </section>
+
+
+
+        @* </section>
 
         <aside class="columna-derecha">
             <div class="panel-card">
@@ -101,16 +209,16 @@
                 </div>
             </div>
         </aside>
-    </main>
+    </main> *@
 
     <script>
-        // Script simple para el men� de opciones de cada post
+        // Script simple para el men� de opciones de cada post
         function toggleMenu(button) {
             const menu = button.nextElementSibling;
             menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
         }
 
-        // Cierra el men� si se hace clic en cualquier otro lugar
+        // Cierra el men� si se hace clic en cualquier otro lugar
         document.addEventListener('click', function (e) {
             document.querySelectorAll('.opciones-menu').forEach(menu => {
                 const btn = menu.previousElementSibling;
@@ -120,6 +228,198 @@
             });
         });
     </script>
+
+    <script>
+    function editarPost(idPost) {
+        document.getElementById("post-contenido-" + idPost).style.display = "none";
+        document.getElementById("form-editar-" + idPost).style.display = "block";
+    }
+
+    function cancelarEdicion(idPost) {
+        document.getElementById("form-editar-" + idPost).style.display = "none";
+        document.getElementById("post-contenido-" + idPost).style.display = "block";
+    }
+    </script>
+
+    <script>
+            function fijarPost(idPost, fijar) {
+            // Crear formulario dinámicamente
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/VistaIngenieros/FijarPost';
+            
+            // Input para idPost
+            const inputId = document.createElement('input');
+            inputId.type = 'hidden';
+            inputId.name = 'idPost';
+            inputId.value = idPost;
+            
+            // Input para fijar
+            const inputFijar = document.createElement('input');
+            inputFijar.type = 'hidden';
+            inputFijar.name = 'fijar';
+            inputFijar.value = fijar;
+            
+            // Agregar inputs al formulario y enviarlo
+            form.appendChild(inputId);
+            form.appendChild(inputFijar);
+            document.body.appendChild(form);
+            form.submit();
+        }
+    </script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const btnNotificaciones = document.getElementById('btnNotificaciones');
+        const dropdown = document.getElementById('notificacionesDropdown');
+        
+        // Toggle dropdown
+        btnNotificaciones.addEventListener('click', function(e) {
+            e.stopPropagation();
+            dropdown.classList.toggle('active');
+        });
+        
+        // Cerrar dropdown al hacer clic fuera
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.notificaciones-container')) {
+                dropdown.classList.remove('active');
+            }
+        });
+        
+        // Prevenir que el dropdown se cierre al hacer clic dentro
+        dropdown.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    });
+
+    // Función para marcar una notificación como leída
+    function marcarComoLeida(idNotificacion) {
+        fetch('/Notificaciones/MarcarComoLeida', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+            },
+            body: JSON.stringify({ id: idNotificacion })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Remover la notificación del DOM
+                const notificacionItem = document.querySelector(`[data-id="${idNotificacion}"]`);
+                if (notificacionItem) {
+                    notificacionItem.remove();
+                    actualizarContadorNotificaciones();
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+   function aceptarOferta(idNotificacion) {
+        const formData = new URLSearchParams();
+        formData.append("idNotificacion", idNotificacion);
+
+        fetch('/VistaIngenieros/AceptarOferta', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+            },
+            body: formData.toString()
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const notificacionItem = document.querySelector(`[data-id="${idNotificacion}"]`);
+                if (notificacionItem) {
+                    notificacionItem.remove();
+                }
+                actualizarContadorNotificaciones();
+            } else {
+                alert("Error al aceptar la oferta");
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+    function rechazarOferta(idNotificacion) {
+        fetch('/VistaIngenieros/RechazarOferta', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+            },
+            body: "idNotificacion=" + encodeURIComponent(idNotificacion)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const notificacionItem = document.querySelector(`[data-id="${idNotificacion}"]`);
+                if (notificacionItem) {
+                    notificacionItem.remove();
+                }
+                actualizarContadorNotificaciones();
+            } else {
+                alert("Error al rechazar la oferta: " + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    // Función para marcar todas las notificaciones como leídas
+    function marcarTodasComoLeidas() {
+        fetch('/Notificaciones/MarcarTodasComoLeidas', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Recargar la página o limpiar las notificaciones
+                location.reload();
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    // Función para actualizar el contador de notificaciones
+    function actualizarContadorNotificaciones() {
+        const notificacionesRestantes = document.querySelectorAll('.notificacion-item').length;
+        const badge = document.querySelector('.notificacion-badge');
+        
+        if (notificacionesRestantes === 0) {
+            if (badge) {
+                badge.remove();
+            }
+            // Mostrar mensaje de "no hay notificaciones"
+            document.querySelector('.notificaciones-lista').innerHTML = `
+                <div class="no-notificaciones">
+                    <i class="fas fa-bell-slash"></i>
+                    <p>No tienes notificaciones nuevas</p>
+                </div>
+            `;
+            // Ocultar el botón de marcar todas como leídas
+            const btnMarcarTodas = document.querySelector('.btn-marcar-leidas');
+            if (btnMarcarTodas) {
+                btnMarcarTodas.style.display = 'none';
+            }
+        } else if (badge) {
+            badge.textContent = notificacionesRestantes;
+        }
+    }
+</script>
+
 
 </body>
 </html>

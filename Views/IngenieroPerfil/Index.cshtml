@@ -1,7 +1,8 @@
-﻿@model IngeLab.Models.IngenieroPerfilViewModel
+﻿
+@model IngeLab.Models.IngenieroPerfilViewModel
 @{
     Layout = null;
-    ViewData["Title"] = $"{Model.Perfil.Nombre} {Model.Perfil.Apellido}";
+    ViewData["Title"] = $"{Model.Perfil_Ingeniero.Nombre} {Model.Perfil_Ingeniero.Apellido}";
 }
 
 <!DOCTYPE html>
@@ -26,13 +27,16 @@
                     <img src="https://via.placeholder.com/150" alt="Foto de perfil">
                 </div>
                 <div class="perfil-nombre">
-                    <h1>@Model.Perfil.Nombre @Model.Perfil.Apellido</h1>
-                    <p>@Model.Perfil.Especializacion</p>
+                    <h1>@Model.Perfil_Ingeniero.Nombre @Model.Perfil_Ingeniero.Apellido</h1>
+                    <p>@(string.IsNullOrEmpty(Model.Perfil_Ingeniero.Especializacion) ? "Especialización no definida" : Model.Perfil_Ingeniero.Especializacion)</p>
+                    <p class="perfil-contratado-por">@(string.IsNullOrEmpty(Model.Perfil_Ingeniero.ContratadoPor) ? "No contratado" : "Contratado por: " + Model.Perfil_Ingeniero.ContratadoPor)
                 </div>
                 <div class="perfil-acciones">
                     @if (Model.IsOwnProfile)
                     {
-                        <a href="#" class="btn-editar-perfil"><i class="fas fa-pen"></i> Editar Perfil</a>
+                       <button type="button" class="btn-editar-perfil" onclick="mostrarFormularioEdicion()">
+                            <i class="fas fa-pen"></i> Editar Perfil
+                       </button>
                     }
                     <a href="#" class="btn-contactar">Contactar</a>
                 </div>
@@ -42,53 +46,222 @@
         <main class="perfil-grid">
             <aside class="columna-info">
                 <div class="panel-card-perfil">
-                    <h3 class="panel-titulo">Acerca de Mí</h3>
-                    <p class="bio">Apasionado por la tecnología y la creación de soluciones escalables en la nube. Con 5+ años de experiencia, mi objetivo es transformar desafíos complejos en software robusto y eficiente.</p>
+                    <h3 class="panel-titulo">Información Profesional</h3>
+                    @if (Model.Perfil_Ingeniero.Anios_Experiencia > 0)
+                    {
+                        <p><strong>Experiencia:</strong> @Model.Perfil_Ingeniero.Anios_Experiencia años</p>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Perfil_Ingeniero.Nivel_Academico))
+                    {
+                        <p><strong>Nivel Académico:</strong> @Model.Perfil_Ingeniero.Nivel_Academico</p>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Perfil_Ingeniero.Disponibilidad))
+                    {
+                        <p><strong>Disponibilidad:</strong> @Model.Perfil_Ingeniero.Disponibilidad</p>
+                    }
+                    
+                    @if (Model.Perfil_Ingeniero.Anios_Experiencia == 0 && string.IsNullOrEmpty(Model.Perfil_Ingeniero.Nivel_Academico))
+                    {
+                        <p>Completa tu perfil profesional para mostrar más información.</p>
+                        <a href="@Url.Action("Index", "IngCompletarPerfil")" class="btn btn-primary">Completar Perfil</a>
+                    }
                 </div>
-                <div class="panel-card-perfil">
-                    <h3 class="panel-titulo">Habilidades Clave</h3>
-                    <div class="tags-container-perfil">
-                        @foreach (var skill in Model.Habilidades)
-                        {
-                            <span class="skill-tag-perfil">@skill</span>
-                        }
+                
+                @if (Model.Lista_Habilidades != null && Model.Lista_Habilidades.Any())
+                {
+                    <div class="panel-card-perfil">
+                        <h3 class="panel-titulo">Habilidades Técnicas</h3>
+                        <div class="tags-container-perfil">
+                            @foreach (var skill in Model.Lista_Habilidades)
+                            {
+                                <span class="skill-tag-perfil">@skill</span>
+                            }
+                        </div>
                     </div>
-                </div>
+                }
+
+                @if(Model.Idiomas != null && Model.Idiomas.Any())
+                {
+                    <div class="panel-card-perfil">
+                            <h3 class="panel-titulo">Idiomas</h3>
+                            <div class="tags-container-perfil">
+                                @foreach (var skill in Model.Idiomas)
+                                {
+                                    <span class="skill-tag-perfil">@skill</span>
+                                }
+                            </div>
+                        </div>
+                    }
             </aside>
 
             <section class="columna-contenido">
-                <div class="panel-card-perfil">
-                    <h3 class="panel-titulo">Experiencia Laboral</h3>
-                    @foreach (var exp in Model.Experiencias)
-                    {
-                        <div class="item-experiencia">
-                            <h4>@exp.Cargo</h4>
-                            <h5>@exp.Empresa &middot; @exp.Periodo</h5>
-                            <p>@exp.Descripcion</p>
-                        </div>
-                    }
+                <!-- Eliminar completamente la sección de Experiencia Laboral -->
+                
+                <div id ="perfil-view" class="panel-card-perfil">
+                    <h3 class="panel-titulo">Datos Personales</h3>
+                        <div class="grid-formulario">
+                            <div class="campo-individual">
+                                <label for="nombre" class="label-estilizado">Nombre</label>
+                                <input type="text" id="nombre" class="input-estilizado" value="@Model.Perfil_Ingeniero.Nombre" readonly />
+                            </div>
+
+                            <div class="campo-individual">
+                                <label for="apellidos" class="label-estilizado">Apellidos</label>
+                                <input type="text" id="apellidos" class="input-estilizado" value="@Model.Perfil_Ingeniero.Apellido" readonly />
+                            </div>
+
+                            <div class="campo-individual">
+                                <label for="nombre" class="label-estilizado">Numero De Documento</label>
+                                <input type="text" id="NumeroDocumento" class="input-estilizado" value="@Model.Perfil_Ingeniero.NumeroDocumento" readonly />
+                            </div>
+
+                            <div class="campo-individual">
+                                <label for="correo" class="label-estilizado">Correo</label>
+                                <input type="email" id="correo" class="input-estilizado" value="@Model.Perfil_Ingeniero.Correo" readonly />
+                            </div>
+
+                            <div class="campo-individual">
+                                <label for="telefono" class="label-estilizado">Teléfono</label>
+                                <input type="text" id="telefono" class="input-estilizado" value="@Model.Perfil_Ingeniero.Telefono" readonly />
+                            </div>
+
+                    </div>
                 </div>
+
+                <div id="perfil-edit" class="panel-card-perfil" style="display:none;">
+                    <h3 class="panel-titulo">Editar Datos Personales</h3>
+                    <form asp-controller="IngenieroPerfil" asp-action="Editar" method="post">
+                        <input type="hidden" name="IdUsuario" value="@Model.Perfil_Ingeniero.Id_Usuario" />
+
+                        <div class="grid-formulario">
+                            <div class="campo-individual">
+                                <label for="nombre-edit" class="label-estilizado">Nombre</label>
+                                <input type="text" id="nombre-edit" name="Nombre" class="input-estilizado" value="@Model.Perfil_Ingeniero.Nombre" />
+                            </div>
+                            <div class="campo-individual">
+                                <label for="apellidos-edit" class="label-estilizado">Apellidos</label>
+                                <input type="text" id="apellidos-edit" name="Apellido" class="input-estilizado" value="@Model.Perfil_Ingeniero.Apellido" />
+                            </div>
+                            <div class="campo-individual">
+                                <label for="apellidos-edit" class="label-estilizado">Numero De Documento</label>
+                                <input type="text" id="NumeroDocumento-edit" name="NumeroDocumento" class="input-estilizado" value="@Model.Perfil_Ingeniero.NumeroDocumento" />
+                            </div>
+                            <div class="campo-individual">
+                                <label for="correo-edit" class="label-estilizado">Correo</label>
+                                <input type="email" id="correo-edit" name="Correo" class="input-estilizado" value="@Model.Perfil_Ingeniero.Correo" />
+                            </div>
+                            <div class="campo-individual">
+                                <label for="telefono-edit" class="label-estilizado">Teléfono</label>
+                                <input type="text" id="telefono-edit" name="Telefono" class="input-estilizado" value="@Model.Perfil_Ingeniero.Telefono" />
+                            </div>
+
+                            <div class="campo-individual">
+                                <label for="Anios_Experiencia" class="label-estilizado">Años de Experiencia</label>
+                                <input type="text" name="Anios_Experiencia" id="Anios_Experiencia" class="input-estilizado" value="@Model.Perfil_Ingeniero.Anios_Experiencia" />
+                            </div>
+
+                            <div class="campo-individual">
+                                <label for="Nivel_Academico" class="label-estilizado">Nivel Academico</label>
+                                <select id="Nivel_Academico" name="Nivel_Academico" class="input-estilizado" value="@Model.Perfil_Ingeniero.Nivel_Academico">
+                                    <option value="" disabled selected>Tu máximo nivel de estudios</option>
+                                    <option value="bachillerato" selected="@(Model.Perfil_Ingeniero.Nivel_Academico == "bachillerato")">Bachillerato</option>
+                                    <option value="certificaciones" selected="@(Model.Perfil_Ingeniero.Nivel_Academico == "certificaciones")">Certificaciones</option>
+                                    <option value="licenciatura" selected="@(Model.Perfil_Ingeniero.Nivel_Academico == "licenciatura")">Licenciatura / Pregrado</option>
+                                    <option value="maestria" selected="@(Model.Perfil_Ingeniero.Nivel_Academico == "maestria")">Maestría / Postgrado</option>
+                                    <option value="doctorado" selected="@(Model.Perfil_Ingeniero.Nivel_Academico == "doctorado")">Doctorado</option>
+                                </select>
+                            </div>
+
+                            <div class="campo-individual">
+                                <label for="disponibilidad" class="label-estilizado">Disponibilidad</label>
+                                <select id="Disponibilidad" name="Disponibilidad" class="input-estilizado" value="@Model.Perfil_Ingeniero.Disponibilidad">
+                                    <option value="" disabled selected>Define tu disponibilidad</option>
+                                    <option value="full-time" selected="@(Model.Perfil_Ingeniero.Disponibilidad == "full-time")">Jornada Completa</option>
+                                    <option value="part-time" selected="@(Model.Perfil_Ingeniero.Disponibilidad == "part-time")">Media Jornada</option>
+                                    <option value="freelance" selected="@(Model.Perfil_Ingeniero.Disponibilidad == "freelance")">Freelance / Por Proyecto</option>
+                                    <option value="open" selected="@(Model.Perfil_Ingeniero.Disponibilidad == "open")">Abierto a Ofertas</option>
+                                </select>
+                            </div>
+
+
+                            <div class="campo-full">
+                                <label for="habilidades" class="label-estilizado">Habilidades Técnicas</label>
+                                <textarea id="Habilidades_Tecnicas" name="Habilidades_Tecnicas" class="input-estilizado" rows="3" placeholder="Ej: C#, .NET, Azure, SQL, Metodologías Ágiles..."> @(Model.Perfil_Ingeniero.Habilidades_Tecnicas)</textarea>
+                            </div>
+
+
+                            <div class="campo-full">
+                                <label for="idiomas" class="label-estilizado">Idiomas</label>
+                                <textarea id="Idiomas" name="Idiomas" class="input-estilizado" rows="2" placeholder="Ej: Español (Nativo), Inglés (C1)..."> @(Model.Perfil_Ingeniero.Idiomas)</textarea>
+                            </div>
+
+
+
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <button type="button" class="btn btn-secondary" onclick="cancelarEdicion()">Cancelar</button>
+                        @{
+                        var idUsuario = Context.Session.GetInt32("UsuarioId") ?? 0;
+                        }
+                        <input type="hidden" name="Id_Usuario" value="@idUsuario" />
+                        </form>
+             </div>
                 <div class="panel-card-perfil">
                     <h3 class="panel-titulo">Publicaciones</h3>
-                    @foreach (var post in Model.Posts.OrderByDescending(p => p.IsPinned))
+                    @if (Model.Posts != null && Model.Posts.Any())
                     {
-                        <div class="post-card-perfil @(post.IsPinned ? "pinned" : "")">
-                            @if (post.IsPinned)
-                            {
-                                <div class="pin-indicator-perfil"><i class="fas fa-thumbtack"></i> Fijada</div>
-                            }
-                            <p>@post.Contenido</p>
-                            @if (Model.IsOwnProfile)
-                            {
-                                <div class="post-opciones-perfil">
-                                    <button class="btn-opciones-perfil"><i class="fas fa-ellipsis-h"></i></button>
-                                </div>
-                            }
-                        </div>
+                        @foreach (var post in Model.Posts.OrderByDescending(p => p.IsPinned))
+                        {
+                            <div class="post-card-perfil @(post.IsPinned ? "pinned" : "")">
+                                @if (post.IsPinned)
+                                {
+                                    <div class="pin-indicator-perfil"><i class="fas fa-thumbtack"></i> Fijada</div>
+                                }
+                                <p>@post.Contenido</p>
+                                @if (Model.IsOwnProfile)
+                                {
+                                    <div class="post-opciones-perfil">
+                                        <button class="btn-opciones-perfil"><i class="fas fa-ellipsis-h"></i></button>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p>No hay publicaciones aún</p>
                     }
                 </div>
             </section>
         </main>
+    </div> 
+
+    <!-- Botón para volver al dashboard -->
+    <div style="position: fixed; top: 20px; left: 20px;">
+        <a href="/VistaIngenieros/Index" class="btn-volver">
+            <i class="fas fa-arrow-left"></i> Volver al Dashboard
+        </a>
     </div>
+
 </body>
 </html>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const btnEditar = document.querySelector(".btn-editar-perfil");
+        const vista = document.getElementById("perfil-view");
+        const edicion = document.getElementById("perfil-edit");
+
+        btnEditar.addEventListener("click", function (e) {
+            e.preventDefault(); // para que no te mande a otra URL
+            vista.style.display = "none";
+            edicion.style.display = "block";
+        });
+    });
+
+    function cancelarEdicion() {
+        document.getElementById("perfil-view").style.display = "block";
+        document.getElementById("perfil-edit").style.display = "none";
+    }
+</script>

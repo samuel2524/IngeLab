@@ -18,7 +18,7 @@ namespace IngeLab.Controllers
 
         public NpgsqlConnection establecerConexion()
         {
-            conexion.ConnectionString = cadenaConexion;
+            var conexion =new NpgsqlConnection(cadenaConexion);
             conexion.Open();
 
             return conexion;

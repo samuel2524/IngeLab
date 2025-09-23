@@ -30,10 +30,17 @@ namespace IngeLab.Controllers
                         cmd.Parameters.AddWithValue("Correo", usuario.Correo);
                         cmd.Parameters.AddWithValue("Contraseña", usuario.Contraseña);
 
-                        int countUsuarios = Convert.ToInt32(cmd.ExecuteScalar());
+                        var result = cmd.ExecuteScalar();
 
-                        if (countUsuarios > 0)
+                        if (result != null) // 🔹 Existe el usuario
                         {
+                            int idUsuario = Convert.ToInt32(result);
+
+                            // ✅ Guardamos el id en la sesión
+                            HttpContext.Session.SetInt32("UsuarioId", idUsuario);
+                            Console.WriteLine($"IdUsuario en sesión -> {idUsuario}");
+
+                            // Redirigimos al perfil del ingeniero
                             return RedirectToAction("Index", "VistaIngenieros");
                         }
                         // else
@@ -50,10 +57,16 @@ namespace IngeLab.Controllers
                         cmd.Parameters.AddWithValue("Correo", usuario.Correo);
                         cmd.Parameters.AddWithValue("Contraseña", usuario.Contraseña);
 
-                        int countEmpresas = Convert.ToInt32(cmd.ExecuteScalar());
+                        var result = cmd.ExecuteScalar();
 
-                        if (countEmpresas > 0)
+                        if (result != null) // 🔹 Existe la empresa
                         {
+                            int idEmpresa = Convert.ToInt32(result);
+
+                            // ✅ Guardamos el id en la sesión
+                            HttpContext.Session.SetInt32("EmpresaId", idEmpresa);
+
+                            // Redirigimos al perfil de la empresa
                             return RedirectToAction("Index", "VistaEmpresa");
                         }
                         // {

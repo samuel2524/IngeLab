@@ -74,7 +74,8 @@ namespace IngeLab.Controllers
                         cmd.Parameters.AddWithValue("FechaNacimiento", Ingeniero.FechaNacimiento);
                         cmd.Parameters.AddWithValue("Telefono", Ingeniero.Telefono);
                         var idUsuario = (int)cmd.ExecuteScalar();
-                        ViewBag.IdUsuario = idUsuario;
+                        
+                        HttpContext.Session.SetInt32("UsuarioId", idUsuario);
                     }
                 }
 
