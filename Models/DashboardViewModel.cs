@@ -9,7 +9,7 @@ namespace IngeLab.Models
     public class IngenieroDashboardViewModel
     {
         public Ingenieros PerfilActual { get; set; }
-        public List<Post> PostsPublicados { get; set; }
+        public List<PostViewModel> PostsPublicados { get; set; }
         public List<string> HabilidadesEnTendencia { get; set; }
         public List<Notificacion> Notificaciones { get; set; } = new List<Notificacion>();
 

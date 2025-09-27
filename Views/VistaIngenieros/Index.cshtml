@@ -129,52 +129,35 @@
             <input type="hidden" name="Id_Usuario" value="@idUsuario" />
             
             </Form>
-    
-
-          @foreach (var post in Model.PostsPublicados)
-            {
-                <div class="post-card">
-                    <div class="post-header">
-                        <img src="https://via.placeholder.com/45" alt="autor" class="post-autor-foto">
-                        <div class="post-autor-info">
-                            <h4>@Model.PerfilActual.Nombre</h4>
-                            <p>@post.FechaCreacion.ToString("dd MMM, HH:mm")</p>
-                        </div>
-
-                        <div class="post-opciones">
-                            <button type="button" class="btn-opciones" onclick="toggleMenu(this)">
-                                <i class="fas fa-ellipsis-h"></i>
-                            </button>
-                            <div class="opciones-menu">
-
-                                <!-- EDITAR -->
-                                <a href="javascript:void(0);" 
-                                class="opcion-editar" 
-                                onclick="editarPost(@post.Id_Post)">
-                                    Editar Publicación
-                                </a>
-
-                                <!-- FIJAR / DESFIJAR -->
-                               <a href="javascript:void(0);"
-                                    class="opcion-editar"
-                                    onclick="fijarPost(@post.Id_Post, @(post.Fijado ? "false" : "true"))">
-                                        @(post.Fijado ? "Desfijar" : "Fijar") Publicación
-                                </a>
 
 
-                                <!-- ELIMINAR -->
-                                <form asp-action="EliminarPost" asp-controller="VistaIngenieros" method="post" style="display:inline;">
-                                    <input type="hidden" name="idPost" value="@post.Id_Post" />
-                                    <a href="javascript:void(0);" 
-                                    class="opcion-eliminar" 
-                                    onclick="this.closest('form').submit(); return false;">
-                                        Eliminar
-                                    </a>
-                                </form>
+    @foreach (var post in Model.PostsPublicados)
+    {
+        <div class="post-card">
+            <div class="post-header">
+                <img src="https://via.placeholder.com/45" alt="autor" class="post-autor-foto">
+                <div class="post-autor-info">
+                    @* ✨ Mostramos el nombre del autor del post ✨ *@
+                    <h4>@post.AutorNombre @post.AutorApellido</h4>
+                    <p>@post.FechaCreacion.ToString("dd MMM, HH:mm")</p>
+                </div>
 
-                            </div>
+                @* ✨ Lógica clave: solo mostrar opciones si el post es mío ✨ *@
+                @if (post.Id_Usuario == Model.PerfilActual.Id_Usuario)
+                {
+                    <div class="post-opciones">
+                        <button type="button" class="btn-opciones" onclick="toggleMenu(this)">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                        <div class="opciones-menu">
+                            <a href="javascript:void(0);" onclick="editarPost(@post.Id_Post)">Editar</a>
+                            <a href="javascript:void(0);" onclick="fijarPost(@post.Id_Post, @(post.Fijado ? "false" : "true"))">
+                                @(post.Fijado ? "Desfijar" : "Fijar")
+                            </a>
                         </div>
                     </div>
+                }
+            </div>
 
                     <!-- CONTENIDO -->
             <div class="post-contenido" id="post-contenido-@post.Id_Post">
