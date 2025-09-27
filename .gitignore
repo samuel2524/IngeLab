@@ -1,14 +1,25 @@
-# Archivos de compilación .NET
-bin/
-obj/
-
-# Archivos temporales de usuario
-*.user
-*.rsuser
+# Archivos específicos del usuario y temporales de Visual Studio
 *.suo
+*.user
+*.userosscache
+*.sln.docstates
+.vs/
 
-# Data de Postgres (no versionar nunca la base de datos interna)
-BD_Dockerizada/data_postgres/
+# Carpetas de compilación
+[Bb]in/
+[Oo]bj/
 
-# Logs
-*.log
+# Paquetes de NuGet
+packages/
+*.nupkg
+
+# Archivos de publicación
+[Pp]ublish/
+[Rr]elease/
+
+# Archivos del sistema operativo
+[Tt]humbs.db
+*.DS_Store
+
+# Archivos de herramientas
+*.DotSettings.user

@@ -311,10 +311,10 @@ select.input-filtro {
     }
 
 
-/* --- 6. Contenedor Principal del Feed --- */
+/* --- 6. Contenedor Principal del Feed (VERSIÓN FINAL) --- */
+
 .feed-container {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    display: flex; /* ✨ CAMBIO 1: Volvemos a Flexbox para el contenedor principal */
     gap: 30px;
     max-width: 1600px;
     margin: 0 auto;
@@ -324,16 +324,16 @@ select.input-filtro {
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 15px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-    max-height: 70vh;
-    overflow: hidden; /* Ocultamos el overflow principal, cada columna tendrá el suyo */
+    height: 70vh; /* ✨ CAMBIO 2: Usamos 'height' en vez de 'max-height' para darle una altura FIJA */
     z-index: 1000;
 }
 
 .columna-talento {
+    flex: 1; /* Le decimos a cada columna que ocupe la mitad del espacio */
     display: flex;
     flex-direction: column;
-    min-width: 0; /* Truco de Flexbox para permitir que los hijos se encojan */
-    overflow: hidden;
+    min-width: 0;
+    overflow: hidden; /* Muy importante para que el scroll interno funcione */
 }
 
 .columna-titulo {
@@ -341,14 +341,15 @@ select.input-filtro {
     text-align: center;
     margin-bottom: 20px;
     text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+    flex-shrink: 0; /* Evita que el título se encoja */
 }
 
 .cards-scroll-container {
-    flex-grow: 1;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow-y: auto; /* ✨ CAMBIO 3: La magia final. El scroll se activará como debe */
     padding-right: 15px;
 }
+
+    /* ... (tus estilos de scrollbar ::-webkit-scrollbar se mantienen igual) ... */
 
     .cards-scroll-container::-webkit-scrollbar {
         width: 8px;
