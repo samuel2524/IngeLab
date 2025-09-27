@@ -416,22 +416,51 @@ namespace IngeLab.Controllers
                 {
                     return RedirectToAction("Login", "Cuenta");
                 }
+                int? idEmpresa = null;
                 using (var conexion = bd.establecerConexion())
                 {
                     string query = @"UPDATE ingenieros_contactados 
                                      SET estado = 'rechazada', leido = true
                                      WHERE id_contacto = @IdContacto 
-                                     AND id_usuario = @IdUsuario";
+                                     AND id_usuario = @IdUsuario
+                                     RETURNING id_empresa"
+                                     ;
                     using (var comando = new NpgsqlCommand(query, conexion))
                     {
                         comando.Parameters.AddWithValue("IdContacto", idContacto);
                         comando.Parameters.AddWithValue("IdUsuario", idUsuario.Value);
-                        int filas = comando.ExecuteNonQuery();
-                        if (filas > 0)
-                            return Json(new { success = true });
-                        else
-                            return Json(new { success = false, message = "No se actualizó ningún registro" });
+                        var result = comando.ExecuteScalar();
+                        if (result != null)
+                        {
+                            idEmpresa = Convert.ToInt32(result);
+                        }
+
+
                     }
+                }
+
+                if (idEmpresa.HasValue)
+                {
+                    using (var conexion = bd.establecerConexion())
+                    {
+                        string mensaje = "El ingeniero rechazo tu oferta";
+                        string insertQuery = @"
+                            INSERT INTO notificaciones_empresa (id_empresa, id_usuario, mensaje)
+                            VALUES (@IdEmpresa, @IdUsuario, @Mensaje)";
+                        using (var cmd = new NpgsqlCommand(insertQuery, conexion))
+                        {   
+                            cmd.Parameters.AddWithValue("IdEmpresa", idEmpresa.Value);
+                            cmd.Parameters.AddWithValue("IdUsuario", idUsuario.Value);
+                            cmd.Parameters.AddWithValue("Mensaje", mensaje);
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                    return Json(new { success = true, idEmpresa = idEmpresa.Value });
+
+                }
+                else
+                {
+                    return Json(new { success = false, message = "No se actualizó ningún registro" });
                 }
             }
             catch (Exception ex)

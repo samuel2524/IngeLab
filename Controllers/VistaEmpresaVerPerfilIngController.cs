@@ -1,5 +1,6 @@
 using IngeLab.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Npgsql;
 
 namespace IngeLab.Controllers
@@ -91,7 +92,7 @@ namespace IngeLab.Controllers
                     {
                         while (reader.Read())
                         {
-                            posts.Add(new Post
+                            var post = new Post
                             {
                                 Id_Post = reader.GetInt32(0),
                                 Id_Usuario = idUsuario,  
@@ -99,10 +100,28 @@ namespace IngeLab.Controllers
                                 FechaCreacion = reader.GetDateTime(2),
                                 Tipo_Contenido = reader.GetString(3),
                                 Fijado = reader.GetBoolean(4)
-                            });
+                            };
+
+                            if (post.Tipo_Contenido != "texto" && !string.IsNullOrEmpty(post.Contenido))
+                            {
+                                try
+                                {
+                                    dynamic data = JsonConvert.DeserializeObject(post.Contenido);
+                                    post.TextoExplicativo = data.texto;
+                                    post.Codigo = data.codigo;
+                                }
+                                catch
+                                {
+                                    // fallback por si no está en formato JSON
+                                    post.TextoExplicativo = "";
+                                    post.Codigo = post.Contenido;
+                                }
+                            }
+                            posts.Add(post);
                         }
                     }
                 }
+                
             }
 
             return posts;

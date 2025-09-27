@@ -1,4 +1,3 @@
-
 @model IngeLab.Models.IngenieroPerfilViewModel
 @{
     Layout = null;
@@ -14,6 +13,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="~/css/Perfil.css" asp-append-version="true">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </head>
 <body class="body-perfil">
 
@@ -29,14 +31,18 @@
                 <div class="perfil-nombre">
                     <h1>@Model.Perfil_Ingeniero.Nombre @Model.Perfil_Ingeniero.Apellido</h1>
                     <p>@(string.IsNullOrEmpty(Model.Perfil_Ingeniero.Especializacion) ? "Especialización no definida" : Model.Perfil_Ingeniero.Especializacion)</p>
-                    <p class="perfil-contratado-por">@(string.IsNullOrEmpty(Model.Perfil_Ingeniero.ContratadoPor) ? "No contratado" : "Contratado por: " + Model.Perfil_Ingeniero.ContratadoPor)
+                    <p class="perfil-contratado-por">
+                        @(string.IsNullOrEmpty(Model.Perfil_Ingeniero.ContratadoPor) 
+                            ? "No contratado" 
+                            : "Contratado por: " + Model.Perfil_Ingeniero.ContratadoPor)
+                    </p>
                 </div>
                 <div class="perfil-acciones">
                     @if (Model.IsOwnProfile)
                     {
-                       <button type="button" class="btn-editar-perfil" onclick="mostrarFormularioEdicion()">
+                        <button type="button" class="btn-editar-perfil" onclick="mostrarFormularioEdicion()">
                             <i class="fas fa-pen"></i> Editar Perfil
-                       </button>
+                        </button>
                     }
                     <a href="#" class="btn-contactar">Contactar</a>
                 </div>
@@ -44,6 +50,7 @@
         </header>
 
         <main class="perfil-grid">
+            <!-- Columna izquierda -->
             <aside class="columna-info">
                 <div class="panel-card-perfil">
                     <h3 class="panel-titulo">Información Profesional</h3>
@@ -74,7 +81,7 @@
                         <div class="tags-container-perfil">
                             @foreach (var skill in Model.Lista_Habilidades)
                             {
-                                <span class="skill-tag-perfil">@skill</span>
+                                <span class=a"skill-tag-perfil">@skill</span>
                             }
                         </div>
                     </div>
@@ -83,37 +90,62 @@
                 @if(Model.Idiomas != null && Model.Idiomas.Any())
                 {
                     <div class="panel-card-perfil">
-                            <h3 class="panel-titulo">Idiomas</h3>
-                            <div class="tags-container-perfil">
-                                @foreach (var skill in Model.Idiomas)
-                                {
-                                    <span class="skill-tag-perfil">@skill</span>
-                                }
-                            </div>
+                        <h3 class="panel-titulo">Idiomas</h3>
+                        <div class="tags-container-perfil">
+                            @foreach (var skill in Model.Idiomas)
+                            {
+                                <span class="skill-tag-perfil">@skill</span>
+                            }
                         </div>
-                    }
+                    </div>
+                }
             </aside>
 
+            <!-- Columna principal (publicaciones) -->
+            
+            <section class="columna-principal">
                 <div class="panel-card-perfil">
                     <h3 class="panel-titulo">Publicaciones</h3>
+
                     @if (Model.Posts != null && Model.Posts.Any())
                     {
-                        @foreach (var post in Model.Posts.OrderByDescending(p => p.IsPinned))
-                        {
-                            <div class="post-card-perfil @(post.IsPinned ? "pinned" : "")">
-                                @if (post.IsPinned)
-                                {
-                                    <div class="pin-indicator-perfil"><i class="fas fa-thumbtack"></i> Fijada</div>
-                                }
-                                <p>@post.Contenido</p>
-                                @if (Model.IsOwnProfile)
-                                {
-                                    <div class="post-opciones-perfil">
-                                        <button class="btn-opciones-perfil"><i class="fas fa-ellipsis-h"></i></button>
+                        <div class="posts-container">
+                            @foreach (var post in Model.Posts)
+                            {
+                                <div class="post-card">
+                                    <div class="post-header">
+                                        <img src="https://via.placeholder.com/45" alt="autor" class="post-autor-foto">
+                                        <div class="post-autor-info">
+                                            <h4>@Model.Perfil_Ingeniero.Nombre @Model.Perfil_Ingeniero.Apellido</h4>
+                                            <p>@post.FechaCreacion.ToString("dd MMM, HH:mm")</p>
+                                        </div>
                                     </div>
-                                }
-                            </div>
-                        }
+
+                                    <div class="post-contenido">
+                                        @if (post.Tipo_Contenido == "texto")
+                                        {
+                                            <p>@post.Contenido</p>
+                                        }
+                                        else
+                                        {
+                                            @if (!string.IsNullOrEmpty(post.TextoExplicativo))
+                                            {
+                                                <p>@post.TextoExplicativo</p>
+                                            }
+                                            <div class="code-block-container">
+                                                <div class="code-block-header">
+                                                    <span class="language-tag">@post.Tipo_Contenido</span>
+                                                    <button type="button" class="copy-code-btn" onclick="copiarCodigo(this)">
+                                                        <i class="far fa-copy"></i> Copiar
+                                                    </button>
+                                                </div>
+                                                <pre><code class="language-@post.Tipo_Contenido">@Html.Raw(post.Codigo)</code></pre>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        </div>
                     }
                     else
                     {
@@ -121,8 +153,11 @@
                     }
                 </div>
             </section>
+
+
         </main>
-    </div> 
+    </div>
+
 
     <!-- Botón para volver al dashboard -->
     <div style="position: fixed; top: 20px; left: 20px;">

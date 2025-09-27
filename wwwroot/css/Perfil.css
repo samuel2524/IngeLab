@@ -19,6 +19,19 @@
     background-attachment: fixed;
 }
 
+.perfil-grid {
+    display: grid;
+    grid-template-columns: 300px 1fr; /* aside a la izquierda, publicaciones al centro */
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.columna-principal {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 .perfil-container {
     max-width: 1200px;
     margin: 30px auto;

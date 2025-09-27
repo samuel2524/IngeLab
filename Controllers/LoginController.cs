@@ -23,7 +23,7 @@ namespace IngeLab.Controllers
             {
                 using (var conexion = bd.establecerConexion())
                 {
-                    string sqlIngenieros = "SELECT * FROM usuarios WHERE correo = @Correo AND contraseña = @Contraseña";
+                    string sqlIngenieros =  "SELECT id_usuario FROM usuarios WHERE correo = @Correo AND contraseña = @Contraseña";;
 
                     using (var cmd = new NpgsqlCommand(sqlIngenieros, conexion))
                     {
@@ -50,7 +50,7 @@ namespace IngeLab.Controllers
                         // }
                     }
 
-                    string sqlEmpresas = "SELECT * FROM empresas WHERE correo = @Correo AND contraseña = @Contraseña";
+                    string sqlEmpresas = "SELECT id_empresa FROM empresas WHERE correo = @Correo AND contraseña = @Contraseña";;
 
                     using (var cmd = new NpgsqlCommand(sqlEmpresas, conexion))
                     {

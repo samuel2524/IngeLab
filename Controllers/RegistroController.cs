@@ -119,7 +119,12 @@ namespace IngeLab.Controllers
                         cmd.Parameters.AddWithValue("Contraseña", empresas.Contraseña);
                         cmd.Parameters.AddWithValue("Telefono", empresas.Telefono);
                         var idEmpresa = (int)cmd.ExecuteScalar();
-                        ViewBag.idEmpresa = idEmpresa;
+                        // ✅ Guardar el id real en la sesión
+                        HttpContext.Session.SetInt32("EmpresaId", idEmpresa);
+
+                        // ✅ Actualizar el objeto empresa para usarlo en la vista
+                        empresas.Id_empresa = idEmpresa;
+                        ViewBag.IdEmpresa = idEmpresa;
                     }
                 }
                 ViewBag.Exito = "Empresa registrada exitosamente";
