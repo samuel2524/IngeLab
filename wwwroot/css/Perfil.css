@@ -1,5 +1,12 @@
-﻿/* Importamos las variables base para mantener consistencia */
-@import url('VistaEmpresa.css');
+﻿/* ===== ESTILOS GLOBALES ===== */
+:root {
+    --dark-bg: #0a0a14;
+    --light-bg: #1a1a2e;
+    --primary-color: #00ffff;
+    --text-color: #e0e0e0;
+    --title-color: #ffffff;
+    --font-family: 'Poppins', sans-serif;
+}
 
 .body-perfil {
     background-color: var(--dark-bg);
@@ -18,32 +25,36 @@
     padding: 0 20px;
 }
 
-/* ===== HEADER DEL PERFIL (BANNER, AVATAR, INFO) ===== */
+/* ===== HEADER DEL PERFIL ===== */
 .perfil-header {
     background: rgba(10, 15, 30, 0.6);
     backdrop-filter: blur(15px);
     border-radius: 15px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     margin-bottom: 30px;
-    overflow: hidden; /* Clave para que el banner no se salga */
+    overflow: hidden;
 }
 
-.perfil-banner {
+/* EN: Perfil.css */
+
+/* ✨ NUEVA REGLA para que el header ocupe todo el ancho de la grid ✨ */
+.perfil-grid > .perfil-header {
+    grid-column: 1 / -1; /* Ocupa desde la primera hasta la última columna */
+}
+
+
+.perfil-banner img {
+    width: 100%;
     height: 250px;
+    object-fit: cover;
 }
-
-    .perfil-banner img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
 
 .perfil-info-bar {
     display: flex;
     align-items: flex-end;
     padding: 0 40px 20px;
     position: relative;
-    margin-top: -80px; /* Sube la barra para que se monte sobre el banner */
+    margin-top: -80px;
 }
 
 .perfil-avatar {
@@ -64,27 +75,17 @@
 
 .perfil-nombre {
     flex-grow: 1;
-    z-index: 2;
 }
 
     .perfil-nombre h1 {
         color: var(--title-color);
         font-size: 2.2rem;
-        margin: 0;
-        text-shadow: 0 2px 5px rgba(0,0,0,0.5);
-    }
-
-    .perfil-nombre p {
-        font-size: 1.1rem;
-        color: var(--text-color);
-        margin: 0;
-        text-shadow: 0 2px 5px rgba(0,0,0,0.5);
     }
 
 .perfil-acciones {
     display: flex;
     gap: 10px;
-    z-index: 2;
+    margin-left: auto;
 }
 
 .btn-editar-perfil, .btn-contactar {
@@ -94,6 +95,7 @@
     font-weight: 600;
     transition: all 0.3s ease;
     border: 2px solid var(--primary-color);
+    cursor: pointer;
 }
 
 .btn-editar-perfil {
@@ -101,23 +103,13 @@
     color: var(--dark-bg);
 }
 
-.btn-contactar {
-    background-color: transparent;
-    color: var(--primary-color);
-}
+    .btn-editar-perfil:hover {
+        background-color: transparent;
+        color: var(--primary-color);
+        box-shadow: 0 0 10px var(--primary-color);
+    }
 
-.btn-editar-perfil:hover {
-    background-color: transparent;
-    color: var(--primary-color);
-    box-shadow: 0 0 10px var(--primary-color);
-}
-
-.btn-contactar:hover {
-    background-color: var(--primary-color);
-    color: var(--dark-bg);
-}
-
-/* ===== GRID PRINCIPAL DEL PERFIL ===== */
+/* ===== GRID Y PANELES ===== */
 .perfil-grid {
     display: grid;
     grid-template-columns: 320px 1fr;
@@ -125,10 +117,9 @@
     align-items: flex-start;
 }
 
-/* Columna Izquierda */
 .columna-info {
     position: sticky;
-    top: 30px; /* Se quedará fija al hacer scroll */
+    top: 30px;
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -145,111 +136,154 @@
 .panel-titulo {
     color: var(--title-color);
     margin-top: 0;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     border-left: 3px solid var(--primary-color);
     padding-left: 10px;
 }
 
-.bio {
-    line-height: 1.7;
-    font-size: 0.95rem;
-}
-
-.tags-container-perfil {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-.skill-tag-perfil {
-    background: rgba(0, 255, 255, 0.1);
+.panel-card-perfil .bio a {
     color: var(--primary-color);
-    padding: 5px 12px;
-    border-radius: 15px;
-    font-size: 0.85rem;
+    text-decoration: none;
+    overflow-wrap: break-word;
+    word-break: break-all;
+}
+
+    .panel-card-perfil .bio a:hover {
+        text-decoration: underline;
+    }
+
+/* ===== MODO VISTA (DATA CHIPS) ===== */
+#perfil-view .grid-formulario {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+#perfil-view .campo-individual {
+    background: rgba(0, 255, 255, 0.04);
+    border: 1px solid rgba(0, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 12px 15px;
+}
+
+#perfil-view .label-estilizado {
+    font-size: 0.75rem;
     font-weight: 600;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
 }
 
-/* Columna Derecha */
-.columna-contenido {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-}
-
-.item-experiencia {
-    padding-bottom: 15px;
-    margin-bottom: 15px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-    .item-experiencia:last-child {
-        border-bottom: none;
-        margin-bottom: 0;
-        padding-bottom: 0;
-    }
-
-    .item-experiencia h4 {
-        color: var(--title-color);
-        font-size: 1.1rem;
-        margin: 0 0 2px 0;
-    }
-
-    .item-experiencia h5 {
-        color: var(--text-color);
-        font-size: 0.9rem;
-        font-weight: 400;
-        margin: 0 0 8px 0;
-    }
-
-    .item-experiencia p {
-        margin: 0;
-        font-size: 0.95rem;
-        line-height: 1.6;
-    }
-
-.post-card-perfil {
-    padding: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(0,0,0,0.1);
-    border-radius: 10px;
-    margin-bottom: 15px;
-    position: relative;
-}
-
-    .post-card-perfil:last-child {
-        margin-bottom: 0;
-    }
-
-    .post-card-perfil.pinned {
-        border-color: var(--primary-color);
-    }
-
-.pin-indicator-perfil {
-    color: var(--primary-color);
-    font-size: 0.8rem;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-
-    .pin-indicator-perfil .fa-thumbtack {
-        margin-right: 5px;
-    }
-
-.post-opciones-perfil {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-}
-
-.btn-opciones-perfil {
+#perfil-view .input-estilizado[readonly],
+#perfil-view .input-estilizado[disabled] {
     background: transparent;
     border: none;
-    color: var(--text-color);
-    cursor: pointer;
+    padding: 0;
+    color: var(--title-color);
+    font-size: 1rem;
+    height: auto;
+    box-shadow: none;
 }
 
-/* RESPONSIVE */
+/* ===== MODO EDICIÓN (FORMULARIO OSCURO) ===== */
+/* ===== Ajustes para el formulario de edición ===== */
+#perfil-edit .grid-formulario {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* columnas flexibles */
+    gap: 20px; /* espacio horizontal y vertical */
+    align-items: start; /* evita que se monten verticalmente */
+}
+
+/* Cada campo ocupa bien su espacio */
+#perfil-edit .campo-individual {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* Inputs, selects y textareas con mismo look */
+#perfil-edit .input-estilizado,
+#perfil-edit select.input-estilizado,
+#perfil-edit textarea.input-estilizado {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.35);
+    color: #fff;
+    font-size: 0.95rem;
+    resize: none;
+    box-sizing: border-box;
+}
+
+    /* Efecto al enfocar */
+    #perfil-edit .input-estilizado:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    }
+
+/* Campos que deben ocupar toda la fila */
+#perfil-edit .campo-full {
+    grid-column: 1 / -1;
+}
+
+#perfil-edit select.input-estilizado option {
+    background-color: var(--dark-bg);
+}
+
+#perfil-edit .campo-full {
+    grid-column: 1 / -1;
+}
+
+#perfil-edit .btn-primary, #perfil-edit .btn-secondary {
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 2px solid;
+    margin-top: 15px;
+}
+
+#perfil-edit .btn-primary {
+    background-color: var(--primary-color);
+    color: var(--dark-bg);
+    border-color: var(--primary-color);
+}
+
+#perfil-edit .btn-secondary {
+    background: transparent;
+    color: #ccc;
+    border-color: #888;
+}
+
+/* ✨====== BOTÓN DE VOLVER AL DASHBOARD (ESTILO COMPLETO RESTAURADO) ======✨ */
+.btn-volver {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: rgba(10, 15, 30, 0.6);
+    backdrop-filter: blur(10px);
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 25px;
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+    .btn-volver:hover {
+        background: rgba(0, 255, 255, 0.1);
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        transform: translateY(-2px);
+    }
+/* ✨========================================================================✨ */
+
+
+/* ===== RESPONSIVE ===== */
 @media (max-width: 992px) {
     .perfil-grid {
         grid-template-columns: 1fr;
@@ -271,8 +305,184 @@
         margin-right: 0;
         margin-bottom: 15px;
     }
+}
 
-    .perfil-acciones {
-        margin-top: 20px;
+@media (max-width: 600px) {
+    #perfil-view .grid-formulario,
+    #perfil-edit .grid-formulario {
+        grid-template-columns: 1fr;
     }
 }
+
+
+/* ---------------------------------*/
+
+/* ============================================= */
+/* === ESTILOS DE POSTS (IMPORTADOS DEL FEED) ==== */
+/* ============================================= */
+
+/* Usaremos la misma clase .post-card para reutilizar todo */
+.post-card {
+    background: rgba(10, 15, 30, 0.6);
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    margin-bottom: 25px; /* Espacio entre posts */
+}
+
+.post-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.post-autor-foto {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+.post-opciones {
+    position: relative;
+    margin-left: auto;
+}
+
+.btn-opciones {
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.opciones-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 30px; /* Dejamos el estilo que te gustaba */
+    background: var(--light-bg);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    width: 180px;
+    overflow: hidden;
+    z-index: 10;
+}
+
+    .opciones-menu a {
+        display: block;
+        padding: 10px 15px;
+        color: var(--text-color);
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: background-color 0.2s ease;
+    }
+
+        .opciones-menu a:hover {
+            background-color: rgba(0, 255, 255, 0.1);
+        }
+
+    .opciones-menu .opcion-eliminar {
+        color: #ff4d4d;
+    }
+
+.post-contenido {
+    padding-top: 15px;
+    margin-left: 60px; /* Para alinear con la info del autor */
+    line-height: 1.7;
+}
+
+/* Estilos para el formulario de edición (copiados también) */
+div[id^="form-editar-"] .form-control {
+    background-color: #0A0F1E;
+    color: #E0E0E0;
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    border-radius: 8px;
+    padding: 12px;
+    font-family: var(--font-family);
+}
+
+div[id^="form-editar-"] .btn-success {
+    background-color: var(--primary-color);
+    color: var(--dark-bg);
+}
+
+div[id^="form-editar-"] .btn-secondary {
+    background-color: #2a2f45;
+    color: #b0b8c4;
+    border: 1px solid #4a4f65;
+}
+
+/* Estilos para el bloque de código */
+.code-block-container {
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    border-radius: 8px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.code-block-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1a1f33;
+    padding: 8px 15px;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.language-tag {
+    color: var(--primary-color);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.copy-code-btn {
+    background: none;
+    border: 1px solid #4a4f65;
+    color: #b0b8c4;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.2s ease;
+}
+
+    .copy-code-btn:hover {
+        background-color: rgba(0, 255, 255, 0.1);
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+    }
+
+.code-block-container pre {
+    margin: 0 !important;
+    border-radius: 0 0 8px 8px !important;
+}
+
+/* ============================================= */
+/* === BOTÓN DE CERRAR SESIÓN (LOGOUT) ==== */
+/* ============================================= */
+
+.btn-logout {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid #ff4d4d; /* Un rojo sutil para la acción de salir */
+    background-color: transparent;
+    color: #ff4d4d;
+    cursor: pointer;
+}
+
+    .btn-logout:hover {
+        background-color: #ff4d4d;
+        color: var(--dark-bg);
+        box-shadow: 0 0 15px #ff4d4d;
+    }

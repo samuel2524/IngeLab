@@ -4,6 +4,7 @@ using IngeLab.Models;
 using System.Collections.Generic;
 using System;
 using Npgsql;
+using Newtonsoft.Json;
 
 namespace IngeLab.Controllers
 {
@@ -128,7 +129,6 @@ namespace IngeLab.Controllers
         private List<Post> ObtenerPosts(int idUsuario)
         {
             var posts = new List<Post>();
-
             using (var conexion = bd.establecerConexion())
             {
                 var query = "SELECT id_post, contenido, fecha_public, tipo_contenido, fijado FROM postingeniero WHERE id_usuario = @IdUsuario ORDER BY fijado DESC, fecha_public DESC";
@@ -139,20 +139,36 @@ namespace IngeLab.Controllers
                     {
                         while (reader.Read())
                         {
-                            posts.Add(new Post
+                            var post = new Post
                             {
                                 Id_Post = reader.GetInt32(0),
-                                Id_Usuario = idUsuario,  
                                 Contenido = reader.GetString(1),
                                 FechaCreacion = reader.GetDateTime(2),
                                 Tipo_Contenido = reader.GetString(3),
                                 Fijado = reader.GetBoolean(4)
-                            });
+                            };
+
+                            // ✨ AQUÍ DESEMPACAMOS EL JSON (LA MISMA LÓGICA DEL OTRO CONTROLLER) ✨
+                            if (post.Tipo_Contenido != "texto" && !string.IsNullOrEmpty(post.Contenido))
+                            {
+                                try
+                                {
+                                    dynamic data = JsonConvert.DeserializeObject(post.Contenido);
+                                    post.TextoExplicativo = data.texto;
+                                    post.Codigo = data.codigo;
+                                }
+                                catch
+                                {
+                                    post.TextoExplicativo = "";
+                                    post.Codigo = post.Contenido;
+                                }
+                            }
+
+                            posts.Add(post);
                         }
                     }
                 }
             }
-
             return posts;
         }
 

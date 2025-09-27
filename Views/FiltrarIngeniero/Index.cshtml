@@ -24,6 +24,13 @@
         <div class="logo-central">
             <a href="/" class="header-logo">IngeLab</a>
         </div>
+
+        @* ✨ AQUÍ LA MAGIA ✨ *@
+        <div class="header-acciones-derecha">
+            <a href="@Url.Action("Index", "VistaEmpresa")" class="btn-volver">
+                <i class="fas fa-arrow-left"></i> Volver al Dashboard
+            </a>
+        </div>
     </header>
 
     <main class="main-container">
@@ -77,9 +84,19 @@
                                     <h4>Especialización</h4>
                                     <p>@ing.Especializacion</p>
                                     <h4>Habilidades Técnicas</h4>
-                                    <p>@ing.Habilidades_Tecnicas</p>
+                                    <div class="card-tags-container">
+                                        @foreach (var skill in ing.Habilidades_Tecnicas.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                                        {
+                                            <span class="skill-tag">@skill.Trim()</span>
+                                        }
+                                    </div>
                                     <h4>Idiomas</h4>
-                                    <p>@ing.Idiomas</p>
+                                    <div class="card-tags-container">
+                                        @foreach (var lang in ing.Idiomas.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                                        {
+                                            <span class="skill-tag">@lang.Trim()</span>
+                                        }
+                                    </div>
                                     <h4>Disponibilidad</h4>
                                     <p>@ing.Disponibilidad</p>
                                     <h4>Experiencia</h4>
@@ -127,12 +144,6 @@
                 <button class="btn-cancelar" onclick="cerrarModal()">Cancelar</button>
             </div>
         </div>
-    </div>
-
-    <div style="position: fixed; top: 20px; left: 20px;">
-        <a href="/VistaEmpresa/Index" class="btn-volver">
-            <i class="fas fa-arrow-left"></i> Volver al Dashboard
-        </a>
     </div>
 
 </body>

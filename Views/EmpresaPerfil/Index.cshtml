@@ -35,10 +35,12 @@
                     {
                         <button type="button" class="btn-editar-perfil" onclick="mostrarFormularioEdicion()">
                             <i class="fas fa-pen"></i> Editar Perfil
-                       </button>
-                    }
-                    <a href="#" class="btn-contactar">Seguir</a>
+                        </button>
 
+                        <a href="@Url.Action("Index", "Logout")" class="btn-logout">
+                            <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                        </a>
+                    }
                 </div>
             </div>
         </header>
@@ -70,11 +72,11 @@
 
 
                 <div class="panel-card-perfil">
-                    <h3 class="panel-titulo">Cosas Importantes(Bro Organiza esto como quieras, tu veras como organizas estos datos en la pagina)</h3>
+                    <h3 class="panel-titulo">Sobre Nosotros</h3>
                    <p class="bio">
                         <strong>Modalidad:</strong> @Model.Perfil_Empresa.Modalidad <br />
                         <strong>Ubicación:</strong> @Model.Perfil_Empresa.Ubicacion <br />
-                        <strong>Tamaño:</strong> @Model.Perfil_Empresa.Tamano
+                        <strong>Tamaño del Personal:</strong> @Model.Perfil_Empresa.Tamano
                    </p>
                 </div>
 

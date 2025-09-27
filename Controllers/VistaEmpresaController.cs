@@ -28,7 +28,8 @@ namespace IngeLab.Controllers
             };
 
 
-
+            // ✨ CAMBIO 1: Le decimos a la vista que esta NO es una página de resultados de filtro.
+            ViewBag.EsVistaDeFiltro = false;
 
 
             // Pasamos la lista de ingenieros a la vista.
@@ -152,9 +153,9 @@ namespace IngeLab.Controllers
                                 Apellido = reader["apellidos"].ToString(),
                                 Correo = reader["correo"].ToString(),
                                 Telefono = reader["telefono"].ToString(),
-                                Habilidades_Tecnicas = reader["habilidades_tecnicas"].ToString(),
+                                Habilidades_Tecnicas = reader["habilidades_tecnicas"].ToString().Replace(",", ", "),
                                 Especializacion = reader["especializacion"].ToString(),
-                                Idiomas = reader["idiomas"].ToString(),
+                                Idiomas = reader["idiomas"].ToString().Replace(",", ", "),
                                 Disponibilidad = reader["disponibilidad"].ToString(),
                                 Nivel_Academico = reader["nivel_academico"].ToString(),
                                 Anios_Experiencia = Convert.ToInt32(reader["anios_experiencia"])
@@ -237,9 +238,9 @@ namespace IngeLab.Controllers
                                 Apellido = reader["apellidos"].ToString(),
                                 Correo = reader["correo"].ToString(),
                                 Telefono = reader["telefono"].ToString(),
-                                Habilidades_Tecnicas = reader["habilidades_tecnicas"].ToString(),
+                                Habilidades_Tecnicas = reader["habilidades_tecnicas"].ToString().Replace(",", ", "),
                                 Especializacion = reader["especializacion"].ToString(),
-                                Idiomas = reader["idiomas"].ToString(),
+                                Idiomas = reader["idiomas"].ToString().Replace(",", ", "),
                                 Disponibilidad = reader["disponibilidad"].ToString(),
                                 Nivel_Academico = reader["nivel_academico"].ToString(),
                                 Anios_Experiencia = reader["anios_experiencia"] != DBNull.Value
@@ -361,9 +362,9 @@ namespace IngeLab.Controllers
                                 Apellido = reader["apellidos"].ToString(),
                                 Correo = reader["correo"].ToString(),
                                 Telefono = reader["telefono"].ToString(),
-                                Habilidades_Tecnicas = reader["habilidades_tecnicas"].ToString(),
+                                Habilidades_Tecnicas = reader["habilidades_tecnicas"].ToString().Replace(",", ", "),
                                 Especializacion = reader["especializacion"].ToString(),
-                                Idiomas = reader["idiomas"].ToString(),
+                                Idiomas = reader["idiomas"].ToString().Replace(",", ", "),
                                 Disponibilidad = reader["disponibilidad"].ToString(),
                                 Nivel_Academico = reader["nivel_academico"].ToString(),
                                 Anios_Experiencia = reader["anios_experiencia"] != DBNull.Value

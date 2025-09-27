@@ -1,4 +1,9 @@
-﻿/* ===== ESTILOS GLOBALES Y DE FONDO ===== */
+﻿/*
+ * Hoja de Estilos para el Dashboard de Empresa (VistaEmpresa.css)
+ * Versión Final Refinada
+ */
+
+/* --- 1. Estilos Globales y Variables --- */
 :root {
     --dark-bg: #0a0a14;
     --light-bg: #1a1a2e;
@@ -18,18 +23,19 @@ html {
     scroll-behavior: smooth;
 }
 
+/* --- 2. Estilos del Body y Fondo --- */
 .body-vista-empresa {
     background-color: var(--dark-bg);
     color: var(--text-color);
     font-family: var(--font-family);
     overflow-x: hidden;
-    background-image: url('../images/AI_Generated_WEB.png'); /* Reutilizamos un fondo cool */
+    background-image: url('../images/AI_Generated_WEB.png');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* El fondo no se mueve con el scroll */
+    background-attachment: fixed;
 }
 
-/* ===== HEADER Y NAVEGACIÓN ===== */
+/* --- 3. Header y Navegación --- */
 .header-empresa {
     display: flex;
     justify-content: space-between;
@@ -40,10 +46,29 @@ html {
     background: rgba(10, 10, 20, 0.5);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+    z-index: 2000; /* Se mantiene por encima del feed */
+}
+
+.perfil-link-container,
+.logo-central,
+.header-acciones-derecha {
+    flex: 1; /* Las 3 columnas ocupan el mismo espacio */
 }
 
 .perfil-link-container {
-    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.logo-central {
+    text-align: center;
+}
+
+.header-acciones-derecha {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
 }
 
 .perfil-link {
@@ -69,11 +94,6 @@ html {
     object-fit: cover;
 }
 
-.logo-central {
-    flex: 1;
-    text-align: center;
-}
-
 .header-logo {
     color: #ffffff;
     font-size: 1.8rem;
@@ -88,20 +108,21 @@ html {
         text-shadow: 0 0 16px rgba(0, 255, 255, 1);
     }
 
-/* ===== CONTENEDOR PRINCIPAL Y BUSCADOR ===== */
+/* --- 4. Buscador y Filtros --- */
 .main-container {
     padding: 30px 5%;
 }
 
 .buscador-container {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
     margin: 0 auto 30px auto;
-    max-width: 800px;
+    max-width: 900px;
 }
 
-.input-buscador {
-    flex-grow: 1;
+.input-buscador,
+.input-filtro {
     padding: 12px 20px;
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 25px;
@@ -110,11 +131,36 @@ html {
     font-size: 1rem;
     outline: none;
     font-family: var(--font-family);
+    transition: all 0.3s ease;
+    flex-grow: 1;
 }
 
-    .input-buscador:focus {
+.input-buscador {
+    min-width: 250px;
+}
+
+.input-filtro {
+    min-width: 150px;
+}
+
+    .input-buscador::placeholder,
+    .input-filtro::placeholder {
+        color: #888;
+    }
+
+    .input-buscador:focus,
+    .input-filtro:focus {
         border-color: var(--primary-color);
         box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    }
+
+select.input-filtro {
+    cursor: pointer;
+}
+
+    select.input-filtro option {
+        background: var(--dark-bg);
+        color: var(--text-color);
     }
 
 .btn-buscar {
@@ -127,6 +173,8 @@ html {
     font-size: 1rem;
     font-weight: bold;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    flex-grow: 1;
+    max-width: 150px;
 }
 
     .btn-buscar:hover {
@@ -134,45 +182,159 @@ html {
         box-shadow: 0 0 15px var(--primary-color);
     }
 
-/* ===== FEED DE TALENTOS (EL CUADRO DIVIDIDO) ===== */
+
+/* --- 5. Notificaciones --- */
+.notificaciones-container {
+    position: relative;
+}
+
+.btn-notificaciones {
+    position: relative;
+    background: none;
+    border: none;
+    padding: 10px;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.notificacion-badge {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+    color: var(--dark-bg);
+    border-radius: 50%;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.notificaciones-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 15px);
+    right: 0;
+    width: 350px;
+    max-height: 400px;
+    background: rgba(10, 15, 30, 0.9);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+}
+
+    .notificaciones-dropdown.active {
+        display: block;
+    }
+
+.notificaciones-header {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+    .notificaciones-header h4 {
+        margin: 0;
+        color: var(--title-color);
+    }
+
+.btn-marcar-leidas {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+    .btn-marcar-leidas:hover {
+        text-decoration: underline;
+    }
+
+.notificaciones-lista {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.notificacion-item {
+    padding: 15px;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+    transition: background-color 0.2s ease;
+}
+
+    .notificacion-item:last-child {
+        border-bottom: none;
+    }
+
+    .notificacion-item:hover {
+        background-color: rgba(0, 255, 255, 0.05);
+    }
+
+.notificacion-empresa {
+    color: var(--primary-color);
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.notificacion-oferta {
+    color: var(--text-color);
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.notificacion-fecha {
+    color: #888;
+}
+
+.no-notificaciones {
+    padding: 30px;
+    text-align: center;
+    color: #888;
+}
+
+    .no-notificaciones i {
+        font-size: 3rem;
+        margin-bottom: 15px;
+        opacity: 0.5;
+    }
+
+    .no-notificaciones p {
+        margin: 0;
+        font-size: 1.1rem;
+    }
+
+
+/* --- 6. Contenedor Principal del Feed --- */
 .feed-container {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 30px;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 30px;
     background: rgba(10, 15, 30, 0.6);
     backdrop-filter: blur(15px);
-    border-radius: 15px;
-    padding: 30px;
     border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
     max-height: 70vh;
-    overflow-y: auto; /* 🔥 ahora el scroll es del contenedor */
-    overflow-x: hidden; /* evita scroll horizontal feo */
+    overflow: hidden; /* Ocultamos el overflow principal, cada columna tendrá el suyo */
+    z-index: 1000;
 }
 
 .columna-talento {
     display: flex;
     flex-direction: column;
-    min-width: 0;
-    /* ❌ le quitamos el scroll de acá */
+    min-width: 0; /* Truco de Flexbox para permitir que los hijos se encojan */
+    overflow: hidden;
 }
-
-/* Scrollbar bonito */
-.feed-container::-webkit-scrollbar {
-    width: 10px;
-}
-
-.feed-container::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-}
-
-.feed-container::-webkit-scrollbar-thumb {
-    background-color: var(--primary-color);
-    border-radius: 10px;
-    border: 2px solid var(--dark-bg);
-}
-
 
 .columna-titulo {
     color: var(--title-color);
@@ -184,12 +346,10 @@ html {
 .cards-scroll-container {
     flex-grow: 1;
     overflow-y: auto;
-    overflow-x: hidden; /* 🔥 evita scroll horizontal inesperado */
+    overflow-x: hidden;
     padding-right: 15px;
 }
 
-
-    /* Estilizando el scrollbar para que se vea futurista */
     .cards-scroll-container::-webkit-scrollbar {
         width: 8px;
     }
@@ -205,14 +365,18 @@ html {
         border: 2px solid var(--dark-bg);
     }
 
-/* ===== TARJETA DE INGENIERO ===== */
+
+/* --- 7. Tarjeta de Ingeniero --- */
 .ingeniero-card {
     background: var(--light-bg);
+    border: 1px solid rgba(0, 255, 255, 0.2);
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
-    border: 1px solid rgba(0, 255, 255, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Reglas de corte de texto para evitar desbordamientos */
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
     .ingeniero-card:hover {
@@ -231,8 +395,17 @@ html {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    object-fit: cover;
     border: 2px solid rgba(0, 255, 255, 0.5);
+    object-fit: cover;
+}
+
+.card-info-principal h3,
+.card-info-principal p,
+.card-body h4,
+.card-body p {
+    /* Forzamos a los hijos a heredar las reglas de corte */
+    word-break: inherit;
+    overflow-wrap: inherit;
 }
 
 .card-info-principal h3 {
@@ -263,11 +436,11 @@ html {
 }
 
 .btn-ver-perfil {
+    padding: 8px 15px;
     background: transparent;
     border: 1px solid var(--primary-color);
-    color: var(--primary-color);
-    padding: 8px 15px;
     border-radius: 20px;
+    color: var(--primary-color);
     text-decoration: none;
     font-weight: 600;
     transition: all 0.3s ease;
@@ -279,201 +452,23 @@ html {
     }
 
 .placeholder-card {
-    border: 2px dashed rgba(255, 255, 255, 0.3);
-    border-radius: 10px;
-    padding: 40px;
-    text-align: center;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 40px;
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
     color: rgba(255, 255, 255, 0.6);
-}
-
-
-.input-filtro {
-    margin-left: 10px;
-    padding: 8px;
-    font-size: 14px;
-}
-
-.btn-buscar {
-    margin-left: 10px;
-    padding: 10px 20px;
-    background-color: #00d1ff;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-}
-.notificaciones-container {
-    position: relative;
-    display: inline-block;
-}
-.notificaciones-container {
-    position: relative;
-    display: inline-block;
-}
-
-.btn-notificaciones {
-    position: relative;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: #333;
-    cursor: pointer;
-    padding: 10px;
-    border-radius: 50%;
-    transition: background-color 0.3s ease;
-}
-
-.btn-notificaciones:hover {
-    background-color: #f0f0f0;
-}
-
-.notificacion-badge {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    background-color: #dc3545;
-    color: white;
-    border-radius: 50%;
-    padding: 2px 6px;
-    font-size: 0.8rem;
-    min-width: 18px;
-    height: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.notificaciones-dropdown {
-    position: fixed;
-    top: 60px; /* Ajusta según la altura de tu header */
-    right: 20px; /* Margen del borde derecho */
-    width: 350px;
-    max-height: 400px;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    z-index: 9999;
-    display: none;
-}
-
-.notificaciones-dropdown.active {
-    display: block;
-}
-
-.notificaciones-header {
-    padding: 15px;
-    border-bottom: 1px solid #eee;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.notificaciones-header h4 {
-    margin: 0;
-    color: #333;
-}
-
-.btn-marcar-leidas {
-    background: none;
-    border: none;
-    color: #007bff;
-    cursor: pointer;
-    font-size: 0.9rem;
-}
-
-.btn-marcar-leidas:hover {
-    text-decoration: underline;
-}
-
-.notificaciones-lista {
-    max-height: 300px;
-    overflow-y: auto;
-}
-
-.notificacion-item {
-    padding: 15px;
-    border-bottom: 1px solid #f0f0f0;
-    position: relative;
-    background: #f8f9fa;
-    transition: background-color 0.3s ease;
-}
-
-.notificacion-item:hover {
-    background: #e9ecef;
-}
-
-.notificacion-item:last-child {
-    border-bottom: none;
-}
-
-.notificacion-empresa {
-    color: #007bff;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.notificacion-oferta {
-    color: #333;
-    margin-bottom: 8px;
-    line-height: 1.4;
-}
-
-.notificacion-fecha {
-    color: #666;
-}
-
-.btn-marcar-leida {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: #28a745;
-    color: white;
-    border: none;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 0.8rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.btn-marcar-leida:hover {
-    background: #218838;
-}
-
-.no-notificaciones {
-    padding: 30px;
     text-align: center;
-    color: #666;
 }
 
-.no-notificaciones i {
-    font-size: 3rem;
-    margin-bottom: 15px;
-    opacity: 0.5;
-}
-
-.no-notificaciones p {
-    margin: 0;
-    font-size: 1.1rem;
-}
-
-
-
-
-/* ===== RESPONSIVE DESIGN ===== */
+/* --- 8. Diseño Responsivo --- */
 @media (max-width: 992px) {
     .feed-container {
-        grid-template-columns: 1fr; /* Una sola columna en pantallas pequeñas */
-        max-height: none; /* Quitamos la altura máxima */
+        grid-template-columns: 1fr;
+        max-height: none;
     }
 }
 
@@ -483,15 +478,11 @@ html {
         gap: 15px;
     }
 
-    .perfil-link-container, .logo-central {
-        text-align: center;
+    .perfil-link-container,
+    .logo-central,
+    .header-acciones-derecha {
         flex: none;
+        justify-content: center;
+        width: 100%;
     }
-}
-
-.ingeniero-card,
-.placeholder-card {
-    max-width: 100%; /* 🔥 esto evita que se estiren */
-    box-sizing: border-box;
-    word-wrap: break-word; /* por si alguna habilidad o texto largo rompe */
 }

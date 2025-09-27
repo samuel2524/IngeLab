@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System;
 using Npgsql;
 using IngeLab.Models.NotificacionesIngeniero;
+using Newtonsoft.Json;
 
 namespace IngeLab.Controllers
 {
@@ -89,6 +90,52 @@ namespace IngeLab.Controllers
                 return Content("Error al crear el post" + e.Message);
             }
         }
+
+        [HttpPost]
+        // 👇 CAMBIAMOS LOS PARÁMETROS DE LA ACCIÓN
+        public IActionResult PublicarCodigo(string TextoExplicativo, string Codigo, string Tipo_Contenido)
+        {
+            try
+            {
+                var idUsuario = HttpContext.Session.GetInt32("UsuarioId");
+                if (!idUsuario.HasValue)
+                {
+                    return Unauthorized();
+                }
+
+                // ✨ AQUÍ CREAMOS EL PAQUETE JSON ✨
+                var contenidoJson = JsonConvert.SerializeObject(new
+                {
+                    texto = TextoExplicativo,
+                    codigo = Codigo
+                });
+
+                using (var conexion = bd.establecerConexion())
+                {
+                    var query = @"INSERT INTO postingeniero 
+                            (id_usuario, contenido, fecha_public, tipo_contenido, fijado) 
+                        VALUES 
+                            (@Id_Usuario, @Contenido, @FechaCreacion, @Tipo_Contenido, false)";
+
+                    using (var comando = new Npgsql.NpgsqlCommand(query, conexion))
+                    {
+                        comando.Parameters.AddWithValue("@Id_Usuario", idUsuario.Value);
+                        comando.Parameters.AddWithValue("@Contenido", contenidoJson); // Guardamos el string JSON
+                        comando.Parameters.AddWithValue("@FechaCreacion", DateTime.Now);
+                        comando.Parameters.AddWithValue("@Tipo_Contenido", Tipo_Contenido);
+
+                        comando.ExecuteNonQuery();
+                    }
+                }
+
+                return RedirectToAction("Index", "VistaIngenieros");
+            }
+            catch (System.Exception e)
+            {
+                return Content("Error al publicar el fragmento de código: " + e.Message);
+            }
+        }
+
 
         public IActionResult EliminarPost(int idPost)
         {
@@ -256,10 +303,11 @@ namespace IngeLab.Controllers
 
 
 
+        // EN: VistaIngenierosController.cs
+
         public List<Post> ObtenerPostsPorUsuario(int idUsuario)
         {
             var posts = new List<Post>();
-
             using (var conexion = bd.establecerConexion())
             {
                 var query = "SELECT id_post, contenido, fecha_public, tipo_contenido, fijado FROM postingeniero WHERE id_usuario = @IdUsuario ORDER BY fijado DESC, fecha_public DESC";
@@ -270,19 +318,43 @@ namespace IngeLab.Controllers
                     {
                         while (reader.Read())
                         {
-                            posts.Add(new Post
+                            var post = new Post
                             {
                                 Id_Post = reader.GetInt32(0),
                                 Contenido = reader.GetString(1),
                                 FechaCreacion = reader.GetDateTime(2),
                                 Tipo_Contenido = reader.GetString(3),
                                 Fijado = reader.GetBoolean(4)
-                            });
+                            };
+
+                            // ✨ AQUÍ DESEMPACAMOS EL JSON ✨
+                            if (post.Tipo_Contenido != "texto" && !string.IsNullOrEmpty(post.Contenido))
+                            {
+                                try
+                                {
+                                    // Leemos el JSON y lo separamos en nuestras propiedades "ayudantes"
+                                    dynamic data = JsonConvert.DeserializeObject(post.Contenido);
+                                    post.TextoExplicativo = data.texto;
+                                    post.Codigo = data.codigo;
+                                }
+                                catch
+                                {
+                                    // Si falla (por si tienes posts antiguos), muestra el contenido como código
+                                    post.TextoExplicativo = "";
+                                    post.Codigo = post.Contenido;
+                                }
+                            }
+                            else
+                            {
+                                // Para posts de texto, el contenido es el texto explicativo.
+                                post.TextoExplicativo = post.Contenido;
+                            }
+
+                            posts.Add(post);
                         }
                     }
                 }
             }
-
             return posts;
         }
 

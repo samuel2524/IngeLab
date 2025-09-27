@@ -1,5 +1,12 @@
-﻿/* Importamos las variables y estilos base para mantener consistencia */
+﻿/*
+ * Hoja de Estilos para el Dashboard del Ingeniero (VistaIngenieros.css)
+ * Versión Final Refinada
+ */
+
+/* Importamos las variables globales de la vista de empresa para mantener consistencia */
 @import url('VistaEmpresa.css');
+
+/* --- 1. Estilos Generales y Layout --- */
 
 .body-vista-ingeniero {
     background-color: var(--dark-bg);
@@ -8,7 +15,17 @@
     overflow-x: hidden;
 }
 
-/* ===== HEADER ===== */
+.columna-central {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* --- 2. Header y Navegación --- */
+
 .header-ingeniero {
     display: flex;
     justify-content: space-between;
@@ -44,13 +61,10 @@
     border: 2px solid var(--primary-color);
 }
 
+/* --- 3. Panel de Notificaciones --- */
+
 .notificaciones-container {
     position: relative;
-    display: inline-block;
-}
-.notificaciones-container {
-    position: relative;
-    display: inline-block;
 }
 
 .btn-notificaciones {
@@ -58,277 +72,196 @@
     background: none;
     border: none;
     font-size: 1.5rem;
-    color: #333;
+    color: var(--text-color);
     cursor: pointer;
-    padding: 10px;
-    border-radius: 50%;
-    transition: background-color 0.3s ease;
-}
-
-.btn-notificaciones:hover {
-    background-color: #f0f0f0;
 }
 
 .notificacion-badge {
     position: absolute;
-    top: 5px;
-    right: 5px;
-    background-color: #dc3545;
-    color: white;
-    border-radius: 50%;
-    padding: 2px 6px;
-    font-size: 0.8rem;
-    min-width: 18px;
-    height: 18px;
+    top: -5px;
+    right: -5px;
+    width: 20px;
+    height: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: var(--primary-color);
+    color: var(--dark-bg);
+    border-radius: 50%;
+    font-size: 0.8rem;
+    font-weight: bold;
 }
 
 .notificaciones-dropdown {
-    position: fixed;
-    top: 60px; /* Ajusta según la altura de tu header */
-    right: 20px; /* Margen del borde derecho */
-    width: 350px;
-    max-height: 400px;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    z-index: 9999;
     display: none;
+    position: absolute;
+    top: calc(100% + 15px);
+    left: 0;
+    width: 380px;
+    max-height: 450px;
+    background: rgba(10, 15, 30, 0.8);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+    z-index: 9999;
 }
 
-.notificaciones-dropdown.active {
-    display: block;
-}
+    .notificaciones-dropdown.active {
+        display: block;
+    }
 
 .notificaciones-header {
     padding: 15px;
-    border-bottom: 1px solid #eee;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.2);
 }
 
-.notificaciones-header h4 {
-    margin: 0;
-    color: #333;
-}
+    .notificaciones-header h4 {
+        color: var(--title-color);
+        text-shadow: 0 0 5px var(--primary-color);
+    }
 
 .btn-marcar-leidas {
     background: none;
     border: none;
-    color: #007bff;
+    color: var(--primary-color);
     cursor: pointer;
     font-size: 0.9rem;
+    transition: text-shadow 0.3s ease;
 }
 
-.btn-marcar-leidas:hover {
-    text-decoration: underline;
-}
+    .btn-marcar-leidas:hover {
+        text-shadow: 0 0 8px var(--primary-color);
+    }
 
 .notificaciones-lista {
-    max-height: 300px;
+    max-height: 350px;
     overflow-y: auto;
 }
 
 .notificacion-item {
     padding: 15px;
-    border-bottom: 1px solid #f0f0f0;
-    position: relative;
-    background: #f8f9fa;
+    background: transparent;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.1);
     transition: background-color 0.3s ease;
 }
 
-.notificacion-item:hover {
-    background: #e9ecef;
-}
+    .notificacion-item:last-child {
+        border-bottom: none;
+    }
 
-.notificacion-item:last-child {
-    border-bottom: none;
-}
+    .notificacion-item:hover {
+        background-color: rgba(0, 255, 255, 0.05);
+    }
 
-.notificacion-empresa {
-    color: #007bff;
+.notificacion-empresa strong {
+    color: var(--primary-color);
     font-weight: bold;
-    margin-bottom: 5px;
 }
 
 .notificacion-oferta {
-    color: #333;
-    margin-bottom: 8px;
+    color: var(--text-color);
     line-height: 1.4;
 }
 
-.notificacion-fecha {
-    color: #666;
+.notificacion-fecha small {
+    color: #888;
 }
 
-.btn-marcar-leida {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: #28a745;
-    color: white;
-    border: none;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 0.8rem;
+.notificacion-acciones {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    gap: 10px;
+    margin-top: 12px;
 }
 
-.btn-marcar-leida:hover {
-    background: #218838;
+.btn-aceptar,
+.btn-rechazar {
+    flex-grow: 1;
+    padding: 8px 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    background: transparent;
+    border: 1px solid;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.btn-aceptar {
+    border-color: #00ff7f;
+    color: #00ff7f;
+}
+
+.btn-rechazar {
+    border-color: #ff4d4d;
+    color: #ff4d4d;
+}
+
+.btn-aceptar:hover {
+    background: #00ff7f;
+    color: var(--dark-bg);
+    box-shadow: 0 0 10px #00ff7f;
+}
+
+.btn-rechazar:hover {
+    background: #ff4d4d;
+    color: var(--dark-bg);
+    box-shadow: 0 0 10px #ff4d4d;
 }
 
 .no-notificaciones {
-    padding: 30px;
+    padding: 40px 20px;
     text-align: center;
-    color: #666;
 }
 
-.no-notificaciones i {
-    font-size: 3rem;
-    margin-bottom: 15px;
-    opacity: 0.5;
-}
-
-.no-notificaciones p {
-    margin: 0;
-    font-size: 1.1rem;
-}
-
-
-.buscador-container {
-    position: relative;
-    width: 400px;
-}
-
-.input-buscador {
-    width: 100%;
-    padding: 10px 15px 10px 40px; /* Espacio para el icono */
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 20px;
-    background-color: rgba(0, 0, 0, 0.2);
-    color: #fff;
-}
-
-.buscador-icono {
-    position: absolute;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: rgba(255, 255, 255, 0.5);
-}
-
-/* ===== DASHBOARD GRID LAYOUT ===== */
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: 280px 1fr 280px; /* Columnas: Izq, Central, Der */
-    gap: 30px;
-    padding: 30px 5%;
-    align-items: flex-start;
-}
-
-/* ===== PANELES LATERALES ===== */
-.panel-card {
-    background: rgba(10, 15, 30, 0.6);
-    backdrop-filter: blur(15px);
-    border-radius: 15px;
-    padding: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.panel-titulo {
-    color: var(--title-color);
-    margin-bottom: 15px;
-    border-left: 3px solid var(--primary-color);
-    padding-left: 10px;
-}
-
-.lista-ofertas {
-    list-style: none;
-}
-
-    .lista-ofertas li {
+    .no-notificaciones i {
+        font-size: 3rem;
         margin-bottom: 15px;
-        padding-left: 10px;
-        border-left: 2px solid transparent;
+        color: var(--primary-color);
+        opacity: 0.6;
     }
 
-        .lista-ofertas li.no-leida {
-            border-left-color: var(--primary-color);
-            font-weight: 600;
-        }
+    .no-notificaciones p {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #adb5bd;
+    }
 
-.empresa-oferta {
-    display: block;
-    color: var(--title-color);
-    font-size: 0.95rem;
-}
 
-.titulo-oferta {
-    display: block;
-    font-size: 0.85rem;
-    color: var(--text-color);
-}
+/* --- 4. Feed de Publicaciones --- */
 
-.link-ver-todas {
-    display: block;
-    text-align: center;
-    margin-top: 15px;
-    color: var(--primary-color);
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.tags-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-.skill-tag {
-    background: rgba(0, 255, 255, 0.1);
-    color: var(--primary-color);
-    padding: 5px 10px;
-    border-radius: 15px;
-    font-size: 0.8rem;
-    font-weight: 600;
-}
-
-/* ===== COLUMNA CENTRAL (FEED) ===== */
-.columna-central {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-}
-
-.crear-post-card {
+/* Estilo base para las tarjetas de cristal */
+.crear-post-card,
+.post-card {
     background: rgba(10, 15, 30, 0.6);
     backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 15px;
     padding: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
 }
+
+/* --- 4.1. Tarjeta para Crear Post --- */
 
 .input-post {
     width: 100%;
+    min-height: 80px;
     background: transparent;
     border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     outline: none;
+    margin-bottom: 15px;
     color: var(--text-color);
     font-family: var(--font-family);
     font-size: 1.1rem;
     resize: vertical;
-    min-height: 80px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    margin-bottom: 15px;
 }
 
 .post-acciones {
@@ -338,13 +271,16 @@
 }
 
 .btn-accion-post {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
     background: transparent;
     border: none;
+    border-radius: 8px;
     color: var(--text-color);
     font-weight: 600;
     cursor: pointer;
-    padding: 8px 12px;
-    border-radius: 8px;
     transition: background-color 0.3s ease;
 }
 
@@ -353,10 +289,10 @@
     }
 
 .btn-publicar {
+    padding: 10px 25px;
     background-color: var(--primary-color);
     color: var(--dark-bg);
     border: none;
-    padding: 10px 25px;
     border-radius: 20px;
     font-weight: bold;
     cursor: pointer;
@@ -368,13 +304,9 @@
         box-shadow: 0 0 15px var(--primary-color);
     }
 
-/* --- Estilos de las Tarjetas de Post --- */
+/* --- 4.2. Tarjeta de Post Individual --- */
+
 .post-card {
-    background: rgba(10, 15, 30, 0.6);
-    backdrop-filter: blur(15px);
-    border-radius: 15px;
-    padding: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
 }
 
@@ -390,23 +322,17 @@
     border-radius: 50%;
 }
 
-.post-autor-info {
-    flex-grow: 1;
+.post-contenido {
+    padding-top: 15px;
+    margin-left: 60px; /* Alineado con la info del autor */
+    line-height: 1.7;
 }
 
-    .post-autor-info h4 {
-        color: var(--title-color);
-        margin: 0;
-    }
-
-    .post-autor-info p {
-        color: rgba(255, 255, 255, 0.6);
-        font-size: 0.85rem;
-        margin: 0;
-    }
+/* --- 4.3. Menú de Opciones del Post --- */
 
 .post-opciones {
     position: relative;
+    margin-left: auto;
 }
 
 .btn-opciones {
@@ -415,24 +341,19 @@
     color: var(--text-color);
     font-size: 1rem;
     cursor: pointer;
-    padding: 5px;
-    border-radius: 50%;
 }
-
-    .btn-opciones:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-    }
 
 .opciones-menu {
     display: none;
     position: absolute;
-    right: 0;
-    top: 30px;
+    top: 0;
+    right: calc(100% + 10px); /* Despliega el menú a la izquierda para no tapar contenido */
+    width: max-content;
+    white-space: nowrap;
     background: var(--light-bg);
-    border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    width: 180px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     overflow: hidden;
     z-index: 10;
 }
@@ -443,6 +364,7 @@
         color: var(--text-color);
         text-decoration: none;
         font-size: 0.9rem;
+        transition: background-color 0.2s ease;
     }
 
         .opciones-menu a:hover {
@@ -453,38 +375,201 @@
         color: #ff4d4d;
     }
 
-.post-contenido {
-    padding-top: 15px;
-    margin-left: 60px; /* Alineado con la info del autor */
-    line-height: 1.7;
+/* --- 4.4. Formulario de Edición del Post --- */
+
+/* Usamos un selector de atributo para aplicar a todos los forms de edición */
+div[id^="form-editar-"] {
+    margin-left: 60px; /* Mantenemos la alineación con el resto del contenido */
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
-@media (max-width: 1200px) {
-    .dashboard-grid {
-        grid-template-columns: 1fr 2fr; /* Ocultamos la columna derecha */
-    }
-
-    .columna-derecha {
-        display: none;
-    }
-}
-
-@media (max-width: 800px) {
-    .dashboard-grid {
-        grid-template-columns: 1fr; /* Una sola columna */
-    }
-
-    .columna-izquierda {
-        display: none;
-    }
-
-    .header-ingeniero {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .buscador-container {
+    div[id^="form-editar-"] textarea {
         width: 100%;
+        min-height: 100px;
+        padding: 12px;
+        background-color: #0A0F1E;
+        border: 1px solid rgba(0, 255, 255, 0.3);
+        border-radius: 8px;
+        color: #E0E0E0;
+        font-family: var(--font-family);
+        font-size: 1rem;
+        outline: none;
+        resize: vertical;
+        transition: all 0.3s ease;
     }
+
+        div[id^="form-editar-"] textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+
+    div[id^="form-editar-"] .btn-container {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    div[id^="form-editar-"] .btn {
+        border: none;
+        padding: 8px 20px;
+        border-radius: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        div[id^="form-editar-"] .btn:hover {
+            transform: translateY(-2px);
+        }
+
+    div[id^="form-editar-"] .btn-success {
+        background-color: var(--primary-color);
+        color: var(--dark-bg);
+    }
+
+        div[id^="form-editar-"] .btn-success:hover {
+            box-shadow: 0 0 15px var(--primary-color);
+        }
+
+    div[id^="form-editar-"] .btn-secondary {
+        background-color: #2a2f45;
+        border: 1px solid #4a4f65;
+        color: #b0b8c4;
+    }
+
+        div[id^="form-editar-"] .btn-secondary:hover {
+            background-color: #3a3f55;
+            color: #fff;
+        }
+
+
+/* --- 5. Bloques de Código (Syntax Highlighting) --- */
+
+.code-block-container {
+    margin-top: 10px;
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.code-block-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 15px;
+    background-color: #1a1f33;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.language-tag {
+    color: var(--primary-color);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.copy-code-btn {
+    padding: 5px 10px;
+    background: none;
+    border: 1px solid #4a4f65;
+    border-radius: 5px;
+    color: #b0b8c4;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+    .copy-code-btn:hover {
+        background-color: rgba(0, 255, 255, 0.1);
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+    }
+
+/* Ajuste para que Prism.js se integre con nuestro contenedor */
+.code-block-container pre {
+    margin: 0 !important; /* Sobreescribe estilos de la librería */
+    border-radius: 0 0 8px 8px !important;
+}
+
+
+/* --- 6. Modal para Publicar Código --- */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 2000;
+}
+
+.modal-content {
+    width: 90%;
+    max-width: 600px;
+    background: var(--light-bg);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 25px;
+}
+
+    .modal-content h3 {
+        margin-top: 0;
+        color: var(--title-color);
+    }
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        color: #b0b8c4;
+    }
+
+.modal-select,
+.modal-textarea {
+    width: 100%;
+    padding: 10px;
+    background-color: #0A0F1E;
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    border-radius: 8px;
+    color: var(--text-color);
+    font-family: var(--font-family);
+}
+
+.modal-textarea {
+    resize: vertical;
+}
+
+.modal-acciones {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-modal-cancelar,
+.btn-modal-publicar {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-modal-cancelar {
+    background-color: #3a3f55;
+    color: #fff;
+}
+
+.btn-modal-publicar {
+    background-color: var(--primary-color);
+    color: var(--dark-bg);
 }

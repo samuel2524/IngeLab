@@ -1,10 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Controllers",
     "\\Views",
-    "\\Views\\EmpCompletarPerfil",
-    "\\Views\\Shared"
+    "\\Views\\VistaIngenieros"
   ],
   "SelectedNode": "\\IngeLab.sln",
   "PreviewInSolutionExplorer": false
