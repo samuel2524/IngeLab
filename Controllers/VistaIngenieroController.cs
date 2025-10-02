@@ -44,18 +44,24 @@ namespace IngeLab.Controllers
             using (var conexion = bd.establecerConexion())
             {
                 // La query ahora une 'postingeniero' con 'usuarios' para obtener los datos del autor
-                var query = @"
+                var query =@"
                     SELECT p.id_post, p.id_usuario, p.contenido, p.fecha_public, 
-                           p.tipo_contenido, p.fijado, u.nombre, u.apellidos
+                        p.tipo_contenido, p.fijado, u.nombre, u.apellidos
                     FROM postingeniero p
                     INNER JOIN usuarios u ON p.id_usuario = u.id_usuario
-                    ORDER BY p.fijado DESC, p.fecha_public DESC
-                    LIMIT 50;"; // Limitamos a 50 para empezar, por rendimiento
+                    ORDER BY 
+                        CASE WHEN p.id_usuario = @IdUsuario THEN 0 ELSE 1 END,
+                        p.fijado DESC, 
+                        p.fecha_public DESC
+                    LIMIT 50;"; 
 
                 using (var comando = new NpgsqlCommand(query, conexion))
                 {
+                    var idUsuarioActual = HttpContext.Session.GetInt32("UsuarioId");
+                    comando.Parameters.AddWithValue("@IdUsuario", idUsuarioActual ?? -1);
                     using (var reader = comando.ExecuteReader())
                     {
+                      
                         while (reader.Read())
                         {
                             var post = new PostViewModel

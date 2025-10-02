@@ -21,57 +21,87 @@ namespace IngeLab.Controllers
         {
             try
             {
+                
+
                 using (var conexion = bd.establecerConexion())
                 {
-                    string sqlIngenieros =  "SELECT id_usuario FROM usuarios WHERE correo = @Correo AND contraseña = @Contraseña";;
+                    string sqlIngenieros = "SELECT id_usuario, contraseña FROM usuarios WHERE correo = @Correo";
 
                     using (var cmd = new NpgsqlCommand(sqlIngenieros, conexion))
                     {
                         cmd.Parameters.AddWithValue("Correo", usuario.Correo);
-                        cmd.Parameters.AddWithValue("Contraseña", usuario.Contraseña);
 
-                        var result = cmd.ExecuteScalar();
-
-                        if (result != null) // 🔹 Existe el usuario
+                        using (var reader = cmd.ExecuteReader())
                         {
-                            int idUsuario = Convert.ToInt32(result);
+                            if (reader.Read())
+                            {
+                                int idUsuario = reader.GetInt32(0);
+                                 string hashGuardado = reader.GetString(1);
 
-                            // ✅ Guardamos el id en la sesión
-                            HttpContext.Session.SetInt32("UsuarioId", idUsuario);
-                            Console.WriteLine($"IdUsuario en sesión -> {idUsuario}");
-
-                            // Redirigimos al perfil del ingeniero
-                            return RedirectToAction("Index", "VistaIngenieros");
+                                // 2️⃣ Comparar contraseñas usando BCrypt
+                                if (BCrypt.Net.BCrypt.Verify(usuario.Contraseña, hashGuardado))
+                                {
+                                    HttpContext.Session.SetInt32("UsuarioId", idUsuario);
+                                    return RedirectToAction("Index", "VistaIngenieros");
+                                }
+                            }
                         }
+
+                        // var result = cmd.ExecuteScalar();
+
+                        // if (result != null) // 🔹 Existe el usuario
+                        // {
+                        //     int idUsuario = Convert.ToInt32(result);
+
+                        //     // ✅ Guardamos el id en la sesión
+                        //     HttpContext.Session.SetInt32("UsuarioId", idUsuario);
+                        //     Console.WriteLine($"IdUsuario en sesión -> {idUsuario}");
+
+                        //     // Redirigimos al perfil del ingeniero
+                        //     return RedirectToAction("Index", "VistaIngenieros");
+                        // }
                         // else
                         // {
                         //     ViewBag.Error = "Correo o contraseña incorrectos.";
-                            
+
                         // }
                     }
 
-                    string sqlEmpresas = "SELECT id_empresa FROM empresas WHERE correo = @Correo AND contraseña = @Contraseña";;
+                    string sqlEmpresas = sqlEmpresas = "SELECT id_empresa, contraseña FROM empresas WHERE correo = @Correo";
 
                     using (var cmd = new NpgsqlCommand(sqlEmpresas, conexion))
                     {
                         cmd.Parameters.AddWithValue("Correo", usuario.Correo);
-                        cmd.Parameters.AddWithValue("Contraseña", usuario.Contraseña);
+                        
 
-                        var result = cmd.ExecuteScalar();
-
-                        if (result != null) // 🔹 Existe la empresa
+                        using (var reader = cmd.ExecuteReader())
                         {
-                            int idEmpresa = Convert.ToInt32(result);
+                            if (reader.Read())
+                            {
+                                int idEmpresa = reader.GetInt32(0);
+                                string hashGuardado = reader.GetString(1);
 
-                            // ✅ Guardamos el id en la sesión
-                            HttpContext.Session.SetInt32("EmpresaId", idEmpresa);
-
-                            // Redirigimos al perfil de la empresa
-                            return RedirectToAction("Index", "VistaEmpresa");
+                                if (BCrypt.Net.BCrypt.Verify(usuario.Contraseña, hashGuardado))
+                                {
+                                    HttpContext.Session.SetInt32("EmpresaId", idEmpresa);
+                                    return RedirectToAction("Index", "VistaEmpresa");
+                                }
+                            }
                         }
+
+                        // if (result != null) // 🔹 Existe la empresa
                         // {
-                        //     ViewBag.Error = "Correo o contraseña incorrectos.";
+                        //     int idEmpresa = Convert.ToInt32(result);
+
+                        //     // ✅ Guardamos el id en la sesión
+                        //     HttpContext.Session.SetInt32("EmpresaId", idEmpresa);
+
+                        //     // Redirigimos al perfil de la empresa
+                        //     return RedirectToAction("Index", "VistaEmpresa");
                         // }
+                        // // {
+                        // //     ViewBag.Error = "Correo o contraseña incorrectos.";
+                        // // }
 
                     }
 

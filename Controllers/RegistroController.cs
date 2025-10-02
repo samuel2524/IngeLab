@@ -70,7 +70,10 @@ namespace IngeLab.Controllers
                         cmd.Parameters.AddWithValue("TipoDocumento", Ingeniero.TipoDocumento);
                         cmd.Parameters.AddWithValue("NumeroDocumento", Ingeniero.NumeroDocumento);
                         cmd.Parameters.AddWithValue("Correo", Ingeniero.Correo);
-                        cmd.Parameters.AddWithValue("Contraseña", Ingeniero.Contraseña);
+
+                        string hash = BCrypt.Net.BCrypt.HashPassword(Ingeniero.Contraseña);
+                        cmd.Parameters.AddWithValue("Contraseña", hash);
+
                         cmd.Parameters.AddWithValue("FechaNacimiento", Ingeniero.FechaNacimiento);
                         cmd.Parameters.AddWithValue("Telefono", Ingeniero.Telefono);
                         var idUsuario = (int)cmd.ExecuteScalar();
@@ -116,7 +119,9 @@ namespace IngeLab.Controllers
                         cmd.Parameters.AddWithValue("Nombre", empresas.Nombre);
                         cmd.Parameters.AddWithValue("NIT", empresas.NIT);
                         cmd.Parameters.AddWithValue("Correo", empresas.Correo);
-                        cmd.Parameters.AddWithValue("Contraseña", empresas.Contraseña);
+                        string hash = BCrypt.Net.BCrypt.HashPassword(empresas.Contraseña);
+                        cmd.Parameters.AddWithValue("Contraseña", hash);
+                        
                         cmd.Parameters.AddWithValue("Telefono", empresas.Telefono);
                         var idEmpresa = (int)cmd.ExecuteScalar();
                         // ✅ Guardar el id real en la sesión
