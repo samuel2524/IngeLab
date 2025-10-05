@@ -1,13 +1,14 @@
 /*
  * Hoja de Estilos para la Vista de Filtro de Ingenieros (FiltrarIngeniero.css)
- * Versión Final Refinada
+ * Versión 4.0 - Final con Responsividad Avanzada
  */
 
-/* --- 1. Estilos Globales y Variables (Heredados) --- */
+/* --- 1. Estilos Globales y Variables --- */
 :root {
     --dark-bg: #0a0a14;
     --light-bg: #1a1a2e;
-    --primary-color: #00ffff;
+    --primary-color: #00ffff; /* Cian brillante */
+    --secondary-color: #9370db; /* Un morado sutil para acciones secundarias */
     --text-color: #e0e0e0;
     --title-color: #ffffff;
     --font-family: 'Poppins', sans-serif;
@@ -38,7 +39,7 @@ html {
 /* --- 3. Header y Navegación --- */
 .header-empresa {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr; /* Izquierda, centro, derecha */
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
     padding: 20px 5%;
     background: rgba(10, 10, 20, 0.5);
@@ -47,15 +48,15 @@ html {
 }
 
 .perfil-link-container {
-    justify-self: start; /* Alinea a la izquierda */
+    justify-self: start;
 }
 
 .logo-central {
-    justify-self: center; /* Alinea al centro */
+    justify-self: center;
 }
 
 .header-acciones-derecha {
-    justify-self: end; /* Alinea a la derecha */
+    justify-self: end;
 }
 
 .perfil-link {
@@ -86,14 +87,8 @@ html {
     font-size: 1.8rem;
     font-weight: 600;
     text-decoration: none;
-    letter-spacing: 2px;
     text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
-    transition: text-shadow 0.3s ease;
 }
-
-    .header-logo:hover {
-        text-shadow: 0 0 16px rgba(0, 255, 255, 1);
-    }
 
 .btn-volver {
     display: inline-flex;
@@ -107,17 +102,15 @@ html {
     border-radius: 25px;
     border: 1px solid rgba(0, 255, 255, 0.3);
     transition: all 0.3s ease;
-    white-space: nowrap;
 }
 
     .btn-volver:hover {
         background: var(--primary-color);
         color: var(--dark-bg);
         box-shadow: 0 0 15px var(--primary-color);
-        transform: scale(1.05);
     }
 
-/* --- 4. Contenido Principal: Buscador y Resultados --- */
+/* --- 4. Contenido Principal y Buscador --- */
 .main-container {
     padding: 30px 5%;
 }
@@ -132,7 +125,6 @@ html {
 
 .input-buscador,
 .input-filtro {
-    flex-grow: 1;
     padding: 12px 20px;
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 25px;
@@ -142,6 +134,7 @@ html {
     outline: none;
     font-family: var(--font-family);
     transition: all 0.3s ease;
+    flex-grow: 1;
 }
 
 .input-buscador {
@@ -151,6 +144,11 @@ html {
 .input-filtro {
     min-width: 150px;
 }
+
+    .input-buscador::placeholder,
+    .input-filtro::placeholder {
+        color: #888;
+    }
 
     .input-buscador:focus,
     .input-filtro:focus {
@@ -177,6 +175,8 @@ select.input-filtro {
     font-size: 1rem;
     font-weight: bold;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    flex-grow: 1;
+    max-width: 150px;
 }
 
     .btn-buscar:hover {
@@ -184,8 +184,8 @@ select.input-filtro {
         box-shadow: 0 0 15px var(--primary-color);
     }
 
-.feed-container {
-    display: block;
+/* --- 5. Contenedor y Grilla de Resultados --- */
+.resultados-container {
     background: rgba(10, 15, 30, 0.6);
     backdrop-filter: blur(15px);
     border-radius: 15px;
@@ -194,30 +194,30 @@ select.input-filtro {
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
 }
 
-.columna-titulo {
+.resultados-titulo {
     color: var(--title-color);
     text-align: center;
-    margin-bottom: 20px;
-    text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+    margin-bottom: 30px;
+    font-size: 2rem;
+    text-shadow: 0 0 10px var(--primary-color);
 }
 
-.cards-scroll-container {
+.resultados-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
 }
 
-/* --- 5. Tarjeta de Ingeniero --- */
+/* --- 6. Tarjeta de Ingeniero --- */
 .ingeniero-card {
     display: flex;
     flex-direction: column;
+    height: 100%;
     background: var(--light-bg);
     border-radius: 10px;
     padding: 20px;
     border: 1px solid rgba(0, 255, 255, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow-wrap: break-word;
-    word-break: break-word;
 }
 
     .ingeniero-card:hover {
@@ -240,36 +240,23 @@ select.input-filtro {
     border: 2px solid rgba(0, 255, 255, 0.5);
 }
 
-.card-info-principal h3, .card-info-principal p,
-.card-body h4, .card-body p {
-    word-break: inherit;
-    overflow-wrap: inherit;
-}
-
 .card-info-principal h3 {
     color: var(--title-color);
-    margin: 0;
 }
 
 .card-info-principal p {
     color: var(--primary-color);
     font-weight: 600;
-    margin: 0;
 }
 
 .card-body h4 {
     color: var(--title-color);
+    margin-top: 10px;
     margin-bottom: 5px;
-    font-size: 0.9rem;
-}
-
-.card-body p {
-    font-size: 0.9rem;
-    line-height: 1.5;
 }
 
 .card-footer {
-    margin-top: auto; /* Empuja el footer hacia abajo */
+    margin-top: auto;
     padding-top: 20px;
     display: flex;
     justify-content: flex-end;
@@ -277,7 +264,7 @@ select.input-filtro {
     gap: 10px;
 }
 
-.btn-ver-perfil {
+.btn-ver-perfil, .btn-contactar, .btn-deseados {
     padding: 8px 15px;
     background: transparent;
     border: 1px solid var(--primary-color);
@@ -289,9 +276,21 @@ select.input-filtro {
     cursor: pointer;
 }
 
-    .btn-ver-perfil:hover {
+    .btn-ver-perfil:hover, .btn-contactar:hover {
         background: var(--primary-color);
         color: var(--dark-bg);
+        box-shadow: 0 0 10px var(--primary-color);
+    }
+
+.btn-deseados {
+    border-color: var(--secondary-color);
+    color: var(--secondary-color);
+}
+
+    .btn-deseados:hover {
+        background: var(--secondary-color);
+        color: var(--dark-bg);
+        box-shadow: 0 0 10px var(--secondary-color);
     }
 
 .card-tags-container {
@@ -307,14 +306,22 @@ select.input-filtro {
     padding: 4px 10px;
     border-radius: 15px;
     font-size: 0.8rem;
-    font-weight: 600;
 }
 
-/* --- 6. Ventana Modal de Contacto --- */
+.placeholder-card {
+    grid-column: 1 / -1;
+    padding: 40px;
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    color: rgba(255, 255, 255, 0.6);
+    text-align: center;
+}
+
+/* --- 7. Ventana Modal de Contacto --- */
 .modal {
     display: none;
     position: fixed;
-    z-index: 1050;
+    z-index: 2000;
     left: 0;
     top: 0;
     width: 100%;
@@ -322,78 +329,52 @@ select.input-filtro {
     justify-content: center;
     align-items: center;
     background-color: rgba(10, 10, 20, 0.8);
+    backdrop-filter: blur(5px);
 }
 
 .modal-content {
     position: relative;
     width: 90%;
     max-width: 500px;
-    padding: 30px 40px;
+    padding: 30px;
     background: var(--light-bg);
     border: 1px solid rgba(0, 255, 255, 0.2);
     border-radius: 15px;
-    box-shadow: 0 5px 30px rgba(0, 255, 255, 0.2);
-    color: var(--title-color);
-    text-align: center;
 }
-
-    .modal-content h2 {
-        font-size: 1.8rem;
-        margin-bottom: 5px;
-    }
-
-    .modal-content label {
-        display: block;
-        margin-bottom: 15px;
-        color: var(--text-color);
-    }
 
 .cerrar {
     position: absolute;
-    top: 15px;
-    right: 20px;
-    color: var(--primary-color);
+    top: 10px;
+    right: 15px;
+    color: var(--text-color);
     font-size: 2rem;
     cursor: pointer;
-    transition: transform 0.2s ease;
 }
-
-    .cerrar:hover {
-        transform: scale(1.2);
-    }
 
 .modal-content textarea {
     width: 100%;
     min-height: 120px;
     padding: 15px;
     background: var(--dark-bg);
-    border: 2px solid var(--primary-color);
+    border: 1px solid var(--primary-color);
     border-radius: 10px;
     color: white;
-    font-family: var(--font-family);
     font-size: 1rem;
     resize: vertical;
-    margin-bottom: 15px;
+    margin: 15px 0;
 }
-
-    .modal-content textarea::placeholder {
-        color: #888;
-    }
 
 .modal-buttons {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     gap: 15px;
-    margin-top: 15px;
 }
 
-.btn-enviar,
-.btn-cancelar {
-    padding: 12px 35px;
-    border: 2px solid var(--primary-color);
+.btn-enviar, .btn-cancelar {
+    padding: 10px 25px;
+    border: 1px solid var(--primary-color);
     border-radius: 25px;
     font-weight: bold;
-    font-size: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -410,7 +391,6 @@ select.input-filtro {
 
 .btn-enviar:hover {
     box-shadow: 0 0 15px var(--primary-color);
-    transform: scale(1.05);
 }
 
 .btn-cancelar:hover {
@@ -418,17 +398,23 @@ select.input-filtro {
     color: var(--dark-bg);
 }
 
-
-/* --- 7. Diseño Responsivo --- */
+/* --- 8. Diseño Responsivo General --- */
 @media (max-width: 768px) {
     .header-empresa {
-        grid-template-columns: 1fr; /* Una sola columna en móvil */
+        grid-template-columns: 1fr;
         gap: 15px;
     }
 
-    .perfil-link-container,
-    .logo-central,
-    .header-acciones-derecha {
-        justify-self: center; /* Centramos todo */
+    .perfil-link-container, .logo-central, .header-acciones-derecha {
+        justify-self: center;
     }
 }
+
+/* --- 9. Ajustes Responsivos para el Buscador --- */
+@media (max-width: 992px) {
+    .buscador-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+

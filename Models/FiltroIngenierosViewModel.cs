@@ -2,6 +2,7 @@ namespace IngeLab.Models
 {
     public class FiltroIngenieroViewModel
     {
+        public string Nombre { get; set; }
         public string PalabrasClave { get; set; } 
         public string Disponibilidad { get; set; }
         public int? Anios_Experiencia { get; set; }

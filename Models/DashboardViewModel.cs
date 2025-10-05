@@ -12,7 +12,7 @@ namespace IngeLab.Models
         public List<PostViewModel> PostsPublicados { get; set; }
         public List<string> HabilidadesEnTendencia { get; set; }
         public List<Notificacion> Notificaciones { get; set; } = new List<Notificacion>();
-
+        public int NotificacionesNoLeidasCount { get; set; }
 
     }
 

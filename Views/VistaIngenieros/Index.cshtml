@@ -2,8 +2,6 @@
 @{
     Layout = null;
     ViewData["Title"] = "Mi Feed";
-    
-    @* var notificacionesNoLeidas = Model.N.Count(n => !n.IsLeida); *@
 }
 
 <!DOCTYPE html>
@@ -12,428 +10,154 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"] - IngeLab</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
 
-
-    @* <script src="~/js/ingDashboard.js"></script> *@
     <link rel="stylesheet" href="~/css/VistaIngenieros.css" asp-append-version="true">
 </head>
-    <body class="body-vista-ingeniero">
+<body class="body-vista-ingeniero">
 
-        <header class="header-ingeniero">
-            <div class="header-left">
-                <a href="/IngenieroPerfil/Index" class="perfil-link">
-                    <img src="https://via.placeholder.com/50" alt="Foto de perfil" class="perfil-foto">
-                    <span>Mi Perfil</span>
-                </a>
-                <div class="notificaciones-container">
-                    <button class="btn-notificaciones" id="btnNotificaciones">
-                        <i class="fas fa-bell"></i>
-                        @if (Model != null && Model.Notificaciones.Count() > 0)
+    <header class="header-ingeniero">
+        <div class="header-left">
+            <a href="@Url.Action("Index", "IngenieroPerfil")" class="perfil-link">
+                <img src="https://via.placeholder.com/50" alt="Foto de perfil" class="perfil-foto">
+                <span>Mi Perfil</span>
+            </a>
+
+            <div class="notificaciones-container">
+                <button class="btn-notificaciones" id="btnNotificaciones">
+                    <i class="fas fa-bell"></i>
+                    @if (Model != null && Model.NotificacionesNoLeidasCount > 0)
+                    {
+                        <span class="notificacion-badge">@Model.NotificacionesNoLeidasCount</span>
+                    }
+                </button>
+
+                <div class="notificaciones-dropdown" id="notificacionesDropdown">
+                    <div class="notificaciones-header">
+                        <h4>Notificaciones</h4>
+                        @if (Model != null && Model.NotificacionesNoLeidasCount > 0)
                         {
-                            <span class="notificacion-badge">@Model.Notificaciones.Count()</span>
+                            <button class="btn-marcar-leidas">
+                                Marcar todas como leídas
+                            </button>
                         }
-                    </button>
-                    
-                    <!-- Dropdown de notificaciones -->
-                    <div class="notificaciones-dropdown" id="notificacionesDropdown">
-                        <div class="notificaciones-header">
-                            <h4>Notificaciones</h4>
-                            @if (Model != null && Model.Notificaciones.Count() > 0)
-                            {
-                                <button class="btn-marcar-leidas" onclick="marcarTodasComoLeidas()">
-                                    Marcar todas como leídas
-                                </button>
-                            }
-                        </div>
-                        
+                    </div>
+
                     <div class="notificaciones-lista">
-                       @if (Model != null && Model.Notificaciones.Any())
+                        @if (Model != null && Model.Notificaciones.Any())
                         {
                             @foreach (var notificacion in Model.Notificaciones)
                             {
-                                <div class="notificacion-item" data-id="@notificacion.IdContacto">
-                                    <div class="notificacion-empresa">
-                                        <strong>@notificacion.Empresa</strong>
-                                    </div>
-                                    <div class="notificacion-oferta">
-                                        @notificacion.Oferta
-                                    </div>
-                                    <div class="notificacion-fecha">
-                                        <small>@notificacion.Fecha.ToString("dd/MM/yyyy HH:mm")</small>
-                                    </div>
-
+                                <div class="notificacion-item @(notificacion.IsLeida ? "vista" : "")" data-id="@notificacion.IdContacto">
+                                    <div class="notificacion-empresa"><strong>@notificacion.Empresa</strong></div>
+                                    <div class="notificacion-oferta">@notificacion.Oferta</div>
+                                    <div class="notificacion-fecha"><small>@notificacion.Fecha.ToString("dd/MM/yyyy HH:mm")</small></div>
                                     <div class="notificacion-acciones">
-                                        <button class="btn-marcar-leida" onclick="marcarComoLeida(@notificacion.IdContacto)">
-                                            <i class="fas fa-check"></i>
-                                        </button>
-
-                                        <button class="btn-aceptar" onclick="aceptarOferta(@notificacion.IdContacto)">
-                                            <i class="fas fa-thumbs-up"></i> Aceptar
-                                        </button>
-
-                                        <button class="btn-rechazar" onclick="rechazarOferta(@notificacion.IdContacto)">
-                                            <i class="fas fa-thumbs-down"></i> Rechazar
-                                        </button>
+                                        <button class="btn-aceptar" data-id="@notificacion.IdContacto"><i class="fas fa-thumbs-up"></i> Aceptar</button>
+                                        <button class="btn-rechazar" data-id="@notificacion.IdContacto"><i class="fas fa-thumbs-down"></i> Rechazar</button>
                                     </div>
                                 </div>
                             }
-                            }
-                            else
-                            {
-                                <div class="no-notificaciones">
-                                    <i class="fas fa-bell-slash"></i>
-                                    <p>No tienes notificaciones nuevas</p>
-                                </div>
-                            }
-
+                        }
+                        else
+                        {
+                            <div class="no-notificaciones">
+                                <i class="fas fa-bell-slash"></i>
+                                <p>No tienes notificaciones pendientes</p>
+                            </div>
+                        }
+                    </div>
                 </div>
             </div>
-
         </div>
-        
     </header>
 
-    @* <main class="dashboard-grid">
-        <aside class="columna-izquierda">
-            <div class="panel-card">
-                <h3 class="panel-titulo">Ofertas Recientes</h3>
-                <ul class="lista-ofertas">
-                    @foreach (var notificacion in Model.Notificaciones.Take(3))
-                    {
-                        <li class="@(notificacion.IsLeida ? "" : "no-leida")">
-                            <span class="empresa-oferta">@notificacion.EmpresaNombre</span>
-                            <span class="titulo-oferta">@notificacion.TituloOferta</span>
-                        </li>
-                    }
-                </ul>
-                <a href="#" class="link-ver-todas">Ver todas las ofertas</a>
-            </div>
-        </aside> *@
+    <main class="columna-central">
+        <div class="crear-post-card">
+            <form method="post" asp-controller="VistaIngenieros" asp-action="Post">
+                @{
+                    var idUsuario = Context.Session.GetInt32("UsuarioId") ?? 0;
+                }
+                <input type="hidden" name="Id_Usuario" value="@idUsuario" />
+                @Html.AntiForgeryToken()
 
-        <Form method="post" asp-controller="VistaIngenieros" asp-action="Post">
-        <section class="columna-central">
-            <div class="crear-post-card">
-                <textarea class="input-post" id="Contenido" name="Contenido" placeholder="En que proyecto estas trabajando, @Model.PerfilActual.Nombre?"></textarea>
+                <textarea class="input-post" name="Contenido" placeholder="¿En qué proyecto estás trabajando, @Model.PerfilActual.Nombre?"></textarea>
                 <div class="post-acciones">
                     <button type="button" class="btn-accion-post" id="btn-abrir-modal-codigo"><i class="fas fa-code"></i> Fragmento de código</button>
                     <button type="submit" class="btn-publicar">Publicar</button>
                 </div>
-            </div>
+            </form>
+        </div>
 
-            @{
-                var idUsuario = Context.Session.GetInt32("UsuarioId") ?? 0;
-            }
-            <input type="hidden" name="Id_Usuario" value="@idUsuario" />
-            
-            </Form>
-
-
-    @foreach (var post in Model.PostsPublicados)
-    {
-        <div class="post-card">
-            <div class="post-header">
-                <img src="https://via.placeholder.com/45" alt="autor" class="post-autor-foto">
-                <div class="post-autor-info">
-                    @* ✨ Mostramos el nombre del autor del post ✨ *@
-                    <h4>@post.AutorNombre @post.AutorApellido</h4>
-                    <p>@post.FechaCreacion.ToString("dd MMM, HH:mm")</p>
-                </div>
-
-                @* ✨ Lógica clave: solo mostrar opciones si el post es mío ✨ *@
-                @if (post.Id_Usuario == Model.PerfilActual.Id_Usuario)
-                {
-                    <div class="post-opciones">
-                        <button type="button" class="btn-opciones" onclick="toggleMenu(this)">
-                            <i class="fas fa-ellipsis-h"></i>
-                        </button>
-                        <div class="opciones-menu">
-                            <a href="javascript:void(0);" onclick="editarPost(@post.Id_Post)">Editar</a>
-                            <a href="javascript:void(0);" onclick="fijarPost(@post.Id_Post, @(post.Fijado ? "false" : "true"))">
-                                @(post.Fijado ? "Desfijar" : "Fijar")
-                            </a>
-                        </div>
+        @foreach (var post in Model.PostsPublicados)
+        {
+            <div class="post-card" data-post-id="@post.Id_Post">
+                <div class="post-header">
+                    <img src="https://via.placeholder.com/45" alt="autor" class="post-autor-foto">
+                    <div class="post-autor-info">
+                        <h4>@post.AutorNombre @post.AutorApellido</h4>
+                        <p>@post.FechaCreacion.ToString("dd MMM, HH:mm")</p>
                     </div>
-                }
-            </div>
-
-                    <!-- CONTENIDO -->
-            <div class="post-contenido" id="post-contenido-@post.Id_Post">
-                @if (post.Tipo_Contenido == "texto")
-                {
-                    <p>@post.Contenido</p>
-                }
-                else
-                {
-                    @if (!string.IsNullOrEmpty(post.TextoExplicativo))
+                    @if (post.Id_Usuario == Model.PerfilActual.Id_Usuario)
                     {
-                        <p>@post.TextoExplicativo</p>
-                    }
-
-                    <div class="code-block-container">
-                        <div class="code-block-header">
-                            <span class="language-tag">@post.Tipo_Contenido</span>
-                            <button type="button" class="copy-code-btn" onclick="copiarCodigo(this)">
-                                <i class="far fa-copy"></i> Copiar
-                            </button>
-                        </div>
-                        <pre><code class="language-@post.Tipo_Contenido">@post.Codigo</code></pre>
-                    </div>
-                }
-            </div>
-
-                    <div class="post-contenido" id="form-editar-@post.Id_Post" style="display:none;">
-                        <form method="post" asp-controller="VistaIngenieros" asp-action="EditarPost">
-                            <input type="hidden" name="idPost" value="@post.Id_Post" />
-                            <textarea name="contenido" class="form-control">@post.Contenido</textarea>
-                            <div class="mt-2" style="display: flex; justify-content: flex-end; gap: 10px;">
-                                <button type="submit" class="btn btn-success btn-sm">Guardar</button>
-                                <button type="button" class="btn btn-secondary btn-sm" onclick="cancelarEdicion(@post.Id_Post)">Cancelar</button>
+                        <div class="post-opciones">
+                            <button type="button" class="btn-opciones"><i class="fas fa-ellipsis-h"></i></button>
+                            <div class="opciones-menu">
+                                <a href="#" class="btn-editar-post">Editar</a>
+                                <a href="#" class="btn-fijar-post" data-fijar="@(post.Fijado ? "false" : "true")">
+                                    @(post.Fijado ? "Desfijar" : "Fijar")
+                                </a>
                             </div>
-                        </form>
-                    </div>
-
-                </div>
-            }
-
-
-
-        @* </section>
-
-        <aside class="columna-derecha">
-            <div class="panel-card">
-                <h3 class="panel-titulo">Habilidades en Tendencia</h3>
-                <div class="tags-container">
-                    @foreach (var skill in Model.HabilidadesEnTendencia)
-                    {
-                        <span class="skill-tag">@skill</span>
+                        </div>
                     }
                 </div>
-            </div>
-        </aside>
-    </main> *@
 
-    <script>
-        // Script simple para el men� de opciones de cada post
-        function toggleMenu(button) {
-            const menu = button.nextElementSibling;
-            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-        }
-
-        // Cierra el men� si se hace clic en cualquier otro lugar
-        document.addEventListener('click', function (e) {
-            document.querySelectorAll('.opciones-menu').forEach(menu => {
-                const btn = menu.previousElementSibling;
-                if (!menu.contains(e.target) && !btn.contains(e.target)) {
-                    menu.style.display = 'none';
-                }
-            });
-        });
-    </script>
-
-    <script>
-    function editarPost(idPost) {
-        document.getElementById("post-contenido-" + idPost).style.display = "none";
-        document.getElementById("form-editar-" + idPost).style.display = "block";
-    }
-
-    function cancelarEdicion(idPost) {
-        document.getElementById("form-editar-" + idPost).style.display = "none";
-        document.getElementById("post-contenido-" + idPost).style.display = "block";
-    }
-    </script>
-
-    <script>
-            function fijarPost(idPost, fijar) {
-            // Crear formulario dinámicamente
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = '/VistaIngenieros/FijarPost';
-            
-            // Input para idPost
-            const inputId = document.createElement('input');
-            inputId.type = 'hidden';
-            inputId.name = 'idPost';
-            inputId.value = idPost;
-            
-            // Input para fijar
-            const inputFijar = document.createElement('input');
-            inputFijar.type = 'hidden';
-            inputFijar.name = 'fijar';
-            inputFijar.value = fijar;
-            
-            // Agregar inputs al formulario y enviarlo
-            form.appendChild(inputId);
-            form.appendChild(inputFijar);
-            document.body.appendChild(form);
-            form.submit();
-        }
-    </script>
-
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const btnNotificaciones = document.getElementById('btnNotificaciones');
-        const dropdown = document.getElementById('notificacionesDropdown');
-        
-        // Toggle dropdown
-        btnNotificaciones.addEventListener('click', function(e) {
-            e.stopPropagation();
-            dropdown.classList.toggle('active');
-        });
-        
-        // Cerrar dropdown al hacer clic fuera
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.notificaciones-container')) {
-                dropdown.classList.remove('active');
-            }
-        });
-        
-        // Prevenir que el dropdown se cierre al hacer clic dentro
-        dropdown.addEventListener('click', function(e) {
-            e.stopPropagation();
-        });
-    });
-
-    // Función para marcar una notificación como leída
-    function marcarComoLeida(idNotificacion) {
-        fetch('/Notificaciones/MarcarComoLeida', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
-            },
-            body: JSON.stringify({ id: idNotificacion })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // Remover la notificación del DOM
-                const notificacionItem = document.querySelector(`[data-id="${idNotificacion}"]`);
-                if (notificacionItem) {
-                    notificacionItem.remove();
-                    actualizarContadorNotificaciones();
-                }
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    }
-
-   function aceptarOferta(idNotificacion) {
-        const formData = new URLSearchParams();
-        formData.append("idNotificacion", idNotificacion);
-
-        fetch('/VistaIngenieros/AceptarOferta', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
-            },
-            body: formData.toString()
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                const notificacionItem = document.querySelector(`[data-id="${idNotificacion}"]`);
-                if (notificacionItem) {
-                    notificacionItem.remove();
-                }
-                actualizarContadorNotificaciones();
-            } else {
-                alert("Error al aceptar la oferta");
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    }
-    function rechazarOferta(idNotificacion) {
-        fetch('/VistaIngenieros/RechazarOferta', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
-            },
-            body: "idNotificacion=" + encodeURIComponent(idNotificacion)
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                const notificacionItem = document.querySelector(`[data-id="${idNotificacion}"]`);
-                if (notificacionItem) {
-                    notificacionItem.remove();
-                }
-                actualizarContadorNotificaciones();
-            } else {
-                alert("Error al rechazar la oferta: " + data.message);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    }
-
-    // Función para marcar todas las notificaciones como leídas
-    function marcarTodasComoLeidas() {
-        fetch('/Notificaciones/MarcarTodasComoLeidas', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // Recargar la página o limpiar las notificaciones
-                location.reload();
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    }
-
-    // Función para actualizar el contador de notificaciones
-    function actualizarContadorNotificaciones() {
-        const notificacionesRestantes = document.querySelectorAll('.notificacion-item').length;
-        const badge = document.querySelector('.notificacion-badge');
-        
-        if (notificacionesRestantes === 0) {
-            if (badge) {
-                badge.remove();
-            }
-            // Mostrar mensaje de "no hay notificaciones"
-            document.querySelector('.notificaciones-lista').innerHTML = `
-                <div class="no-notificaciones">
-                    <i class="fas fa-bell-slash"></i>
-                    <p>No tienes notificaciones nuevas</p>
+                <div class="post-contenido">
+                    @if (post.Tipo_Contenido == "texto")
+                    {
+                        <p>@post.Contenido</p>
+                    }
+                    else
+                    {
+                        @if (!string.IsNullOrEmpty(post.TextoExplicativo))
+                        {
+                            <p>@post.TextoExplicativo</p>
+                        }
+                        <div class="code-block-container">
+                            <div class="code-block-header">
+                                <span class="language-tag">@post.Tipo_Contenido</span>
+                                <button type="button" class="copy-code-btn"><i class="far fa-copy"></i> Copiar</button>
+                            </div>
+                            <pre><code class="language-@post.Tipo_Contenido">@post.Codigo</code></pre>
+                        </div>
+                    }
                 </div>
-            `;
-            // Ocultar el botón de marcar todas como leídas
-            const btnMarcarTodas = document.querySelector('.btn-marcar-leidas');
-            if (btnMarcarTodas) {
-                btnMarcarTodas.style.display = 'none';
-            }
-        } else if (badge) {
-            badge.textContent = notificacionesRestantes;
+
+                <div class="form-editar-container" style="display:none;">
+                    <form method="post" asp-controller="VistaIngenieros" asp-action="EditarPost">
+                        <input type="hidden" name="idPost" value="@post.Id_Post" />
+                        <textarea name="contenido" class="form-control">@post.Contenido</textarea>
+                        <div class="mt-2" style="display: flex; justify-content: flex-end; gap: 10px;">
+                            <button type="submit" class="btn btn-success btn-sm">Guardar</button>
+                            <button type="button" class="btn btn-cancelar-edicion btn-secondary btn-sm">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         }
-    }
-</script>
+    </main>
 
     <div id="modal-codigo" class="modal-overlay" style="display: none;">
         <div class="modal-content">
             <form asp-controller="VistaIngenieros" asp-action="PublicarCodigo" method="post">
                 <h3>Compartir Fragmento de Código</h3>
-
                 <div class="form-group">
                     <label for="TextoExplicativo">Descripción (opcional):</label>
                     <textarea name="TextoExplicativo" class="modal-textarea" rows="3" placeholder="Añade un contexto para tu código..."></textarea>
                 </div>
-
                 <div class="form-group">
                     <label for="Tipo_Contenido">Lenguaje:</label>
                     <select name="Tipo_Contenido" class="modal-select">
@@ -442,20 +166,12 @@
                         <option value="javascript">JavaScript</option>
                         <option value="python">Python</option>
                         <option value="sql">SQL</option>
-                        <option value="html">HTML</option>
-                        <option value="css">CSS</option>
-                        <option value="bash">Bash/Shell</option>
-                        <option value="json">JSON</option>
-                        <option value="swift">Swift</option>
-                        <option value="r">R</option>
                     </select>
                 </div>
-
                 <div class="form-group">
                     <label for="Codigo">Código:</label>
                     <textarea name="Codigo" class="modal-textarea" rows="10" placeholder="Pega tu código aquí..."></textarea>
                 </div>
-
                 <div class="modal-acciones">
                     <button type="button" id="btn-cancelar-codigo" class="btn-modal-cancelar">Cancelar</button>
                     <button type="submit" class="btn-modal-publicar">Publicar</button>
@@ -468,58 +184,194 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
 
     <script>
-               // BLOQUE NUEVO Y MEJORADO
         document.addEventListener('DOMContentLoaded', () => {
             Prism.highlightAll();
 
-            // ✨ CAMBIO CLAVE: Ahora lo buscamos por su ID único ✨
-            const btnAccionCodigo = document.getElementById('btn-abrir-modal-codigo');
-            const modalCodigo = document.getElementById('modal-codigo');
-            const btnCancelarCodigo = document.getElementById('btn-cancelar-codigo');
+            const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
 
-            // Abrir el modal
-            if (btnAccionCodigo) {
-                btnAccionCodigo.addEventListener('click', (e) => {
-                    e.preventDefault();
+            // --- LÓGICA GENERAL DE LA UI ---
+
+            // Cerrar menús o dropdowns si se hace clic fuera de ellos
+            document.addEventListener('click', (e) => {
+                // Cierra dropdown de notificaciones
+                const notificacionesContainer = e.target.closest('.notificaciones-container');
+                if (!notificacionesContainer) {
+                    document.getElementById('notificacionesDropdown').classList.remove('active');
+                }
+
+                // Cierra menú de opciones de posts
+                document.querySelectorAll('.opciones-menu').forEach(menu => {
+                    if (!menu.parentElement.contains(e.target)) {
+                        menu.style.display = 'none';
+                    }
+                });
+            });
+
+            // --- LÓGICA DE NOTIFICACIONES ---
+
+            const notificacionesContainer = document.querySelector('.notificaciones-container');
+            if (notificacionesContainer) {
+                // Abrir/Cerrar dropdown de notificaciones
+                document.getElementById('btnNotificaciones').addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    document.getElementById('notificacionesDropdown').classList.toggle('active');
+                });
+
+                // Manejar clics dentro del dropdown de notificaciones
+                document.getElementById('notificacionesDropdown').addEventListener('click', (e) => {
+                    e.stopPropagation(); // Evita que se cierre al hacer clic dentro
+
+                    const target = e.target.closest('button');
+                    if (!target) return;
+
+                    const idNotificacion = target.dataset.id;
+
+                    if (target.matches('.btn-aceptar')) {
+                        gestionarOferta(idNotificacion, '@Url.Action("AceptarOferta", "VistaIngenieros")');
+                    } else if (target.matches('.btn-rechazar')) {
+                        gestionarOferta(idNotificacion, '@Url.Action("RechazarOferta", "VistaIngenieros")');
+                    } else if (target.matches('.btn-marcar-leidas')) {
+                        marcarTodasComoLeidas();
+                    }
+                });
+            }
+
+            function marcarTodasComoLeidas() {
+                fetch('@Url.Action("MarcarTodasComoLeidas", "Notificaciones")', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'RequestVerificationToken': token }
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        const badge = document.querySelector('.notificacion-badge');
+                        const btnMarcar = document.querySelector('.btn-marcar-leidas');
+                        if (badge) {
+                            badge.style.transition = 'opacity 0.5s ease';
+                            badge.style.opacity = '0';
+                            setTimeout(() => badge.style.display = 'none', 500);
+                        }
+                        if (btnMarcar) btnMarcar.style.display = 'none';
+
+                        document.querySelectorAll('.notificacion-item:not(.vista)').forEach(item => {
+                            item.classList.add('vista');
+                        });
+                    }
+                }).catch(err => console.error('Error:', err));
+            }
+
+            function gestionarOferta(id, url) {
+                const formData = new URLSearchParams();
+                formData.append("idNotificacion", id);
+
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'RequestVerificationToken': token
+                    },
+                    body: formData.toString()
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        const item = document.querySelector(`.notificacion-item[data-id='${id}']`);
+                        if(item) item.remove();
+                        actualizarContadorNotificaciones();
+                    } else {
+                        alert(data.message || 'Error al procesar la oferta.');
+                    }
+                }).catch(err => console.error('Error:', err));
+            }
+
+            function actualizarContadorNotificaciones() {
+                const restantes = document.querySelectorAll('.notificacion-item').length;
+                if (restantes === 0) {
+                    document.querySelector('.notificaciones-lista').innerHTML = `
+                        <div class="no-notificaciones">
+                            <i class="fas fa-bell-slash"></i>
+                            <p>No tienes notificaciones pendientes</p>
+                        </div>`;
+                }
+            }
+
+
+            // --- LÓGICA DEL FEED Y POSTS ---
+
+            const mainFeed = document.querySelector('.columna-central');
+            if (mainFeed) {
+                mainFeed.addEventListener('click', (e) => {
+                    const postCard = e.target.closest('.post-card');
+                    if (!postCard) return;
+
+                    const idPost = postCard.dataset.postId;
+
+                    // Menú de opciones del post (fijar, editar)
+                    if (e.target.matches('.btn-opciones, .btn-opciones *')) {
+                        const menu = postCard.querySelector('.opciones-menu');
+                        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+                    }
+                    else if (e.target.matches('.btn-fijar-post')) {
+                        e.preventDefault();
+                        const fijar = e.target.dataset.fijar === 'true';
+                        fijarPost(idPost, fijar);
+                    }
+                    else if (e.target.matches('.btn-editar-post')) {
+                        e.preventDefault();
+                        postCard.querySelector('.post-contenido').style.display = 'none';
+                        postCard.querySelector('.form-editar-container').style.display = 'block';
+                    }
+                    else if (e.target.matches('.btn-cancelar-edicion')) {
+                        postCard.querySelector('.form-editar-container').style.display = 'none';
+                        postCard.querySelector('.post-contenido').style.display = 'block';
+                    }
+                    else if (e.target.matches('.copy-code-btn, .copy-code-btn *')) {
+                        copiarCodigo(e.target.closest('.copy-code-btn'));
+                    }
+                });
+            }
+
+            function fijarPost(id, fijar) {
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = '@Url.Action("FijarPost", "VistaIngenieros")';
+                form.innerHTML = `
+                    <input type="hidden" name="idPost" value="${id}" />
+                    <input type="hidden" name="fijar" value="${fijar}" />
+                `;
+                document.body.appendChild(form);
+                form.submit();
+            }
+
+            function copiarCodigo(button) {
+                const code = button.closest('.code-block-container').querySelector('code').innerText;
+                navigator.clipboard.writeText(code).then(() => {
+                    button.innerHTML = '<i class="fas fa-check"></i> Copiado';
+                    setTimeout(() => {
+                        button.innerHTML = '<i class="far fa-copy"></i> Copiar';
+                    }, 2000);
+                });
+            }
+
+            // --- LÓGICA DEL MODAL DE CÓDIGO ---
+
+            const modalCodigo = document.getElementById('modal-codigo');
+            if(modalCodigo) {
+                document.getElementById('btn-abrir-modal-codigo').addEventListener('click', () => {
                     modalCodigo.style.display = 'flex';
                 });
-            }
 
-            // Cerrar el modal
-            if (btnCancelarCodigo) {
-                btnCancelarCodigo.addEventListener('click', () => {
+                document.getElementById('btn-cancelar-codigo').addEventListener('click', () => {
                     modalCodigo.style.display = 'none';
                 });
-            }
 
-            // Cerrar si se hace clic fuera del contenido
-            if(modalCodigo) {
                 modalCodigo.addEventListener('click', (e) => {
-                    if (e.target === modalCodigo) {
+                    if (e.target === modalCodigo) { // Cierra si se hace clic en el fondo
                         modalCodigo.style.display = 'none';
                     }
                 });
             }
         });
-    </script>
-
-    <script>
-        // Función para copiar el código
-        function copiarCodigo(button) {
-            const container = button.closest('.code-block-container');
-            const codeElement = container.querySelector('code');
-            const codeToCopy = codeElement.innerText;
-
-            navigator.clipboard.writeText(codeToCopy).then(() => {
-                button.innerHTML = '<i class="fas fa-check"></i> Copiado!';
-                setTimeout(() => {
-                    button.innerHTML = '<i class="far fa-copy"></i> Copiar';
-                }, 2000);
-            }).catch(err => {
-                console.error('Error al copiar el código: ', err);
-                button.innerText = 'Error';
-            });
-        }
     </script>
 
 </body>
