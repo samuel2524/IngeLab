@@ -6,6 +6,7 @@ namespace IngeLab.Models.NotificacionesIngeniero
         public string Oferta { get; set; }
         public string Empresa { get; set; }
         public DateTime Fecha { get; set; }
+        public bool IsLeida { get; set; }
     }
 
     public class NotificacionEmpresa

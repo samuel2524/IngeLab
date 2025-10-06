@@ -14,6 +14,29 @@ namespace IngeLab.Controllers
     {
         BD bd = new BD();
 
+        //public IActionResult Index()
+        //{
+        //    var idUsuario = HttpContext.Session.GetInt32("UsuarioId");
+        //    if (!idUsuario.HasValue)
+        //    {
+        //        return RedirectToAction("Login", "Cuenta");
+        //    }
+
+        //    var perfil = ObtenerPerfilPorId(idUsuario.Value);
+        //    var notificaciones = ObtenerNotificaciones(idUsuario.Value);
+
+        //    var viewModel = new IngenieroDashboardViewModel
+        //    {
+        //        PerfilActual = perfil,
+        //        // ✨ AHORA SE LLAMA AL NUEVO MÉTODO PARA EL FEED GLOBAL ✨
+        //        PostsPublicados = ObtenerFeedGlobal(),
+        //        Notificaciones = notificaciones,
+        //        HabilidadesEnTendencia = new List<string> { "IA Generativa", "Rust", "Clean Architecture", "DevSecOps", "Blazor" }
+        //    };
+
+        //    return View(viewModel);
+        //}
+
         public IActionResult Index()
         {
             var idUsuario = HttpContext.Session.GetInt32("UsuarioId");
@@ -23,18 +46,60 @@ namespace IngeLab.Controllers
             }
 
             var perfil = ObtenerPerfilPorId(idUsuario.Value);
-            var notificaciones = ObtenerNotificaciones(idUsuario.Value);
+            // ✨ Llamamos al método que ahora trae TODAS las notis pendientes ✨
+            var notificacionesPendientes = ObtenerNotificacionesPendientes(idUsuario.Value);
 
             var viewModel = new IngenieroDashboardViewModel
             {
                 PerfilActual = perfil,
-                // ✨ AHORA SE LLAMA AL NUEVO MÉTODO PARA EL FEED GLOBAL ✨
                 PostsPublicados = ObtenerFeedGlobal(),
-                Notificaciones = notificaciones,
-                HabilidadesEnTendencia = new List<string> { "IA Generativa", "Rust", "Clean Architecture", "DevSecOps", "Blazor" }
+                // La lista completa para el dropdown
+                Notificaciones = notificacionesPendientes,
+                // El conteo de solo las no leídas para la burbuja
+                NotificacionesNoLeidasCount = notificacionesPendientes.Count(n => !n.IsLeida),
+                HabilidadesEnTendencia = new List<string> { "IA Generativa", "Rust", "Clean Architecture" }
             };
 
             return View(viewModel);
+        }
+
+        // ⛔️ REEMPLAZA tu antiguo `ObtenerNotificaciones` por este ⛔️
+        private List<Notificacion> ObtenerNotificacionesPendientes(int idUsuario)
+        {
+            var notificaciones = new List<Notificacion>();
+            using (var conexion = bd.establecerConexion())
+            {
+                // La query ahora trae todas las que no han sido aceptadas o rechazadas,
+                // sin importar si fueron leídas o no.
+                string query = @"
+                SELECT ic.id_contacto, ic.oferta, ic.fecha_contacto, e.nombre, ic.leido
+                FROM ingenieros_contactados ic
+                INNER JOIN empresas e ON ic.id_empresa = e.id_empresa
+                WHERE ic.id_usuario = @Id
+                AND (ic.estado IS NULL OR ic.estado NOT IN ('aceptada', 'rechazada'))
+                ORDER BY ic.fecha_contacto DESC";
+
+                using (var cmd = new NpgsqlCommand(query, conexion))
+                {
+                    cmd.Parameters.AddWithValue("Id", idUsuario);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            notificaciones.Add(new Notificacion
+                            {
+                                IdContacto = Convert.ToInt32(reader["id_contacto"]),
+                                Oferta = reader["oferta"].ToString(),
+                                Empresa = reader["nombre"].ToString(),
+                                Fecha = Convert.ToDateTime(reader["fecha_contacto"]),
+                                // Mapeamos el estado 'leido' de la base de datos
+                                IsLeida = reader["leido"] != DBNull.Value && Convert.ToBoolean(reader["leido"])
+                            });
+                        }
+                    }
+                }
+            }
+            return notificaciones;
         }
 
         // ✨ ESTA ES LA NUEVA FUNCIÓN QUE TRAE TODOS LOS POSTS DE TODOS LOS INGENIEROS ✨
@@ -319,38 +384,38 @@ namespace IngeLab.Controllers
             return null;
         }
 
-        private List<Notificacion> ObtenerNotificaciones(int idUsuario)
-        {
-            var notificaciones = new List<Notificacion>();
-            using (var conexion = bd.establecerConexion())
-            {
-                string query = @"
-                    SELECT ic.id_contacto, ic.oferta, ic.fecha_contacto, e.nombre
-                    FROM ingenieros_contactados ic
-                    INNER JOIN empresas e ON ic.id_empresa = e.id_empresa
-                    WHERE ic.id_usuario = @Id 
-                    AND (ic.leido = false OR ic.leido IS NULL) 
-                    ORDER BY ic.fecha_contacto DESC";
-                using (var cmd = new NpgsqlCommand(query, conexion))
-                {
-                    cmd.Parameters.AddWithValue("Id", idUsuario);
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            notificaciones.Add(new Notificacion
-                            {
-                                IdContacto = Convert.ToInt32(reader["id_contacto"]),
-                                Oferta = reader["oferta"].ToString(),
-                                Empresa = reader["nombre"].ToString(),
-                                Fecha = Convert.ToDateTime(reader["fecha_contacto"])
-                            });
-                        }
-                    }
-                }
-            }
-            return notificaciones;
-        }
+        //private List<Notificacion> ObtenerNotificaciones(int idUsuario)
+        //{
+        //    var notificaciones = new List<Notificacion>();
+        //    using (var conexion = bd.establecerConexion())
+        //    {
+        //        string query = @"
+        //            SELECT ic.id_contacto, ic.oferta, ic.fecha_contacto, e.nombre
+        //            FROM ingenieros_contactados ic
+        //            INNER JOIN empresas e ON ic.id_empresa = e.id_empresa
+        //            WHERE ic.id_usuario = @Id 
+        //            AND (ic.leido = false OR ic.leido IS NULL) 
+        //            ORDER BY ic.fecha_contacto DESC";
+        //        using (var cmd = new NpgsqlCommand(query, conexion))
+        //        {
+        //            cmd.Parameters.AddWithValue("Id", idUsuario);
+        //            using (var reader = cmd.ExecuteReader())
+        //            {
+        //                while (reader.Read())
+        //                {
+        //                    notificaciones.Add(new Notificacion
+        //                    {
+        //                        IdContacto = Convert.ToInt32(reader["id_contacto"]),
+        //                        Oferta = reader["oferta"].ToString(),
+        //                        Empresa = reader["nombre"].ToString(),
+        //                        Fecha = Convert.ToDateTime(reader["fecha_contacto"])
+        //                    });
+        //                }
+        //            }
+        //        }
+        //    }
+        //    return notificaciones;
+        //}
 
         [HttpPost]
         public IActionResult AceptarOferta(int idNotificacion)

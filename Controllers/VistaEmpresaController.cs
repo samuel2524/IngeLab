@@ -73,6 +73,19 @@ namespace IngeLab.Controllers
                 var condiciones = new List<string>();
                 var parametros = new Dictionary<string, object>();
 
+                // ✨ ================================================================ ✨
+                // ✨ CAMBIO 2: AÑADIMOS LA LÓGICA PARA FILTRAR POR NOMBRE DEL INGENIERO ✨
+                // ✨ ================================================================ ✨
+                if (!string.IsNullOrWhiteSpace(filtros.Nombre))
+                {
+                    // Concatenamos nombre y apellido para buscar por el nombre completo.
+                    // Usamos ILIKE para que la búsqueda ignore mayúsculas y minúsculas (propio de PostgreSQL).
+                    condiciones.Add("(u.nombre || ' ' || u.apellidos) ILIKE @Nombre");
+                    parametros.Add("Nombre", $"%{filtros.Nombre}%");
+                }
+
+                // --- El resto de tu lógica de filtros permanece intacta ---
+
                 // Filtro por disponibilidad
                 if (!string.IsNullOrEmpty(filtros.Disponibilidad))
                 {
@@ -90,7 +103,7 @@ namespace IngeLab.Controllers
                 // Filtro por años de experiencia
                 if (filtros.Anios_Experiencia.HasValue)
                 {
-                    condiciones.Add("dp.anios_experiencia = @Anios_Experiencia");
+                    condiciones.Add("dp.anios_experiencia >= @Anios_Experiencia"); // Usamos >= para más flexibilidad
                     parametros.Add("Anios_Experiencia", filtros.Anios_Experiencia.Value);
                 }
 
@@ -106,35 +119,32 @@ namespace IngeLab.Controllers
                     {
                         string paramName = $"Palabra{index}";
                         subCondiciones.Add($@"(
-                            COALESCE(dp.habilidades_tecnicas, '') ILIKE '%' || @{paramName} || '%' OR
-                            COALESCE(dp.especializacion, '') ILIKE '%' || @{paramName} || '%' OR
-                            COALESCE(dp.idiomas, '') ILIKE '%' || @{paramName} || '%'
-                        )");
+                    COALESCE(dp.habilidades_tecnicas, '') ILIKE '%' || @{paramName} || '%' OR
+                    COALESCE(dp.especializacion, '') ILIKE '%' || @{paramName} || '%' OR
+                    COALESCE(dp.idiomas, '') ILIKE '%' || @{paramName} || '%'
+                )");
                         parametros.Add(paramName, palabra);
                         index++;
                     }
 
-                    condiciones.Add("(" + string.Join(" AND ", subCondiciones) + ")");
+                    if (subCondiciones.Any())
+                    {
+                        condiciones.Add("(" + string.Join(" AND ", subCondiciones) + ")");
+                    }
                 }
 
-
-                string traemosTodos = condiciones.Count > 0 ? "WHERE " + string.Join(" AND ", condiciones) : "";
+                // Construcción de la cláusula WHERE
+                string traemosTodos = condiciones.Any() ? "WHERE " + string.Join(" AND ", condiciones) : "";
 
                 string query = $@"
-                    SELECT u.id_usuario, u.nombre, u.apellidos, u.correo, u.telefono,
-                        dp.habilidades_tecnicas, dp.especializacion, dp.idiomas,
-                        dp.disponibilidad, dp.nivel_academico, dp.anios_experiencia
-                    FROM usuarios u
-                    INNER JOIN datosprofesionales dp ON u.id_usuario = dp.id_usuario
-                    {traemosTodos}";
+            SELECT u.id_usuario, u.nombre, u.apellidos, u.correo, u.telefono,
+                   dp.habilidades_tecnicas, dp.especializacion, dp.idiomas,
+                   dp.disponibilidad, dp.nivel_academico, dp.anios_experiencia
+            FROM usuarios u
+            INNER JOIN datosprofesionales dp ON u.id_usuario = dp.id_usuario
+            {traemosTodos}";
 
-                Console.WriteLine("QUERY FINAL: " + query);
-                foreach (var param in parametros)
-                {
-                    Console.WriteLine($"{param.Key} = {param.Value}");
-                }
-
-
+                // (El resto del método para ejecutar la query es igual)
                 using (var cmd = new NpgsqlCommand(query, conexion))
                 {
                     foreach (var param in parametros)
@@ -168,6 +178,8 @@ namespace IngeLab.Controllers
 
             filtros.Resultados = resultados;
 
+            // Aquí retornas la vista que muestra los resultados.
+            // ¡Asegúrate de que esta vista tenga la grilla que te pasé en el mensaje anterior!
             return View("~/Views/FiltrarIngeniero/Index.cshtml", filtros);
         }
 

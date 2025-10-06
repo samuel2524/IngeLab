@@ -6,26 +6,25 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buscar Ingenieros</title>
+    <title>Buscar Ingenieros - IngeLab</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="~/css/FiltrarIngeniero.css" asp-append-version="true">
 </head>
 <body class="body-vista-empresa">
+
     <header class="header-empresa">
         <div class="perfil-link-container">
-            <a href="/EmpresaPerfil/Index" class="perfil-link">
+            <a href="@Url.Action("Index", "EmpresaPerfil")" class="perfil-link">
                 <img src="https://via.placeholder.com/50" alt="Logo de la Empresa" class="perfil-logo">
                 <span>Mi Perfil</span>
             </a>
         </div>
         <div class="logo-central">
-            <a href="/" class="header-logo">IngeLab</a>
+            <a href="@Url.Action("Index", "Home")" class="header-logo">IngeLab</a>
         </div>
-
-        @* ✨ AQUÍ LA MAGIA ✨ *@
         <div class="header-acciones-derecha">
             <a href="@Url.Action("Index", "VistaEmpresa")" class="btn-volver">
                 <i class="fas fa-arrow-left"></i> Volver al Dashboard
@@ -35,180 +34,178 @@
 
     <main class="main-container">
         <form asp-controller="VistaEmpresa" asp-action="FiltrarAvanzado" method="post">
-            <div class="buscador-container">
-                <input type="search" name="PalabrasClave" placeholder="Buscar por habilidad, especialidad o nombre..." class="input-buscador" />
+            @Html.AntiForgeryToken()
 
+            <div class="buscador-container">
+                <input type="search" name="Nombre" placeholder="Buscar por nombre..." class="input-buscador" value="@Model.Nombre" />
+
+                <input type="search" name="PalabrasClave" placeholder="Habilidad, especialidad..." class="input-buscador" value="@Model.PalabrasClave" />
                 <select name="Disponibilidad" class="input-filtro">
                     <option value="">Disponibilidad</option>
-                    <option value="full-time">Jornada Completa</option>
-                    <option value="part-time">Media Jornada</option>
-                    <option value="freelance">Freelance / Por Proyecto</option>
-                    <option value="open">Abierto a Ofertas</option>
+                    <option value="full-time" selected="@(Model.Disponibilidad == "full-time")">Jornada Completa</option>
+                    <option value="part-time" selected="@(Model.Disponibilidad == "part-time")">Media Jornada</option>
+                    <option value="freelance" selected="@(Model.Disponibilidad == "freelance")">Freelance</option>
+                    <option value="open" selected="@(Model.Disponibilidad == "open")">Abierto a Ofertas</option>
                 </select>
-
-                <input type="number" name="Anios_Experiencia" placeholder="Años de experiencia" class="input-filtro" min="0" />
-
+                <input type="number" name="Anios_Experiencia" placeholder="Años exp." class="input-filtro" min="0" value="@Model.Anios_Experiencia" />
                 <select name="Nivel_Academico" class="input-filtro">
                     <option value="">Nivel académico</option>
-                    <option value="bachillerato">Bachillerato</option>
-                    <option value="certificaciones">Certificaciones</option>
-                    <option value="licenciatura">Licenciatura / Pregrado</option>
-                    <option value="maestria">Maestría / Postgrado</option>
-                    <option value="doctorado">Doctorado</option>
-                    
+                    <option value="bachillerato" selected="@(Model.Nivel_Academico == "bachillerato")">Bachillerato</option>
+                    <option value="certificaciones" selected="@(Model.Nivel_Academico == "certificaciones")">Certificaciones</option>
+                    <option value="licenciatura" selected="@(Model.Nivel_Academico == "licenciatura")">Licenciatura</option>
+                    <option value="maestria" selected="@(Model.Nivel_Academico == "maestria")">Maestría</option>
+                    <option value="doctorado" selected="@(Model.Nivel_Academico == "doctorado")">Doctorado</option>
                 </select>
-
-                
-
                 <button type="submit" class="btn-buscar">Buscar</button>
             </div>
         </form>
 
-        <div class="feed-container">
-            <div class="columna-talento">
-                <h2 class="columna-titulo">Talentos Encontrados</h2>
-                <div class="cards-scroll-container">
-                    @if (Model.Resultados != null && Model.Resultados.Any())
+        <div class="resultados-container">
+            <h2 class="resultados-titulo">Talentos Encontrados</h2>
+            <div class="resultados-grid" id="resultadosGrid">
+                @if (Model.Resultados != null && Model.Resultados.Any())
+                {
+                    @foreach (var ing in Model.Resultados)
                     {
-                        foreach (var ing in Model.Resultados)
-                        {
-                            <div class="ingeniero-card">
-                                <div class="card-header">
-                                    <img src="https://via.placeholder.com/60" alt="Foto" class="card-foto-perfil" />
-                                    <div class="card-info-principal">
-                                        <h3>@ing.Nombre @ing.Apellido</h3>
-                                        <p>@ing.Nivel_Academico</p>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <h4>Especialización</h4>
+                        <div class="ingeniero-card">
+                            <div class="card-header">
+                                <img src="https://via.placeholder.com/60" alt="Foto" class="card-foto-perfil" />
+                                <div class="card-info-principal">
+                                    <h3>@ing.Nombre @ing.Apellido</h3>
                                     <p>@ing.Especializacion</p>
-                                    <h4>Habilidades Técnicas</h4>
-                                    <div class="card-tags-container">
-                                        @foreach (var skill in ing.Habilidades_Tecnicas.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-                                        {
-                                            <span class="skill-tag">@skill.Trim()</span>
-                                        }
-                                    </div>
-                                    <h4>Idiomas</h4>
-                                    <div class="card-tags-container">
-                                        @foreach (var lang in ing.Idiomas.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-                                        {
-                                            <span class="skill-tag">@lang.Trim()</span>
-                                        }
-                                    </div>
-                                    <h4>Disponibilidad</h4>
-                                    <p>@ing.Disponibilidad</p>
-                                    <h4>Experiencia</h4>
-                                    <p>@ing.Anios_Experiencia años</p>
-                                </div>
-                                <div class="card-footer">
-                                    <a asp-controller="VistaEmpresaVerPerfilIng" 
-                                    asp-action="Index" 
-                                    asp-route-idUsuario="@ing.Id_Usuario" 
-                                    class="btn-ver-perfil">
-                                    Ver Perfil Completo
-                                </a>
-                                    <!-- Botón que abre el modal -->
-                                    <button type="button" class="btn-ver-perfil" onclick="abrirModal(@ing.Id_Usuario)">Contactar</button>
-
-                                    <button type="button" class="btn-ver-perfil" onclick="agregarADeseados(@ing.Id_Usuario)">Lista de Deseados</button>
                                 </div>
                             </div>
-                        }
-                    }
-                    else
-                    {
-                        <div class="placeholder-card">
-                            <p>No se encontraron ingenieros con esos criterios.</p>
+                            <div class="card-body">
+                                <h4>Habilidades</h4>
+                                <div class="card-tags-container">
+                                    @foreach (var skill in ing.Habilidades_Tecnicas.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Take(5))
+                                    {
+                                        <span class="skill-tag">@skill.Trim()</span>
+                                    }
+                                </div>
+                                <p><strong>Experiencia:</strong> @ing.Anios_Experiencia años</p>
+                            </div>
+                            <div class="card-footer">
+                                <a asp-controller="VistaEmpresaVerPerfilIng" asp-action="Index" asp-route-idUsuario="@ing.Id_Usuario" class="btn-ver-perfil">Ver Perfil</a>
+                                <button type="button" class="btn-contactar" data-id="@ing.Id_Usuario">Contactar</button>
+                                <button type="button" class="btn-deseados" data-id="@ing.Id_Usuario">Deseados</button>
+                            </div>
                         </div>
                     }
-                </div>
+                }
+                else
+                {
+                    <div class="placeholder-card" style="grid-column: 1 / -1;">
+                        <p>No se encontraron ingenieros con esos criterios.</p>
+                    </div>
+                }
             </div>
         </div>
     </main>
-    <!-- Modal de Contacto (fuera del foreach) -->
+
     <div id="modal-contacto" class="modal">
         <div class="modal-content">
-            <span class="cerrar" onclick="cerrarModal()">&times;</span>
+            <span class="cerrar">&times;</span>
             <h2>Enviar oferta</h2>
-            
-            <!-- Hidden para saber a qué ingeniero va dirigido -->
             <input type="hidden" id="modalIngenieroId" />
-
-            <label for="mensajeOferta">Escribe tu oferta:</label>
-            <textarea id="modalOferta" placeholder="Escribe tu propuesta..." rows="4"></textarea>
-
+            <label for="modalOferta">Escribe tu oferta:</label>
+            <textarea id="modalOferta" placeholder="Ej: 'Hola, vimos tu perfil y nos parece que encajas perfecto para un rol de...'" rows="4"></textarea>
             <div class="modal-buttons">
-                <button class="btn-enviar" onclick="enviarOferta()">Enviar</button>
-                <button class="btn-cancelar" onclick="cerrarModal()">Cancelar</button>
+                <button class="btn-enviar">Enviar</button>
+                <button type="button" class="btn-cancelar">Cancelar</button>
             </div>
         </div>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+            const modal = document.getElementById('modal-contacto');
+            const resultadosGrid = document.getElementById('resultadosGrid');
+
+            // --- MANEJO DE EVENTOS CON DELEGACIÓN ---
+            if(resultadosGrid) {
+                resultadosGrid.addEventListener('click', (e) => {
+                    const target = e.target;
+                    const idIngeniero = target.dataset.id;
+                    if (!idIngeniero) return;
+
+                    if (target.classList.contains('btn-contactar')) {
+                        abrirModal(idIngeniero);
+                    } else if (target.classList.contains('btn-deseados')) {
+                        agregarADeseados(idIngeniero);
+                    }
+                });
+            }
+
+            // --- LÓGICA DEL MODAL ---
+            const cerrarBtn = modal.querySelector('.cerrar');
+            const cancelarBtn = modal.querySelector('.btn-cancelar');
+            const enviarBtn = modal.querySelector('.btn-enviar');
+
+            cerrarBtn.addEventListener('click', cerrarModal);
+            cancelarBtn.addEventListener('click', cerrarModal);
+            enviarBtn.addEventListener('click', enviarOferta);
+
+            function abrirModal(id) {
+                modal.querySelector("#modalIngenieroId").value = id;
+                modal.style.display = "flex";
+            }
+
+            function cerrarModal() {
+                modal.style.display = "none";
+            }
+
+            // --- LLAMADAS FETCH AL BACKEND ---
+            function enviarOferta() {
+                const id = modal.querySelector("#modalIngenieroId").value;
+                const oferta = modal.querySelector("#modalOferta").value;
+                if (!oferta.trim()) {
+                    alert("Por favor escribe una oferta antes de enviar.");
+                    return;
+                }
+
+                fetch('@Url.Action("ContactarIngeniero", "VistaEmpresa")', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'RequestVerificationToken': token
+                    },
+                    body: `idIngeniero=${id}&oferta=${encodeURIComponent(oferta)}`
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        alert(data.message || "Oferta enviada con éxito 🚀");
+                        cerrarModal();
+                        // Opcional: podrías cambiar el estado del botón en vez de recargar
+                    } else {
+                        alert(data.message || "Hubo un error al enviar la oferta.");
+                    }
+                })
+                .catch(err => console.error("Error en el envío:", err));
+            }
+
+            function agregarADeseados(id) {
+                fetch('@Url.Action("ListaDeseados", "VistaEmpresa")', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'RequestVerificationToken': token
+                    },
+                    body: `idIngeniero=${id}`
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Ingeniero agregado a la lista de deseados ✅');
+                    } else {
+                        alert(data.message || 'No se pudo agregar. Intenta de nuevo ❌');
+                    }
+                })
+                .catch(err => console.error(err));
+            }
+        });
+    </script>
 </body>
 </html>
- <script>
-function abrirModal(idIngeniero) {
-    // Guarda el ID del ingeniero en un input oculto
-    document.getElementById("modalIngenieroId").value = idIngeniero;
-    // Muestra el modal
-    document.getElementById("modal-contacto").style.display = "flex";
-}
-
-function cerrarModal() {
-    // Oculta el modal
-    document.getElementById("modal-contacto").style.display = "none";
-}
-
-function enviarOferta() {
-    const id = document.getElementById("modalIngenieroId").value;
-    const oferta = document.getElementById("modalOferta").value;
-
-    if (!oferta.trim()) {
-        alert("Por favor escribe una oferta antes de enviar.");
-        return;
-    }
-
-    // 🔥 Llamada al backend con lectura de JSON
-    fetch('/VistaEmpresa/ContactarIngeniero', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `idIngeniero=${encodeURIComponent(id)}&oferta=${encodeURIComponent(oferta)}`
-    })
-    .then(response => response.json()) // <- ahora leemos el JSON que envía el controlador
-    .then(data => {
-        if (data.success) {
-            alert(data.message || "Oferta enviada con éxito 🚀");
-            cerrarModal();
-            location.reload(); // Recarga la página para ver el cambio en la lista
-        } else {
-            alert(data.message || "Hubo un error al enviar la oferta.");
-        }
-    })
-    .catch(error => {
-        console.error("Error en el envío:", error);
-        alert("Error en la comunicación con el servidor.");
-    });
-}
-
-function agregarADeseados(idIngeniero) {
-    fetch('/VistaEmpresa/ListaDeseados', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `idIngeniero=${encodeURIComponent(idIngeniero)}`
-    })
-    .then(res => res.json())
-    .then(data => {
-        if(data.success){
-            alert('Ingeniero agregado a la lista de deseados ✅');
-        } else {
-            alert('No se pudo agregar. Intenta de nuevo ❌');
-        }
-    })
-    .catch(err => console.error(err));
-}
-
-</script>
-
-
