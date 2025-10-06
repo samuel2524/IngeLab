@@ -573,3 +573,222 @@ div[id^="form-editar-"] {
     background-color: var(--primary-color);
     color: var(--dark-bg);
 }
+
+
+/* Pega esto al final de tu archivo VistaIngenieros.css */
+
+/* --- Estilos para Footer de Post (Hilos) --- */
+
+.post-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(0, 255, 255, 0.1);
+}
+
+.btn-respuesta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+    .btn-respuesta:hover {
+        background: var(--primary-color);
+        color: var(--dark-bg);
+        box-shadow: 0 0 10px var(--primary-color);
+    }
+
+.respuesta-contador {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #8899a6; /* Un color sutil */
+    font-size: 0.9rem;
+}
+
+/* Añade esto a tu archivo VistaIngenieros.css */
+
+.post-card-link {
+    text-decoration: none; /* Le quita el subrayado azul feo */
+    color: inherit; /* Hereda el color del texto normal */
+    display: block; /* Hace que el link ocupe todo el espacio de la tarjeta */
+}
+
+/* --- Estilos para la Vista de Hilo Detalle --- */
+
+.btn-volver-hilo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: rgba(0, 255, 255, 0.1);
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 25px;
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+    .btn-volver-hilo:hover {
+        background: var(--primary-color);
+        color: var(--dark-bg);
+        box-shadow: 0 0 15px var(--primary-color);
+    }
+
+.respuestas-container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* ✨ Espacio entre las respuestas ✨ */
+    margin-top: 30px;
+    padding-left: 30px; /* Indentación para diferenciar de la principal */
+    border-left: 2px solid rgba(0, 255, 255, 0.2);
+}
+
+.respuestas-titulo {
+    color: var(--title-color);
+    text-shadow: 0 0 8px var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.post-card.es-respuesta {
+    background: rgba(10, 15, 30, 0.4); /* Un fondo ligeramente más sutil */
+}
+
+/* Estilo para el link del contador de respuestas */
+.respuesta-contador-link {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+    .respuesta-contador-link .respuesta-contador:hover {
+        color: var(--primary-color);
+    }
+
+
+
+
+/* --- Estilos para Acciones de Hilos --- */
+
+.post-footer {
+    display: flex;
+    justify-content: space-between; /* Esto pone los elementos a cada extremo */
+    align-items: center;
+    /* ... (resto de estilos del post-footer) ... */
+}
+
+.footer-acciones {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-respuesta-codigo {
+    background: transparent;
+    border: 1px solid #8899a6; /* Un color neutro */
+    color: #8899a6;
+    padding: 8px 12px;
+    border-radius: 50px; /* Redondo para que parezca un ícono */
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+    .btn-respuesta-codigo:hover {
+        background: var(--secondary-color, #9370db);
+        border-color: var(--secondary-color, #9370db);
+        color: white;
+        box-shadow: 0 0 10px var(--secondary-color, #9370db);
+    }
+
+/* --- FIX: Formulario de edición visible y alineado correctamente --- */
+
+.form-editar-container {
+    margin-left: 60px; /* alineado con el contenido original */
+}
+
+    .form-editar-container textarea {
+        width: 100%;
+        min-height: 100px;
+        padding: 12px;
+        background-color: #0A0F1E;
+        border: 1px solid rgba(0, 255, 255, 0.3);
+        border-radius: 8px;
+        color: #E0E0E0;
+        font-family: var(--font-family);
+        font-size: 1rem;
+        outline: none;
+        resize: vertical;
+        transition: all 0.3s ease;
+    }
+
+        .form-editar-container textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+
+    .form-editar-container .mt-2 {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .form-editar-container .btn {
+        border: none;
+        padding: 8px 20px;
+        border-radius: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .form-editar-container .btn-success {
+        background-color: var(--primary-color);
+        color: var(--dark-bg);
+    }
+
+        .form-editar-container .btn-success:hover {
+            box-shadow: 0 0 15px var(--primary-color);
+        }
+
+    .form-editar-container .btn-secondary {
+        background-color: #2a2f45;
+        border: 1px solid #4a4f65;
+        color: #b0b8c4;
+    }
+
+        .form-editar-container .btn-secondary:hover {
+            background-color: #3a3f55;
+            color: #fff;
+        }
+
+
+    /* --- Botón "Cancelar" del form de edición: redondeado y estético --- */
+    .form-editar-container .btn-secondary {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #b0b8c4;
+        padding: 8px 20px;
+        border-radius: 25px; /* 💫 redondeado */
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+        .form-editar-container .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px var(--primary-color);
+            transform: translateY(-2px);
+        }

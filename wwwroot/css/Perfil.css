@@ -499,3 +499,36 @@ div[id^="form-editar-"] .btn-secondary {
         color: var(--dark-bg);
         box-shadow: 0 0 15px #ff4d4d;
     }
+
+
+/* Añade esto a tu archivo Perfil.css */
+
+.reply-context {
+    font-size: 0.9rem;
+    color: #8899a6;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+}
+
+.reply-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background-color: rgba(147, 112, 219, 0.2); /* Color secundario de los botones */
+    color: #9370db;
+    padding: 3px 8px;
+    border-radius: 15px;
+    font-weight: 600;
+    margin-right: 8px;
+}
+
+.link-contexto {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+    .link-contexto:hover {
+        text-decoration: underline;
+    }

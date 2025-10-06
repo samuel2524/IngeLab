@@ -219,6 +219,18 @@
                         @foreach (var post in Model.Posts)
                         {
                             <div class="post-card">
+
+                                @if (post.IdPostPadre.HasValue)
+                                {
+                                    <div class="reply-context">
+                                        <span class="reply-badge"><i class="fas fa-reply"></i> Respuesta</span>
+                                        Respondiendo a
+                                        <a href="@Url.Action("Detalle", "Hilo", new { id = post.IdPostPadre })" class="link-contexto">
+                                            un hilo de @post.AutorPadre
+                                        </a>
+                                    </div>
+                                }
+
                                 <div class="post-header">
                                     <img src="https://via.placeholder.com/45" alt="autor" class="post-autor-foto">
                                     <div class="post-autor-info">

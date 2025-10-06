@@ -17,5 +17,8 @@
         public string AutorApellido { get; set; }
         // Podrías añadir la URL de la foto de perfil aquí también
         // public string AutorFotoUrl { get; set; } 
+
+        // ✨ AÑADE ESTA LÍNEA ✨
+        public int CantidadRespuestas { get; set; }
     }
 }

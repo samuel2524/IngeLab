@@ -10,24 +10,24 @@ namespace IngeLab.Controllers
         BD bD = new BD();
         public IActionResult Index(int idUsuario)
         {
-          var perfil = ObtenerPerfilIngeniero(idUsuario);
-          var datosProfesionales = ObtenerDatosProfesionales(idUsuario);
+              var perfil = ObtenerPerfilIngeniero(idUsuario);
+              var datosProfesionales = ObtenerDatosProfesionales(idUsuario);
 
-          if (perfil == null)
-          return NotFound();
+              if (perfil == null)
+              return NotFound();
 
-          var viewModel = new IngenieroPerfilViewModel
-          {
-                Perfil_Ingeniero = perfil,
-                Lista_Habilidades = datosProfesionales?.Habilidades_Tecnicas?.Split(',', StringSplitOptions.RemoveEmptyEntries)
-                                        .Select(x => x.Trim()).ToList() ?? new List<string>(),
-                Idiomas = datosProfesionales?.Idiomas?.Split(',', StringSplitOptions.RemoveEmptyEntries)
-                                        .Select(x => x.Trim()).ToList() ?? new List<string>(),
-                Posts = ObtenerPosts(idUsuario),
-                IsOwnProfile = false
-          };
+              var viewModel = new IngenieroPerfilViewModel
+              {
+                    Perfil_Ingeniero = perfil,
+                    Lista_Habilidades = datosProfesionales?.Habilidades_Tecnicas?.Split(',', StringSplitOptions.RemoveEmptyEntries)
+                                            .Select(x => x.Trim()).ToList() ?? new List<string>(),
+                    Idiomas = datosProfesionales?.Idiomas?.Split(',', StringSplitOptions.RemoveEmptyEntries)
+                                            .Select(x => x.Trim()).ToList() ?? new List<string>(),
+                    Posts = ObtenerPosts(idUsuario),
+                    IsOwnProfile = false
+              };
 
-            return View("~/Views/VerPerfilIngeniero/Index.cshtml", viewModel);
+                return View("~/Views/VerPerfilIngeniero/Index.cshtml", viewModel);
         }
 
 
@@ -78,13 +78,31 @@ namespace IngeLab.Controllers
 
         }
 
+        // En Controllers/VistaEmpresaVerPerfilIngController.cs
+
         private List<Post> ObtenerPosts(int idUsuario)
         {
             var posts = new List<Post>();
-
-            using (var conexion = bD.establecerConexion())
+            using (var conexion = bD.establecerConexion()) // Tu variable de conexión es bD
             {
-                var query = "SELECT id_post, contenido, fecha_public, tipo_contenido, fijado FROM postingeniero WHERE id_usuario = @IdUsuario ORDER BY fijado DESC, fecha_public DESC";
+                // ✨ ESTA ES LA QUERY ACTUALIZADA CON LOS JOINS MÁGICOS ✨
+                var query = @"
+            SELECT
+                p.id_post, p.contenido, p.fecha_public, p.tipo_contenido, p.fijado,
+                p.id_post_padre,
+                padre.contenido AS contenido_padre,
+                autor_padre.nombre || ' ' || autor_padre.apellidos AS autor_padre
+            FROM
+                postingeniero p
+            LEFT JOIN
+                postingeniero AS padre ON p.id_post_padre = padre.id_post
+            LEFT JOIN
+                usuarios AS autor_padre ON padre.id_usuario = autor_padre.id_usuario
+            WHERE
+                p.id_usuario = @IdUsuario
+            ORDER BY
+                p.fecha_public DESC";
+
                 using (var comando = new NpgsqlCommand(query, conexion))
                 {
                     comando.Parameters.AddWithValue("@IdUsuario", idUsuario);
@@ -94,12 +112,16 @@ namespace IngeLab.Controllers
                         {
                             var post = new Post
                             {
-                                Id_Post = reader.GetInt32(0),
-                                Id_Usuario = idUsuario,  
-                                Contenido = reader.GetString(1),
-                                FechaCreacion = reader.GetDateTime(2),
-                                Tipo_Contenido = reader.GetString(3),
-                                Fijado = reader.GetBoolean(4)
+                                Id_Post = reader.GetInt32(reader.GetOrdinal("id_post")),
+                                Contenido = reader.GetString(reader.GetOrdinal("contenido")),
+                                FechaCreacion = reader.GetDateTime(reader.GetOrdinal("fecha_public")),
+                                Tipo_Contenido = reader.GetString(reader.GetOrdinal("tipo_contenido")),
+                                Fijado = reader.GetBoolean(reader.GetOrdinal("fijado")),
+
+                                // Mapeamos los nuevos campos de contexto
+                                IdPostPadre = reader.IsDBNull(reader.GetOrdinal("id_post_padre")) ? (int?)null : reader.GetInt32(reader.GetOrdinal("id_post_padre")),
+                                ContenidoPadre = reader.IsDBNull(reader.GetOrdinal("contenido_padre")) ? null : reader.GetString(reader.GetOrdinal("contenido_padre")),
+                                AutorPadre = reader.IsDBNull(reader.GetOrdinal("autor_padre")) ? null : reader.GetString(reader.GetOrdinal("autor_padre"))
                             };
 
                             if (post.Tipo_Contenido != "texto" && !string.IsNullOrEmpty(post.Contenido))
@@ -112,18 +134,16 @@ namespace IngeLab.Controllers
                                 }
                                 catch
                                 {
-                                    // fallback por si no está en formato JSON
                                     post.TextoExplicativo = "";
                                     post.Codigo = post.Contenido;
                                 }
                             }
+
                             posts.Add(post);
                         }
                     }
                 }
-                
             }
-
             return posts;
         }
 

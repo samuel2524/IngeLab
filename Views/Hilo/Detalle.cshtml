@@ -1,0 +1,229 @@
+﻿@model IngeLab.Models.HiloDetalleViewModel
+@{
+    Layout = null;
+    ViewData["Title"] = "Hilo de " + Model.HiloPrincipal.AutorNombre;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - IngeLab</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+    <link rel="stylesheet" href="~/css/VistaIngenieros.css" asp-append-version="true">
+</head>
+<body class="body-vista-ingeniero">
+
+    <header class="header-ingeniero">
+        @if (Model.PuedeResponder)
+        {
+            <a href="@Url.Action("Index", "VistaIngenieros")" class="btn-volver-hilo">
+                <i class="fas fa-arrow-left"></i> Volver al Feed
+            </a>
+        }
+        else
+        {
+            <a href="@Url.Action("Index", "VistaEmpresaVerPerfilIng", new { idUsuario = Model.PerfilUsuarioId })" class="btn-volver-hilo">
+                <i class="fas fa-arrow-left"></i> Volver al Perfil
+            </a>
+        }
+    </header>
+
+    <main class="columna-central">
+        <div class="post-card hilo-principal">
+            <div class="post-header">
+                <img src="https://via.placeholder.com/45" alt="autor" class="post-autor-foto">
+                <div class="post-autor-info">
+                    <h4>@Model.HiloPrincipal.AutorNombre @Model.HiloPrincipal.AutorApellido</h4>
+                    <p>@Model.HiloPrincipal.FechaCreacion.ToString("dd MMM, yyyy HH:mm")</p>
+                </div>
+            </div>
+            <div class="post-contenido">
+                @if (Model.HiloPrincipal.Tipo_Contenido == "texto")
+                {
+                    <p>@Model.HiloPrincipal.Contenido</p>
+                }
+                else
+                {
+                    @if (!string.IsNullOrEmpty(Model.HiloPrincipal.TextoExplicativo))
+                    {
+                        <p>@Model.HiloPrincipal.TextoExplicativo</p>
+                    }
+                    <div class="code-block-container">
+                        <div class="code-block-header">
+                            <span class="language-tag">@Model.HiloPrincipal.Tipo_Contenido</span>
+                            <button type="button" class="copy-code-btn"><i class="far fa-copy"></i> Copiar</button>
+                        </div>
+                        <pre><code class="language-@Model.HiloPrincipal.Tipo_Contenido">@Model.HiloPrincipal.Codigo</code></pre>
+                    </div>
+                }
+            </div>
+            @if (Model.PuedeResponder)
+            {
+                <div class="post-footer">
+                    <button type="button" class="btn-respuesta" data-post-id="@Model.HiloPrincipal.Id_Post">
+                        <i class="fas fa-reply"></i> Responder al hilo
+                    </button>
+                    <button type="button" class="btn-respuesta-codigo" data-post-id="@Model.HiloPrincipal.Id_Post" title="Responder con Código">
+                        <i class="fas fa-code"></i>
+                    </button>
+                </div>
+            }
+        </div>
+
+        <div class="respuestas-container">
+            @if (Model.Respuestas.Any())
+            {
+                <h3 class="respuestas-titulo">Respuestas</h3>
+                @foreach (var respuesta in Model.Respuestas)
+                {
+                    <div class="post-card es-respuesta">
+                        <div class="post-header">
+                            <img src="https://via.placeholder.com/45" alt="autor" class="post-autor-foto">
+                            <div class="post-autor-info">
+                                <h4>@respuesta.AutorNombre @respuesta.AutorApellido</h4>
+                                <p>@respuesta.FechaCreacion.ToString("dd MMM, yyyy HH:mm")</p>
+                            </div>
+                        </div>
+                        <div class="post-contenido">
+                            @if (respuesta.Tipo_Contenido == "texto")
+                            {
+                                <p>@respuesta.Contenido</p>
+                            }
+                            else
+                            {
+                                @if (!string.IsNullOrEmpty(respuesta.TextoExplicativo))
+                                {
+                                    <p>@respuesta.TextoExplicativo</p>
+                                }
+                                <div class="code-block-container">
+                                    <div class="code-block-header">
+                                        <span class="language-tag">@respuesta.Tipo_Contenido</span>
+                                        <button type="button" class="copy-code-btn"><i class="far fa-copy"></i> Copiar</button>
+                                    </div>
+                                    <pre><code class="language-@respuesta.Tipo_Contenido">@respuesta.Codigo</code></pre>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </main>
+
+    <div id="modal-respuesta" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <form id="form-respuesta" method="post" asp-controller="VistaIngenieros" asp-action="PublicarRespuesta">
+                @Html.AntiForgeryToken()
+                <h3>Añadir una respuesta</h3>
+                <input type="hidden" id="idPostPadreTexto" name="IdPostPadre" />
+                <div class="form-group">
+                    <textarea name="Contenido" class="modal-textarea" rows="5" placeholder="Escribe tu respuesta..."></textarea>
+                </div>
+                <input type="hidden" name="Tipo_Contenido" value="texto" />
+                <div class="modal-acciones">
+                    <button type="button" class="btn-modal-cancelar">Cancelar</button>
+                    <button type="submit" class="btn-modal-publicar">Publicar Respuesta</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal-respuesta-codigo" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <form method="post" asp-controller="VistaIngenieros" asp-action="PublicarRespuesta">
+                @Html.AntiForgeryToken()
+                <h3>Responder con Código</h3>
+                <input type="hidden" id="idPostPadreCodigo" name="IdPostPadre" />
+                <div class="form-group">
+                    <label>Descripción (opcional):</label>
+                    <textarea name="TextoExplicativo" class="modal-textarea" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Lenguaje:</label>
+                    <select name="Tipo_Contenido" class="modal-select">
+                        <option value="csharp">C#</option>
+                        <option value="java">Java</option>
+                        <option value="javascript">JavaScript</option>
+                        <option value="python">Python</option>
+                        <option value="sql">SQL</option>
+                        <option value="html">HTML</option>
+                        <option value="css">CSS</option>
+                        <option value="bash">Bash/Shell</option>
+                        <option value="json">JSON</option>
+                        <option value="swift">Swift</option>
+                        <option value="r">R</option>
+                        <option value="r">php</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Código:</label>
+                    <textarea name="Codigo" class="modal-textarea" rows="10"></textarea>
+                </div>
+                <div class="modal-acciones">
+                    <button type="button" class="btn-modal-cancelar">Cancelar</button>
+                    <button type="submit" class="btn-modal-publicar">Publicar Respuesta</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            Prism.highlightAll();
+
+            const modalRespuesta = document.getElementById('modal-respuesta');
+            const modalRespuestaCodigo = document.getElementById('modal-respuesta-codigo');
+
+            // Lógica genérica para cerrar modales
+            document.querySelectorAll('.modal-overlay').forEach(modal => {
+                const btnCancelar = modal.querySelector('.btn-modal-cancelar');
+                if (btnCancelar) {
+                    btnCancelar.addEventListener('click', () => { modal.style.display = 'none'; });
+                }
+                modal.addEventListener('click', e => {
+                    if (e.target === modal) { modal.style.display = 'none'; }
+                });
+            });
+
+            // Lógica para los botones de la página
+            document.querySelector('.columna-central').addEventListener('click', e => {
+                const targetButton = e.target.closest('button');
+                if (!targetButton) return;
+
+                const idPost = targetButton.dataset.postId;
+
+                // Si se hace clic en "Responder" (texto)
+                if (targetButton.matches('.btn-respuesta')) {
+                    modalRespuesta.querySelector('#idPostPadreTexto').value = idPost;
+                    modalRespuesta.style.display = 'flex';
+                }
+                // Si se hace clic en "Responder con Código"
+                else if (targetButton.matches('.btn-respuesta-codigo')) {
+                    modalRespuestaCodigo.querySelector('#idPostPadreCodigo').value = idPost;
+                    modalRespuestaCodigo.style.display = 'flex';
+                }
+                // Si se hace clic en "Copiar"
+                else if (targetButton.matches('.copy-code-btn')) {
+                    copiarCodigo(targetButton);
+                }
+            });
+
+            function copiarCodigo(button) {
+                const code = button.closest('.code-block-container').querySelector('code').innerText;
+                navigator.clipboard.writeText(code).then(() => {
+                    button.innerHTML = '<i class="fas fa-check"></i> Copiado';
+                    setTimeout(() => { button.innerHTML = '<i class="far fa-copy"></i> Copiar'; }, 2000);
+                }).catch(err => console.error("Error al copiar", err));
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "vBhE/4c45Ro=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\mesaj\\OneDrive\\Documents\\IngeLab Final\\IngeLab\\IngeLab.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\mesaj\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
+    "C:\\Users\\mesaj\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.2\\microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512",
+    "C:\\Users\\mesaj\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.2\\microsoft.extensions.logging.abstractions.8.0.2.nupkg.sha512",
+    "C:\\Users\\mesaj\\.nuget\\packages\\newtonsoft.json\\13.0.4\\newtonsoft.json.13.0.4.nupkg.sha512",
+    "C:\\Users\\mesaj\\.nuget\\packages\\npgsql\\9.0.3\\npgsql.9.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -103,22 +103,28 @@ namespace IngeLab.Controllers
         }
 
         // ✨ ESTA ES LA NUEVA FUNCIÓN QUE TRAE TODOS LOS POSTS DE TODOS LOS INGENIEROS ✨
+        // En tu archivo Controllers/VistaIngenierosController.cs
+
         private List<PostViewModel> ObtenerFeedGlobal()
         {
             var feed = new List<PostViewModel>();
             using (var conexion = bd.establecerConexion())
             {
-                // La query ahora une 'postingeniero' con 'usuarios' para obtener los datos del autor
-                var query =@"
-                    SELECT p.id_post, p.id_usuario, p.contenido, p.fecha_public, 
-                        p.tipo_contenido, p.fijado, u.nombre, u.apellidos
-                    FROM postingeniero p
-                    INNER JOIN usuarios u ON p.id_usuario = u.id_usuario
-                    ORDER BY 
-                        CASE WHEN p.id_usuario = @IdUsuario THEN 0 ELSE 1 END,
-                        p.fijado DESC, 
-                        p.fecha_public DESC
-                    LIMIT 50;"; 
+                // ✨ CAMBIO 1: La query ahora es más poderosa.
+                // 1. Añadimos un subquery para CONTAR las respuestas de cada post.
+                // 2. Filtramos con WHERE para traer solo los posts PADRE (los que inician hilos).
+                var query = @"
+            SELECT p.id_post, p.id_usuario, p.contenido, p.fecha_public, 
+                   p.tipo_contenido, p.fijado, u.nombre, u.apellidos,
+                   (SELECT COUNT(*) FROM postingeniero AS r WHERE r.id_post_padre = p.id_post) AS cantidad_respuestas
+            FROM postingeniero p
+            INNER JOIN usuarios u ON p.id_usuario = u.id_usuario
+            WHERE p.id_post_padre IS NULL  -- ¡Solo traemos los posts que inician un hilo!
+            ORDER BY 
+                 CASE WHEN p.id_usuario = @IdUsuario THEN 0 ELSE 1 END,
+                 p.fijado DESC, 
+                 p.fecha_public DESC
+            LIMIT 50;";
 
                 using (var comando = new NpgsqlCommand(query, conexion))
                 {
@@ -126,7 +132,6 @@ namespace IngeLab.Controllers
                     comando.Parameters.AddWithValue("@IdUsuario", idUsuarioActual ?? -1);
                     using (var reader = comando.ExecuteReader())
                     {
-                      
                         while (reader.Read())
                         {
                             var post = new PostViewModel
@@ -138,10 +143,13 @@ namespace IngeLab.Controllers
                                 Tipo_Contenido = reader.GetString(reader.GetOrdinal("tipo_contenido")),
                                 Fijado = reader.GetBoolean(reader.GetOrdinal("fijado")),
                                 AutorNombre = reader.GetString(reader.GetOrdinal("nombre")),
-                                AutorApellido = reader.GetString(reader.GetOrdinal("apellidos"))
+                                AutorApellido = reader.GetString(reader.GetOrdinal("apellidos")),
+
+                                // ✨ CAMBIO 2: Mapeamos el nuevo campo del conteo de respuestas.
+                                CantidadRespuestas = Convert.ToInt32(reader["cantidad_respuestas"])
                             };
 
-                            // Mantenemos la lógica para desempaquetar el JSON de los posts de código
+                            // ... (el resto de tu lógica para desempaquetar el JSON se mantiene igual) ...
                             if (post.Tipo_Contenido != "texto" && !string.IsNullOrEmpty(post.Contenido))
                             {
                                 try
@@ -150,15 +158,7 @@ namespace IngeLab.Controllers
                                     post.TextoExplicativo = data.texto;
                                     post.Codigo = data.codigo;
                                 }
-                                catch
-                                {
-                                    post.TextoExplicativo = "";
-                                    post.Codigo = post.Contenido; // Fallback por si el JSON es inválido
-                                }
-                            }
-                            else
-                            {
-                                post.TextoExplicativo = post.Contenido;
+                                catch { /* fallback */ }
                             }
 
                             feed.Add(post);
@@ -236,6 +236,63 @@ namespace IngeLab.Controllers
                 return Content("Error al publicar el fragmento de código: " + e.Message);
             }
         }
+
+
+        // En tu archivo Controllers/VistaIngenierosController.cs, añádelo después de PublicarCodigo
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult PublicarRespuesta(string Contenido, string Tipo_Contenido, string Codigo, string TextoExplicativo, int IdPostPadre)
+        {
+            var idUsuario = HttpContext.Session.GetInt32("UsuarioId");
+            if (!idUsuario.HasValue)
+            {
+                return Unauthorized();
+            }
+
+            try
+            {
+                string contenidoFinal = Contenido;
+
+                // Si es un post con código, empaquetamos el JSON
+                if (Tipo_Contenido != "texto")
+                {
+                    contenidoFinal = JsonConvert.SerializeObject(new { texto = TextoExplicativo, codigo = Codigo });
+                }
+
+                using (var conexion = bd.establecerConexion())
+                {
+                    var query = @"INSERT INTO postingeniero 
+                          (id_usuario, contenido, fecha_public, tipo_contenido, id_post_padre)
+                          VALUES (@IdUsuario, @Contenido, NOW(), @TipoContenido, @IdPostPadre)";
+
+                    using (var comando = new NpgsqlCommand(query, conexion))
+                    {
+                        comando.Parameters.AddWithValue("@IdUsuario", idUsuario.Value);
+                        comando.Parameters.AddWithValue("@Contenido", contenidoFinal);
+                        comando.Parameters.AddWithValue("@TipoContenido", Tipo_Contenido);
+                        comando.Parameters.AddWithValue("@IdPostPadre", IdPostPadre);
+                        comando.ExecuteNonQuery();
+                    }
+                }
+
+                // 🔥 Detecta si vienes desde la vista del hilo y mantente ahí
+                var referer = Request.Headers["Referer"].ToString();
+                if (referer.Contains("/Hilo/Detalle"))
+                {
+                    return Redirect(referer);
+                }
+
+                // Si no, vuelve al feed
+                return RedirectToAction("Index", "VistaIngenieros");
+            }
+            catch (Exception e)
+            {
+                return Content("Error al publicar la respuesta: " + e.Message);
+            }
+        }
+
+
 
         public IActionResult EliminarPost(int idPost)
         {
@@ -351,6 +408,17 @@ namespace IngeLab.Controllers
                         comando.ExecuteNonQuery();
                     }
                 }
+                // ✨ AQUÍ ESTÁ LA MAGIA: LA REDIRECCIÓN INTELIGENTE ✨
+                // Obtenemos la URL de la página desde la que se hizo la petición.
+                string referer = Request.Headers["Referer"].ToString();
+
+                // Si la URL existe (que casi siempre lo hará), redirigimos a esa misma página.
+                if (!string.IsNullOrEmpty(referer))
+                {
+                    return Redirect(referer); // Esto te devolverá a /IngenieroPerfil
+                }
+
+                // Si por alguna extraña razón no encuentra la URL anterior, te manda al feed como plan B.
                 return RedirectToAction("Index", "VistaIngenieros");
             }
             catch (Exception e)
@@ -539,5 +607,44 @@ namespace IngeLab.Controllers
                 return Json(new { success = false, message = ex.Message });
             }
         }
+
+        [HttpPost]
+        public IActionResult MarcarTodasComoLeidas()
+        {
+            try
+            {
+                var idUsuario = HttpContext.Session.GetInt32("UsuarioId");
+                if (!idUsuario.HasValue)
+                {
+                    return Unauthorized();
+                }
+
+                using (var conexion = bd.establecerConexion())
+                {
+                    string query = @"UPDATE ingenieros_contactados
+                             SET leido = true
+                             WHERE id_usuario = @IdUsuario
+                             AND (leido = false OR leido IS NULL)";
+                    using (var comando = new NpgsqlCommand(query, conexion))
+                    {
+                        comando.Parameters.AddWithValue("@IdUsuario", idUsuario.Value);
+                        comando.ExecuteNonQuery();
+                    }
+                }
+
+                // 👇 Devolvemos un resultado JSON, no redirigimos
+                return Json(new { success = true, message = "Notificaciones marcadas como leídas." });
+            }
+            catch (Exception e)
+            {
+                return Json(new { success = false, message = "Error: " + e.Message });
+            }
+        }
+
+
     }
 }
+
+
+
+
